@@ -35,11 +35,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="I'm taking this to the team."))
+
     
 @handler.add(SourceUser, message=TextMessage)
 def handle_push(source):
