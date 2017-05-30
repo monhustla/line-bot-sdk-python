@@ -41,6 +41,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text="I'm taking this to the team."))
     
+for userId in events:    
 line_bot_api.multicast(['to1', 'to2'], TextSendMessage(text='Hello World!'))   
  
 
