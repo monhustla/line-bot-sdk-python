@@ -44,7 +44,7 @@ def handle_message(event):
 @handler.add(SourceUser, message=TextMessage)
 def handle_message(source):
     line_bot_api.multicast(
-        event.userId,
+        source.userId,
         TextSendMessage(text='Hello World!'))   
  
 
