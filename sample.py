@@ -42,7 +42,7 @@ def handle_message(event):
         TextSendMessage(text="I'm taking this to the team."))
     
 @handler.add(SourceUser, message=TextMessage)
-def handle_message(source):
+def handle_push(source):
     line_bot_api.multicast(
         source.userId,
         TextSendMessage(text="Hello World!"))   
