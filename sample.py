@@ -42,7 +42,7 @@ def handle_message(event):
         TextSendMessage(text="I'm taking this to the team."))
     
 for userId in events:    
-line_bot_api.multicast(['to1', 'to2'], TextSendMessage(text='Hello World!'))   
+line_bot_api.multicast([event.userId], TextSendMessage(text='Hello World!'))   
  
 
 
