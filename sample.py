@@ -40,6 +40,9 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="I'm taking this to the team."))
+    
+line_bot_api.multicast(['to1', 'to2'], TextSendMessage(text='Hello World!'))   
+ 
 
 
 if __name__ == "__main__":
