@@ -8,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, SourceUser
 )
 
 app = Flask(__name__)
@@ -45,7 +45,7 @@ def handle_message(event):
 def handle_message(source):
     line_bot_api.multicast(
         source.userId,
-        TextSendMessage(text='Hello World!'))   
+        TextSendMessage(text="Hello World!"))   
  
 
 
