@@ -40,7 +40,8 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="I'm taking this to the team."))
-@handler.add(MessageEvent, message=TextMessage)
+    
+@handler.add(Message, message=Multicast)
 def handle_message(event):
     line_bot_api.multicast(
         event.userId,
