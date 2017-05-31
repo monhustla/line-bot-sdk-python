@@ -62,10 +62,7 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_text_message(source):
-    profile= line_bot_api.event.source.user_id
-    print(profile)
+line_bot_api.push_message(event.source.userID, TextSendMessage(text="hi"))
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
