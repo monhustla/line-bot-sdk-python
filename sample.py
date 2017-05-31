@@ -41,8 +41,6 @@ def sendText(user, text):
     r = requests.post(LINE_API, headers=headers, data=data) 
     #print(r.text)
  
-if __name__ == '__main__':
-     app.run(debug=True)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
