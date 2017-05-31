@@ -63,10 +63,11 @@ def callback():
     return 'OK'
 
 
-parser=line_bot_api.WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
-events=parser.parse(body,signature)
-for source in events:
-    print(source.userID)
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(source):
+    line_bot_api.multicast(
+        event.source.userid
+        TextSendMessage(text=event.message.text))
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
