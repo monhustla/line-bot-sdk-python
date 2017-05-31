@@ -79,7 +79,6 @@ def handle_text_message(event):
     line_bot_api.push_message(
         (event.source.user_id,
          TextSendMessage(text="hey"))
-     return 'OK'
 
 if __name__ == "__main__":
         arg_parser = ArgumentParser(
