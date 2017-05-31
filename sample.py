@@ -34,17 +34,17 @@ def sendText(user, text):
     data = json.dumps({
      "events": [
       {
-        "replyToken": "nHuyWiB7yP5Zw52FIkcQobQuGDXCTA",
-        "type": "message",
-        "timestamp": 1462629479859,
+        "replyToken": replytoken,
+        "type": messagetype,
+        "timestamp": timestamp,
         "source": {
-             "type": "user",
-             "userId": "U206d25c2ea6bd87c17655609a1c37cb8"
+             "type": usertype,
+             "userId": userId
          },
          "message": {
-             "id": "325708",
+             "id": messageid,
              "type": "text",
-             "text": "Hello, world"
+             "text": text
           }
       }
   ]
