@@ -37,8 +37,8 @@ def sendText(user, text):
         }]
     })
  
-    #print("ข้อมูล：",data)
-    r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
+    
+    r = requests.post(LINE_API, headers=headers, data=data) 
     #print(r.text)
  
 if __name__ == '__main__':
