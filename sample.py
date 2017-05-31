@@ -33,9 +33,9 @@ def sendText(user, text):
  
     data = json.dumps({
         "replyToken":user,
-        "source": [{
+        "source": {
             "userId":userId
-        }]
+        }
         "messages":[{
             "type":"text",
             "text":text
