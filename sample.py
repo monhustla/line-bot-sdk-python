@@ -137,7 +137,7 @@ def handle_text_message(event):
                 PostbackTemplateAction(
                     label='ping with text', data='ping',
                     text='ping'),
-                MessageTemplateAction(label='Translate Rice', text='米')
+                MessageTemplateAction(label='Translate Rice', text='k')
             ]),
         ])
         template_message = TemplateSendMessage(
@@ -203,7 +203,7 @@ def handle_content_message(event):
 @handler.add(FollowEvent)
 def handle_follow(event):
     line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text='Got follow event'))
+        event.reply_token, TextSendMessage(text='You need to learn to adapt.'))
 
 
 @handler.add(UnfollowEvent)
