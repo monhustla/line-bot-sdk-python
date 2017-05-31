@@ -47,7 +47,7 @@ def callback():
     #print(json_line)
     new=open("userids.txt","w")
     z=str(user)
-    new.write(user)
+    new.write(z)
     new.close()
     print("ok",user)
     
