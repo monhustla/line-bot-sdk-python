@@ -67,7 +67,7 @@ def callback():
 def handle_message(source):
     line_bot_api.multicast(
         event.source.userid,
-        TextSendMessage(text="hey")
+        TextSendMessage(text="hey"))
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
