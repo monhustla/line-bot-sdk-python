@@ -63,7 +63,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(Source, message=TextMessage)
 def handle_message(source):
     line_bot_api.multicast(
         event.source.userid,
