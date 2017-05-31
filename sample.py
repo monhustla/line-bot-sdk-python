@@ -121,7 +121,7 @@ def handle_text_message(event):
                 PostbackTemplateAction(
                     label='ping with text', data='ping',
                     text='ping'),
-                MessageTemplateAction(label='Translate Rice', text='米')
+                MessageTemplateAction(label='Translate Rice', text='K')
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
