@@ -34,7 +34,6 @@ def sendText(user, text):
         "to":user,
         "messages":[{
             "type":"text"
-            "text":text
         }]
     })
     
