@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return "Hello World!"
-# ส่วน callback สำหรับ Webhook
+
 @app.route('/callback', methods=['POST'])
 def callback():
     json_line = request.get_json()
