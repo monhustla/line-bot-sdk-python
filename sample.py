@@ -61,8 +61,12 @@ def callback():
         abort(400)
 
     return 'OK'
-event=app.logger.info("Request body: " + body)
-line_bot_api.push_message(event.source.userID, TextSendMessage(text="hi"))
+
+
+parser=line_bot_api.WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
+events=parser.parse(body,signature)
+for source in events:
+    print(source.userID)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
