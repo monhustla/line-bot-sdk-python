@@ -62,11 +62,7 @@ def callback():
 
     return 'OK'
 
-@handler.add(Multicast, message=TextMessage)
-def handle_message(source):
-    line_bot_api.multicast(
-        to,
-        TextSendMessage(text="Hey"))
+p=handler.handle(body,signature)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
