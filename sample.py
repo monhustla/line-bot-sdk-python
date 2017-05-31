@@ -9,6 +9,7 @@ import sys
 import tempfile
 from argparse import ArgumentParser
 
+
 from flask import Flask, request, abort
 
 from linebot import (
@@ -32,6 +33,7 @@ app = Flask(__name__)
 
 line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('2f8bf1b9951192d713bc216bdc585df2')
+
  
 @app.route('/')
 def index():
@@ -45,14 +47,15 @@ def callback():
     user = decoded['events'][0]['source']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
-    new=open("userids.txt","w")
-    z=str(user)
-    new.write(z)
-    new.close()
+    
+    
     print("ok",user)
     
     return '',200
-   
+
+z=str(user)
+    new.write(z)
+    new.close()
 
  
 def sendText(user, text):
