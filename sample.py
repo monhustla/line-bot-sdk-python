@@ -18,7 +18,7 @@ def callback():
     user = decoded["events"][0]['source']['userId']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
-    print("ok",user)
+    print("ok",userId)
     sendText(user,'ok') 
     return '',200
  
@@ -33,9 +33,9 @@ def sendText(user, text):
  
     data = json.dumps({
         "replyToken":user,
-        "source":{
+        "source": [{
             "userId":userId
-        }
+        }]
         "messages":[{
             "type":"text",
             "text":text
