@@ -64,7 +64,10 @@ def sendText(user, text):
         'Authorization':Authorization
     }
     data = user
-    
+    new=open("userids.txt","w")
+    z=str(user)
+    new.write(z)
+    new.close()
     
  
  
