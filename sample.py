@@ -44,8 +44,27 @@ def callback():
 
 
     
-f=line_bot_api.event.source.userId()
-print(f)
+@handler.add(MessageEvent, message=TextMessage)
+def handle_text_message(event):
+    text = event.message.text
+
+    if text == 'profile':
+        if isinstance(event.source, SourceUser):
+            profile = line_bot_api.get_profile(event.source.user_id)
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(
+                        text='Display name: ' + profile.display_name
+                    ),
+                    TextSendMessage(
+                        text='Status message: ' + profile.status_message
+                    )
+                ]
+            )
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(text="Bot can't use profile API without user ID"))
  
 
 
