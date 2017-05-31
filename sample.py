@@ -45,7 +45,7 @@ def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)
     decoded = json.loads(json_line)
-    user = decoded['events'][0]['source']
+    user = decoded['events'][0]['source']['userId']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
     with open('userids.txt','w') as outfile:
@@ -55,6 +55,7 @@ def callback():
     
     return '',200
 
+@app.route
 
  
 def sendText(user, text):
