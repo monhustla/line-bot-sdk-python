@@ -39,7 +39,7 @@ def callback():
     
 @handler.add(SourceUser, message=TextMessage)
 def handle_push(source):
-    line_bot_api.multicast(
+    line_bot_api.push_message(
         source.userId,
         TextSendMessage(text="Hello World!"))   
  
