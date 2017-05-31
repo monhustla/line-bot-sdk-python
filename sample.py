@@ -62,7 +62,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(events, source)
+@handler.add(event, source)
 def handle_text_message(source):
     text = event.message.text
 
