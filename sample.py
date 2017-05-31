@@ -30,7 +30,7 @@ def sendText(user, text):
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':Authorization
     }
-    data = json.dumps(decoded)
+    data = json.dumps(user)
     
  
     
