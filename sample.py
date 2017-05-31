@@ -45,11 +45,10 @@ def callback():
     user = decoded['events'][0]['source']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
-    print("ok",user)
-    sendText(user,'ok')
     new=open("userids.txt","w")
     new.write(user)
     new.close()
+    print("ok",user)
     return '',200
  
 def sendText(user, text):
