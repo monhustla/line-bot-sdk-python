@@ -64,8 +64,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-profile= line_bot_api(event.source.user_id)
-print(profile)
+    profile= line_bot_api(event.source.user_id)
+    print(profile)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
