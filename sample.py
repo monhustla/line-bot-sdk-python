@@ -15,7 +15,7 @@ def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)
     decoded = json.loads(json_line)
-    user = decoded["events"][5]['to']
+    user = decoded["events"][0]['to']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
     print("ok",userId)
