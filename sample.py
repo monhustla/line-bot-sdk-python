@@ -64,7 +64,7 @@ def sendText(user, text):
     r = requests.post(LINE_API, headers=headers, data=data) 
     #print(r.text)
 
-if user is !=0:
+if user:
     line_bot_api.push_message(user,TextSendMessage(text="You Did It"))
 
 if __name__ == "__main__":
