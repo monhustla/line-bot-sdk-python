@@ -15,7 +15,7 @@ def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)
     decoded = json.loads(json_line)
-    user = decoded.get['events']['source']['userId']
+    user = decoded['events']['source']['userId']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
     print("ok",user)
@@ -30,7 +30,7 @@ def sendText(user, text):
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':Authorization
     }
-    data = user
+    data = decoded
     
  
     
