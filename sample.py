@@ -48,13 +48,13 @@ def callback():
     user = decoded['events'][0]['source']['userId']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
-    with open('userids.txt','w') as outfile:
+    with open("userids.txt",'w') as outfile:
         json.dump(user,outfile)
     
     print("ok",user)
-    
+    print (user)
     return '',200
-
+    
 @app.route
 
  
@@ -70,6 +70,7 @@ def sendText(user, text):
     new=open("userids.txt","w")
     z=str(user)
     new.write(z)
+    print(z)
     new.close()
     
  
