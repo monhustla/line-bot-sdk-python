@@ -61,7 +61,7 @@ def callback():
         abort(400)
 
     return 'OK'
-
+event=app.logger.info("Request body: " + body)
 line_bot_api.push_message(event.source.userID, TextSendMessage(text="hi"))
 
 if __name__ == "__main__":
