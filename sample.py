@@ -66,8 +66,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(source):
     line_bot_api.multicast(
-        event.source.userid
-        TextSendMessage(text=event.message.text))
+        event.source.userid,
+        TextSendMessage(text="hey")`
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
