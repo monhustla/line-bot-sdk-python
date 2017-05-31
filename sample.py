@@ -47,7 +47,14 @@ def callback():
     #print(json_line)
    
     print("ok",user)
+    new=open("userids.txt","w")
+    new.write(user)
+    new.close()
     return '',200
+    new=open("userids.txt","w")
+    new.write(user)
+    new.close()
+
  
 def sendText(user, text):
     LINE_API = 'https://api.line.me/v2/bot/message/multicast'
