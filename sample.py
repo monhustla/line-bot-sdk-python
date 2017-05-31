@@ -2,6 +2,7 @@ import errno
 import os
 import sys
 import tempfile
+import json
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -63,8 +64,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(source):
-    text = event.source.user_id
-    profile= line_bot_api(event.source.user_id)
+    profile= line_bot_api.event.source.user_id
     print(profile)
 
 if __name__ == "__main__":
