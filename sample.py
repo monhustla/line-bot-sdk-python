@@ -48,7 +48,8 @@ def callback():
     user = decoded['events'][0]['source']
     #id=[d['replyToken'] for d in user][0]
     #print(json_line)
-    
+    with open('userids.txt','w') as outfile:
+        json.dump(user,outfile)
     
     print("ok",user)
     
