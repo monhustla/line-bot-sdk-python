@@ -32,15 +32,23 @@ def sendText(user, text):
     }
  
     data = json.dumps({
-        "replyToken":user,
+     "events": [
+      {
+        "replyToken": "nHuyWiB7yP5Zw52FIkcQobQuGDXCTA",
+        "type": "message",
+        "timestamp": 1462629479859,
         "source": {
-            "userId":userId
-        }
-        "messages":[{
-            "type":"text",
-            "text":text
-        }]
-    })
+             "type": "user",
+             "userId": "U206d25c2ea6bd87c17655609a1c37cb8"
+         },
+         "message": {
+             "id": "325708",
+             "type": "text",
+             "text": "Hello, world"
+          }
+      }
+  ]
+}
  
     
     r = requests.post(LINE_API, headers=headers, data=data) 
