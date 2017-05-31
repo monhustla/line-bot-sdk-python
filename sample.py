@@ -67,8 +67,7 @@ def sendText(user, text):
     r = requests.post(LINE_API, headers=headers, data=data) 
     #print(r.text)
 
-if user:
-    line_bot_api.push_message(user,TextSendMessage(text="You Did It"))
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
