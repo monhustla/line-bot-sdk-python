@@ -48,8 +48,8 @@ def callback():
     print("ok",user)
     sendText(user,'ok')
     new=open("userids.txt","w")
-    new=write(user)
-    new=close()
+    new.write(user)
+    new.close()
     return '',200
  
 def sendText(user, text):
