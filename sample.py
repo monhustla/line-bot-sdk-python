@@ -1,78 +1,48 @@
-import errno
-import os
-import sys
-import tempfile
+from flask import Flask, request
 import json
-from argparse import ArgumentParser
-
-from flask import Flask, request, abort
-
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-    SourceUser, SourceGroup, SourceRoom,
-    TemplateSendMessage, ConfirmTemplate, MessageTemplateAction,
-    ButtonsTemplate, URITemplateAction, PostbackTemplateAction,
-    CarouselTemplate, CarouselColumn, PostbackEvent,
-    StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
-    ImageMessage, VideoMessage, AudioMessage,
-    UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent
-)
-
+import requests
+ 
 app = Flask(__name__)
-
-# get channel_secret and channel_access_token from your environment variable
-)
-
-static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
-
-
-# function for create tmp dir for download content
-def make_static_tmp_dir():
-    try:
-        os.makedirs(static_tmp_path)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(static_tmp_path):
-            pass
-        else:
-            raise
-
-
-@app.route("/callback", methods=['POST'])
+ 
+@app.route('/')
+def index():
+    return "Hello World!"
+# ส่วน callback สำหรับ Webhook
+@app.route('/callback', methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
-
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-
-    return 'OK'
-
-
-@handler.add(event, source)
-def handle_text_message(source):
-    text = event.message.text
-
-    if text == 'profile':
-        if isinstance(event.source, SourceUser):
-            profile = line_bot_api.get_profile(event.source.user_id)
-            print (profile)
-    else:
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.message.text))
-
+    json_line = request.get_json()
+    json_line = json.dumps(json_line)
+    decoded = json.loads(json_line)
+    user = decoded["events"][0]['replyToken']
+    #id=[d['replyToken'] for d in user][0]
+    #print(json_line)
+    print("ผู้ใช้：",user)
+    sendText(user,'งง') # ส่งข้อความ งง
+    return '',200
+ 
+def sendText(user, text):
+    LINE_API = 'https://api.line.me/v2/bot/message/reply'
+    Authorization = 'jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU='
+ 
+    headers = {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':Authorization
+    }
+ 
+    data = json.dumps({
+        "replyToken":user,
+        "messages":[{
+            "type":"text",
+            "text":text
+        }]
+    })
+ 
+    #print("ข้อมูล：",data)
+    r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
+    #print(r.text)
+ 
+if __name__ == '__main__':
+     app.run(debug=True)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
