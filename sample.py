@@ -53,10 +53,7 @@ def callback():
     print("ok",user)
     
     return '',200
-new=open("userids.txt","w")
-z=str(user)
-new.write(z)
-new.close()
+
 
  
 def sendText(user, text):
