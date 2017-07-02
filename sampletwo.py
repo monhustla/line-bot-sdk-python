@@ -12,6 +12,14 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
+    SourceUser, SourceGroup, SourceRoom,
+    TemplateSendMessage, ConfirmTemplate, MessageTemplateAction,
+    ButtonsTemplate, URITemplateAction, PostbackTemplateAction,
+    CarouselTemplate, CarouselColumn, PostbackEvent,
+    StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
+    ImageMessage, VideoMessage, AudioMessage,
+    UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent
+)
 )
 
 app = Flask(__name__)
@@ -45,6 +53,8 @@ def callback():
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
+            continue
+        if text== "Maps":
             continue
 
         line_bot_api.reply_message(
