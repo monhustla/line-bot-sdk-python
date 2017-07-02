@@ -53,10 +53,10 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        if event.message.text == "Maps":
+        if event.message.text == "Mastery Costs":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Congratulations")
+                ImageSendMessage(masterycosts.jpg)
             
        
 
