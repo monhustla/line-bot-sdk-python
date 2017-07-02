@@ -3,6 +3,9 @@ from os import environ
 import sys
 from flask import Flask, request, abort
 from argparse import ArgumentParser
+from PIL import Image
+import requests
+from io import BytesIO
 
 from linebot import (
     LineBotApi, WebhookHandler, WebhookParser
@@ -20,6 +23,10 @@ from linebot.models import (
     ImageMessage, VideoMessage, AudioMessage,
     UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent, ImageSendMessage
 )
+
+
+response = requests.get(https://drive.google.com/open?id=0B3o2dKXZTudKSjllTThBMV9fdkE)
+img = Image.open(BytesIO(response.content))
 
 app = Flask(__name__)
 
@@ -56,7 +63,7 @@ def callback():
         if event.message.text == "Mastery Costs":
             line_bot_api.reply_message(
                 event.reply_token,
-                ImageSendMessage(https://drive.google.com/open?id=0B3o2dKXZTudKSjllTThBMV9fdkE)
+                ImageSendMessage(img)
             )
             
        
