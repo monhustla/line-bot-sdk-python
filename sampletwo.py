@@ -1,5 +1,4 @@
-Type "copyright", "credits" or "license()" for more information.
->>> import errno
+import errno
 import os
 import sys
 import tempfile
