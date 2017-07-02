@@ -47,4 +47,4 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    app.run(environ.get('PORT'))
+    app.run(host='0.0.0.0',port=os.environ['PORT'])
