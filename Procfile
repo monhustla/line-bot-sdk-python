@@ -1,1 +1,1 @@
-web: python sampletwo.py $port
+web: python sampletwo.py
