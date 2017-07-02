@@ -3,7 +3,7 @@ from os import environ
 import sys
 from flask import Flask, request, abort
 from argparse import ArgumentParser
-import Image
+from PIL import image
 import requests
 from io import BytesIO
 
