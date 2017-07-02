@@ -25,7 +25,7 @@ from linebot.models import (
 )
 
 
-response = requests.get(https://drive.google.com/open?id=0B3o2dKXZTudKSjllTThBMV9fdkE)
+response = requests.get("https://drive.google.com/open?id=0B3o2dKXZTudKSjllTThBMV9fdkE")
 img = Image.open(BytesIO(response.content))
 
 app = Flask(__name__)
