@@ -57,6 +57,7 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(masterycosts.jpg)
+            )
             
        
 
