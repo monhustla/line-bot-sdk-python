@@ -53,7 +53,7 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        if text== "Maps":
+        if event.message.text== "Maps":
             continue
 
         line_bot_api.reply_message(
