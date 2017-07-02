@@ -36,9 +36,17 @@ def callback():
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
+        
+    for event in events:
+        if not isinstance(event, MessageEvent):
+            continue
+        if not isinstance(event.message, TextMessage):
+            continue
 
-    return 'OK'
-
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
