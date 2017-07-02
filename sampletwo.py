@@ -168,7 +168,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text="Hey"))
 
-@handler.add(MessageEvent, message="Hi")
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
