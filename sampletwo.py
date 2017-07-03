@@ -165,7 +165,7 @@ def callback():
         if event.message.text == "Mc3 arena":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="t4b"+'\n'+"basic"))            
+                TextSendMessage(text="t4b"+'\n'+"basic"+'\n'+"cutoffs"))            
             #Arena Keywords   
         if event.message.text == "Mc3 basic":
             line_bot_api.reply_message(
@@ -179,7 +179,10 @@ def callback():
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/EwC1hdp.jpg',
                     preview_image_url='https://example.com/preview.jpg'))
-
+        if event.message.text == "Mc3 cutoffs":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="https://docs.google.com/spreadsheets/d/1sJtSVnjhhRNxpiuMR5uXrsTlrsXMjp9TNO7JHDXhtsk/htmlview"))
 
 
 
