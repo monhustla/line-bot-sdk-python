@@ -61,7 +61,7 @@ def callback():
         if isinstance(even, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='Hey')
+                TextSendMessage(text='Hey'))
                     
         if not isinstance(event, MessageEvent):
             continue
