@@ -1,6 +1,8 @@
 import os
 from os import environ
 import sys
+import tempfile
+
 from flask import Flask, request, abort
 from argparse import ArgumentParser
 
@@ -38,11 +40,7 @@ handler = WebhookHandler('2f8bf1b9951192d713bc216bdc585df2')
 line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU=')
 parser = WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
 
-@handler.add(JoinEvent)
-def handle_join(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='Hey, thanks for the invite. For a list of my commands type "list" ' + event.source.type))
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -60,6 +58,11 @@ def callback():
         abort(400)
         
     for event in events:
+        if not isinstance(event, JoinEvent):
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Hey, thanks for the invite. To get started with my commands type "list"")
+                
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
