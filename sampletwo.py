@@ -59,6 +59,22 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
+            
+        #AQ Keywords
+        if event.message.text == "aq costs":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/BvLSyYt.jpg',
+                    preview_image_url='https://example.com/preview.jpg'
+                    
+        if event.message.text == "aq rewards":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/ZwdRIoj.jpg',
+                    preview_image_url='https://example.com/preview.jpg'
+                    
         if event.message.text == "Mastery Costs":
             line_bot_api.reply_message(
                 event.reply_token,
