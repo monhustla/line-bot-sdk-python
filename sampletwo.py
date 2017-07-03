@@ -57,13 +57,7 @@ def callback():
     except InvalidSignatureError:
         abort(400)
         
-    for event in events:
-        if not isinstance(event, JoinEvent):
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="Hey, thanks for the invite. To get started with my commands type: list")
-            )
-                
+    for event in events:                
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
@@ -107,7 +101,11 @@ def callback():
                 )
             )
             
-       
+@handler.add(JoinEvent)
+def handle_join(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='Joined this ' + event.source.type))       
 
 
 
