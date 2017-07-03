@@ -69,11 +69,19 @@ def callback():
             continue
             
             
-        #List Breakdown    
+        #Whole List Breakdown    
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Mc3 arena"+'\n'+"Mc3 aW"+'\n'+"Mc3 arena"+'\n'+"Mc3 calendar"+'\n'+"Mc3 duels"+'\n'+"Mc3 mastery"+'\n'+"Mc3 prestige"+'\n'+"Mc3 special quests"))     
+                TextSendMessage(text="Mc3 aq"+'\n'+"Mc3 aw"+'\n'+"Mc3 arena"+'\n'+"Mc3 calendar"+'\n'+"Mc3 duels"+'\n'+"Mc3 mastery"+'\n'+"Mc3 prestige"+'\n'+"Mc3 special quests"))     
+        
+        #Specific List Breakdown, make sure to follow the headers identifying the class.
+            #Aq Trigger
+        if event.message.text == "Mc3 aq":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="aq boss practice"+'\n'+"aq costs"+'\n'+"aq maps"+'\n'+"aq rewards"))            
+        
         #AQ Keywords
         if event.message.text == "Mc3 aq costs":
             line_bot_api.reply_message(
