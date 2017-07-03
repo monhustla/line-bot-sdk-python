@@ -100,7 +100,37 @@ def callback():
                     preview_image_url='https://example.com/preview.jpg'
                 )
             )
-            
+static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
+
+
+# function for create tmp dir for download content
+def make_static_tmp_dir():
+    try:
+        os.makedirs(static_tmp_path)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(static_tmp_path):
+            pass
+        else:
+            raise
+
+
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # handle webhook body
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return 'OK'
+
 @handler.add(JoinEvent)
 def handle_join(event):
     wplog.logger.info("Got join event")
@@ -112,4 +142,14 @@ def handle_join(event):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=os.environ['PORT'])
+    arg_parser = ArgumentParser(
+        usage='Usage: python ' + __file__ + ' [--port <port>] [--help]'
+    )
+    arg_parser.add_argument('-p', '--port', default=8000, help='port')
+    arg_parser.add_argument('-d', '--debug', default=False, help='debug')
+    options = arg_parser.parse_args()
+
+    # create tmp dir for download content
+    make_static_tmp_dir()
+
+    app.run(debug=options.debug, port=options.port)
