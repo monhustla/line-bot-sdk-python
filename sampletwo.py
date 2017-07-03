@@ -88,7 +88,7 @@ def callback():
                 event.reply_token,
                 TextSendMessage(text="interactive maps"+'\n'+"map 3"+'\n'+"map 4"+'\n'+"map 5"+'\n'+"map 6"))            
         
-                #AQ Keywords
+         #AQ Keywords
         if event.message.text == "Mc3 aq costs":
             line_bot_api.reply_message(
                 event.reply_token,
@@ -147,15 +147,38 @@ def callback():
                     original_content_url='https://i.imgur.com/Eie596I.jpg',
                     preview_image_url='https://example.com/preview.jpg'))
             
-        #AW Keywords    
+        #AW Command Tree
+        if event.message.text == "Mc3 aw":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="aw map"))
+            
+            #AW Keywords    
         if event.message.text == "Mc3 aw map":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/ZxgWTY7.jpg',
                     preview_image_url='https://example.com/preview.jpg'))
-
-
+        
+        #Arena Command Tree
+        if event.message.text == "Mc3 arena":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="t4b"+'\n'+"basic"))            
+            #Arena Keywords   
+        if event.message.text == "Mc3 basic":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/LWHaCCv.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))
+        if event.message.text == "Mc3 t4b":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/EwC1hdp.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))
 
 
 
