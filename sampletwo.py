@@ -63,7 +63,7 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url='https://example.com/original.jpg',
+                    original_content_url='https://i.imgur.com/Y9XKDz9.jpg',
                     preview_image_url='https://example.com/preview.jpg'
                 )
             )
