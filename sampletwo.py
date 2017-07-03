@@ -64,7 +64,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='http://i.imgur.com/Y9XKDz9.jpg',
-                    preview_image_url='http://i.imgur.com/Y9XKDz9.jpg')
+                    preview_image_url='http://i.imgur.com/Y9XKDz9.jg')
             )
             
        
