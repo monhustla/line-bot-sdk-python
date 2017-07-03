@@ -58,7 +58,7 @@ def callback():
         abort(400)
         
     for event in events:
-        if isinstance(even, JoinEvent):
+        if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text='Hey'))
