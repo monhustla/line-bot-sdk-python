@@ -61,13 +61,20 @@ def callback():
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='Hey, thank you for inviting the MCOC Concierge In-Chat Bot. To get started type: list'))
-                    
+                TextSendMessage(text='Hey, thank you for inviting the MCOC Concierge In-Chat Bot. To get started type: Mc3 list'))
+           
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
             continue
             
+            
+        #List Breakdown    
+        if event.message.text == "Mc3 list":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Mc3 arena"+'\n'+"Mc3 aW"+'\n'+"Mc3 arena"+\n+"Mc3 calendar"+'\n'+"Mc3 duels"+'\n'+"Mc3 mastery"+'\n'+"Mc3 prestige"+'\n'+"Mc3 special quests")
+            )     
         #AQ Keywords
         if event.message.text == "Mc3 aq costs":
             line_bot_api.reply_message(
