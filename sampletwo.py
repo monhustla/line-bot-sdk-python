@@ -100,28 +100,9 @@ def callback():
                     preview_image_url='https://example.com/preview.jpg'
                 )
             )
-static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
-
-
-# function for create tmp dir for download content
-def make_static_tmp_dir():
-    try:
-        os.makedirs(static_tmp_path)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(static_tmp_path):
-            pass
-        else:
-            raise
 
 
 
-
-@handler.add(JoinEvent)
-def handle_join(event):
-    wplog.logger.info("Got join event")
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='Joined this ' + event.source.type))
 
 
 
