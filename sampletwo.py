@@ -103,9 +103,10 @@ def callback():
             
 @handler.add(JoinEvent)
 def handle_join(event):
+    wplog.logger.info("Got join event")
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='Joined this"))   
+        TextSendMessage(text='Joined this ' + event.source.type)))   
 
 
 
