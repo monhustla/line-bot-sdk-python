@@ -73,7 +73,7 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"mastery"+'\n'+"prestige"+'\n'+"special quests"))     
+                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"))     
         
         #Specific List Breakdown, make sure to follow the headers identifying the class.
             #Aq Trigger
@@ -209,12 +209,51 @@ def callback():
                 event.reply_token,
                 TextSendMessage(text="http://marveltrucos.x10.mx/basics.php"))
         
-        
-        if event.message.text == "Mc3 basic schedule":
+        #Duels Command Tree
+        if event.message.text == "Mc3 duels":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="http://marveltrucos.x10.mx/basics.php"))
+                TextSendMessage(text="duel targets"))
+                #Duels Keywords
+        if event.message.text == "Mc3 duel targets":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="https://docs.google.com/spreadsheets/d/1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q/edit#gid=1544272893"))            
+          
+        
+        #Masteries Command Tree
+        if event.message.text == "Mc3 masteries":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="ronin nupe"+'\n'+"mastery costs"+'\n'+"mastery builder"+'\n'+"mastery pi"))
+                #Masteries Keywords
+        if event.message.text == "Mc3 ronin nupe":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="https://docs.google.com/document/d/1iC2YjlXa8PNsBGHiupLV6lsdXj7wnH1bC2l-HIWOiwI/edit"))
+        if event.message.text == "Mc3 mastery cost":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/Mc3aao5.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))           
+        if event.message.text == "Mc3 mastery builder":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="https://alsciende.github.io/masteries/v10.0.1/#0000000000000000000000000000000000000010000000000000000"))            
+        if event.message.text == "Mc3 mastery pi":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/T12L38x.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))          
             
+            
+        #Prestige Command Tree
+        if event.message.text == "Mc3 prestige":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="prestige calculator"+'\n'+"prestige list"))            
             
             
             
