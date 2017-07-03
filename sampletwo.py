@@ -73,7 +73,7 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"))     
+                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"+'\n'+"synergies"))     
         
         #Specific List Breakdown, make sure to follow the headers identifying the class.
             #Aq Trigger
@@ -292,7 +292,43 @@ def callback():
         if event.message.text == "Mc3 rttl guide":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="https://drive.google.com/file/d/0B4ozoShtX2kFcDV4R3lQb1hnVnc/view?pref=2&pli=1"))            
+                TextSendMessage(text="https://drive.google.com/file/d/0B4ozoShtX2kFcDV4R3lQb1hnVnc/view?pref=2&pli=1")) 
+
+            
+        #Synergies Command Tree    
+        if event.message.text == "Mc3 synergies":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="attack teams"+'\n'+"bleed teams"+'\n'+"crit teams"+'\n'+"power gain teams")) 
+            #Synergies Keywords   
+        if event.message.text == "Mc3 attack teams":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/WTyyl7t.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))
+        if event.message.text == "Mc3 bleed teams":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Coming Soon")
+        if event.message.text == "Mc3 crit teams":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/UsIqiH4.jpg',
+                    preview_image_url='https://example.com/preview.jpg')) 
+        if event.message.text == "Mc3 power gain teams":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/LBF0Rr9.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))   
+        if event.message.text == "Mc3 unique teams":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/Zmec8Hs.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))                
             
             
             
