@@ -61,7 +61,7 @@ def callback():
             continue
             
         #AQ Keywords
-        if event.message.text == "aq costs":
+        if event.message.text == "Mc3 aq costs":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
@@ -70,19 +70,20 @@ def callback():
                 )
             )
                     
-        if event.message.text == "aq rewards":
+        if event.message.text == "Mc3 aq rewards":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/ZwdRIoj.jpg',
                     preview_image_url='https://example.com/preview.jpg'
                 )
-            )    
-        if event.message.text == "Mastery Costs":
+            )
+            
+        if event.message.text == "Mc3 boss practice":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url='https://i.imgur.com/Y9XKDz9.jpg',
+                    original_content_url='https://i.imgur.com/71x09Rm.jpg',
                     preview_image_url='https://example.com/preview.jpg'
                 )
             )
