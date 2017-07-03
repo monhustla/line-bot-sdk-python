@@ -61,7 +61,7 @@ def callback():
         if not isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Hey, thanks for the invite. To get started with my commands type "list"")
+                TextSendMessage(text="Hey, thanks for the invite. To get started with my commands type: list")
                 
         if not isinstance(event, MessageEvent):
             continue
