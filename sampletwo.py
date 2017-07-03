@@ -73,7 +73,7 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendar"+'\n'+"duels"+'\n'+"mastery"+'\n'+"prestige"+'\n'+"special quests"))     
+                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"mastery"+'\n'+"prestige"+'\n'+"special quests"))     
         
         #Specific List Breakdown, make sure to follow the headers identifying the class.
             #Aq Trigger
@@ -184,8 +184,42 @@ def callback():
                 event.reply_token,
                 TextSendMessage(text="https://docs.google.com/spreadsheets/d/1sJtSVnjhhRNxpiuMR5uXrsTlrsXMjp9TNO7JHDXhtsk/htmlview"))
 
-
-
-
-if __name__ == "__main__":
+        #Calendar Command Tree
+        if event.message.text == "Mc3 calendars":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="daily rotation calendar"+'\n'+"monthly calendar"+'\n'+"premium schedule"+'\n'+"basic schedule"))
+            #Calendar Keywords    
+        if event.message.text == "Mc3 daily rotation calendar":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/iyNbSOk.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))            
+        if event.message.text == "Mc3 monthly calendar":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Coming Soon"))
+        if event.message.text == "Mc3 premium schedule":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="http://marveltrucos.x10.mx/premium.php"))
+        if event.message.text == "Mc3 basic schedule":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="http://marveltrucos.x10.mx/basics.php"))
+        
+        
+        if event.message.text == "Mc3 basic schedule":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="http://marveltrucos.x10.mx/basics.php"))
+            
+            
+            
+            
+            
+            
+            
+    if __name__ == "__main__":
     app.run(host='0.0.0.0',port=os.environ['PORT'])
