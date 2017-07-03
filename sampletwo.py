@@ -310,7 +310,7 @@ def callback():
         if event.message.text == "Mc3 bleed teams":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Coming Soon")
+                TextSendMessage(text="Coming Soon"))
         if event.message.text == "Mc3 crit teams":
             line_bot_api.reply_message(
                 event.reply_token,
