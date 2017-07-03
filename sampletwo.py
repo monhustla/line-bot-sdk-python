@@ -62,7 +62,7 @@ def callback():
         if event.message.text == "Mastery Costs":
             line_bot_api.reply_message(
                 event.reply_token,
-                ImageSendMessage("https://drive.google.com/open?id=0B3o2dKXZTudKSjllTThBMV9fdkE")
+                ImageSendMessage("https://i.stack.imgur.com/uRY4d.png")
             )
             
        
