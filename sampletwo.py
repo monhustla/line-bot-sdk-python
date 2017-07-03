@@ -253,7 +253,55 @@ def callback():
         if event.message.text == "Mc3 prestige":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="prestige calculator"+'\n'+"prestige list"))            
+                TextSendMessage(text="prestige calculator"+'\n'+"prestige list"))         
+            #Prestige Keywords
+        if event.message.text == "Mc3 prestige calculator":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="https://docs.google.com/spreadsheets/d/1YdOWdX2zpyWBBLos36CthqpJ9y1HlPdSHV8jtvkeF3E/copy"))
+        if event.message.text == "Mc3 prestige list":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="https://docs.google.com/spreadsheets/d/1Cd3-X2lAQyJBlBuxBld6fsWBw4HkBdm2AFybHk3nfS4/pubhtml#"))  
+            
+        #Special Quest Command Tree
+        if event.message.text == "Mc3 special quests":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="rol guide"+'\n'+"rttl guide"+'\n'+"lol"))
+            #Special Quest Keywords
+                #Lol Command Tree
+        if event.message.text == "Mc3 lol":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="lol map"+'\n'+"lol fights"))
+        if event.message.text == "Mc3 lol map":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/vB3Ix7L.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))
+        if event.message.text == "Mc3 lol fights":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Coming Soon"))            
+        if event.message.text == "Mc3 rol guide":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Coming Soon"))
+        if event.message.text == "Mc3 rttl guide":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="https://drive.google.com/file/d/0B4ozoShtX2kFcDV4R3lQb1hnVnc/view?pref=2&pli=1"))            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             
