@@ -63,8 +63,8 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url="http://imagemap-generator.dariodomi.de/uploads/170703_002119_3554748e3135b0oF.jpg",
-                    preview_image_url="http://imagemap-generator.dariodomi.de/uploads/170703_002119_3554748e3135b0oF.jpg")
+                    original_content_url='https://example.com/original.jpg',
+                    preview_image_url='https://example.com/preview.jpg')
             )
             
        
