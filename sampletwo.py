@@ -73,8 +73,7 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Mc3 arena"+'\n'+"Mc3 aW"+'\n'+"Mc3 arena"+\n+"Mc3 calendar"+'\n'+"Mc3 duels"+'\n'+"Mc3 mastery"+'\n'+"Mc3 prestige"+'\n'+"Mc3 special quests")
-            )     
+                TextSendMessage(text="Mc3 arena"+'\n'+"Mc3 aW"+'\n'+"Mc3 arena"+'\n'+"Mc3 calendar"+'\n'+"Mc3 duels"+'\n'+"Mc3 mastery"+'\n'+"Mc3 prestige"+'\n'+"Mc3 special quests"))     
         #AQ Keywords
         if event.message.text == "Mc3 aq costs":
             line_bot_api.reply_message(
