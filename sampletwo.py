@@ -88,6 +88,16 @@ def callback():
                 )
             )
             
+        #AW Keywords    
+        if event.message.text == "Mc3 aw map":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/ZxgWTY7.jpg',
+                    preview_image_url='https://example.com/preview.jpg'
+                )
+            )
+            
        
 
 
