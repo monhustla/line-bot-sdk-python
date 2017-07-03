@@ -61,7 +61,7 @@ def callback():
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='Hey, thank you for inviting the MCOC Concierge In-Chat Bot. To get started type: Mc3 list'))
+                TextSendMessage(text='Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3. To get started type: Mc3 list'))
            
         if not isinstance(event, MessageEvent):
             continue
@@ -73,16 +73,22 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Mc3 aq"+'\n'+"Mc3 aw"+'\n'+"Mc3 arena"+'\n'+"Mc3 calendar"+'\n'+"Mc3 duels"+'\n'+"Mc3 mastery"+'\n'+"Mc3 prestige"+'\n'+"Mc3 special quests"))     
+                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendar"+'\n'+"duels"+'\n'+"mastery"+'\n'+"prestige"+'\n'+"special quests"))     
         
         #Specific List Breakdown, make sure to follow the headers identifying the class.
             #Aq Trigger
         if event.message.text == "Mc3 aq":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="aq boss practice"+'\n'+"aq costs"+'\n'+"aq maps"+'\n'+"aq rewards"))            
+                TextSendMessage(text="boss practice"+'\n'+"aq costs"+'\n'+"aq maps"+'\n'+"aq rewards"))
+            
+                #aq maps tree
+        if event.message.text == "Mc3 aq maps":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="interactive maps"+'\n'+"map 3"+'\n'+"map 4"+'\n'+"map 5"+'\n'+"map 6"))            
         
-        #AQ Keywords
+                #AQ Keywords
         if event.message.text == "Mc3 aq costs":
             line_bot_api.reply_message(
                 event.reply_token,
@@ -110,15 +116,44 @@ def callback():
                 )
             )
             
+        if event.message.text == "Mc3 interactive maps":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="http://marveltrucos.x10.mx/coc/aq/"))
+            
+        if event.message.text == "Mc3 map 3":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/GZYgvhS.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))
+            
+        if event.message.text == "Mc3 map 4":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Coming soon")) 
+            
+        if event.message.text == "Mc3 map 5":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/TqTHnKB.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))
+            
+        if event.message.text == "Mc3 map 6":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/Eie596I.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))
+            
         #AW Keywords    
         if event.message.text == "Mc3 aw map":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/ZxgWTY7.jpg',
-                    preview_image_url='https://example.com/preview.jpg'
-                )
-            )
+                    preview_image_url='https://example.com/preview.jpg'))
 
 
 
