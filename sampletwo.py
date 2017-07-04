@@ -81,7 +81,23 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
             
+        if event.message.text=="Mc3 my prestige":
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            cur=conn.cursor()
+            cur.execute("INSERT INTO prestige_data (lineid) VALUES (%s);",
+                        (user))
+            cur.execute("SELECT lined from prestige_data")
+            rows = cur.fetchall()
             
+            print "\nQuery result:\n"
+            for row in rows:
+                print "    LINE ID: ", row[0], "\n"
+                   
+                        
+                        
         #Whole List Breakdown    
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
