@@ -3,7 +3,7 @@ from os import environ
 import sys
 import tempfile
 import psycopg2
-import urllib.reqiest
+import urllib.parse as urlparse
 import json
 
 from flask import Flask, request, abort
@@ -44,13 +44,20 @@ line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLz
 parser = WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
 
 
-conn=psycopg2.connect(
-    database='dcr7ppsdetdg0b'
-    user='ojozedkkfvmbxk',
-    password='37573eae20db0df4e51b2de0a5161a2ad71b71ed041a5c4877848a122f83adda',
-    host='ec2-184-73-236-170.compute-1.amazonaws.com',
-    port='5432'
-)
+url = urlparse.urlparse(os.environ['DATABASE_URL'])
+dbname = url.path[1:]
+user = url.username
+password = url.password
+host = url.hostname
+port = url.port
+
+con = psycopg2.connect(
+            dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+            )
                                  
 
 
