@@ -84,7 +84,10 @@ def callback():
                 event.reply_token,
                 TextSendMessage(text='Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3. To get started type: Mc3 list'))
            
-            
+        if not isinstance(event, MessageEvent):
+            continue
+        if not isinstance(event.message, TextMessage):
+            continue            
         if event.message.text=="Mc3 my prestige":
             json_line = request.get_json()
             json_line = json.dumps(json_line)
