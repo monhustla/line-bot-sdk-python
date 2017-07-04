@@ -97,8 +97,8 @@ def callback():
             
             print "\nQuery result:\n"
             for row in rows:
-                logging.debug("    LINE ID: " + row[0] + "\n")
-                logging.debug("    Summoner: " + row[1] + "\n")
+                print("    LINE ID: " + row[0] + "\n")
+                print("    Summoner: " + row[1] + "\n")
                 champs = row[3]
                    
                         
