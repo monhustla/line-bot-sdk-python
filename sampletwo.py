@@ -46,9 +46,9 @@ parser = WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
 
 conn=psycopg2.connect(
     database='dcr7ppsdetdg0b'
-    user=url.'ojozedkkfvmbxk',
+    user='ojozedkkfvmbxk',
     password='37573eae20db0df4e51b2de0a5161a2ad71b71ed041a5c4877848a122f83adda',
-    host=url.'ec2-184-73-236-170.compute-1.amazonaws.com',
+    host='ec2-184-73-236-170.compute-1.amazonaws.com',
     port='5432'
 )
                                  
