@@ -115,7 +115,7 @@ def callback():
                         {"lineid":f})
             rows= cur.fetchall()
             for row in rows:
-                h=("    Summoner: " + row[1] + "\n")
+                h=("Summoner: " + row[1] + "\n")
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=h))
