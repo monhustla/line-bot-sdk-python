@@ -4,6 +4,7 @@ import sys
 import tempfile
 import psycopg2
 import urlparse
+import json
 
 from flask import Flask, request, abort
 from argparse import ArgumentParser
