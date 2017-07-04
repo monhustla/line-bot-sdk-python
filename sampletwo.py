@@ -43,7 +43,7 @@ line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLz
 parser = WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
 
 urlparse.uses_netloc.append("posgres")
-url=urlparse.urlparse(os.environ[DATABASE_URL"])
+url=urlparse.urlparse(os.environ["DATABASE_URL"])
 conn=psycopg2.connect(
     database=url.path[1:],
     user=url.username,
