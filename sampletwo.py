@@ -2,6 +2,8 @@ import os
 from os import environ
 import sys
 import tempfile
+impost psycopg2
+import urlparse
 
 from flask import Flask, request, abort
 from argparse import ArgumentParser
@@ -39,6 +41,16 @@ handler = WebhookHandler('2f8bf1b9951192d713bc216bdc585df2')
 
 line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU=')
 parser = WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
+
+urlparse.uses_netloc.append("posgres")
+url=urlparse.urlparse(os.environ[DATABASE_URL"])
+conn=psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    host=url.hostname,
+    port=url.port
+)
+                                 
 
 
 
