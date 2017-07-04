@@ -88,7 +88,7 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue            
-        if event.message.text=="Mc3 my prestige":
+        if event.message.text=="Mc3 save profile":
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
