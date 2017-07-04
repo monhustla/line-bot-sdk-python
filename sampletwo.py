@@ -109,7 +109,7 @@ def callback():
             cur=conn.cursor()
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
                         {"lineid":f})
-            rows= cur.one()
+            rows= cur.fetchall()
             for row in rows:
                 h=("    Summoner: " + row[1] + "\n")
                 line_bot_api.reply_message(
