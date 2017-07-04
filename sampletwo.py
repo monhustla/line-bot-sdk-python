@@ -88,6 +88,7 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
+            print(f)
             cur=conn.cursor()
             cur.execute("INSERT INTO prestige_data (lineid) VALUES (%s);",
                         (f))
