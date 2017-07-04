@@ -87,10 +87,11 @@ def callback():
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
+            f=str(user)
             cur=conn.cursor()
             cur.execute("INSERT INTO prestige_data (lineid) VALUES (%s);",
-                        (user))
-            cur.execute("SELECT lined from prestige_data")
+                        (f))
+            cur.execute("SELECT lineid from prestige_data")
             rows = cur.fetchall()
             
             print "\nQuery result:\n"
