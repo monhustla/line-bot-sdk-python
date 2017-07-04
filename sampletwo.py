@@ -3,7 +3,7 @@ from os import environ
 import sys
 import tempfile
 import psycopg2
-import urlparse
+import urllib.reqiest
 import json
 
 from flask import Flask, request, abort
@@ -43,14 +43,13 @@ handler = WebhookHandler('2f8bf1b9951192d713bc216bdc585df2')
 line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU=')
 parser = WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
 
-urlparse.uses_netloc.append("posgres")
-url=urlparse.urlparse(os.environ["DATABASE_URL"])
+
 conn=psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
+    database='dcr7ppsdetdg0b'
+    user=url.'ojozedkkfvmbxk',
+    password='37573eae20db0df4e51b2de0a5161a2ad71b71ed041a5c4877848a122f83adda',
+    host=url.'ec2-184-73-236-170.compute-1.amazonaws.com',
+    port='5432'
 )
                                  
 
