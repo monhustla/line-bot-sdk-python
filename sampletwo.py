@@ -88,10 +88,12 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
             print(f)
             cur=conn.cursor()
             cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
-                        (f, "Living Tribunal", "whocares"))
+                        (f, name, "whocares"))
             cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data""")
             rows = cur.fetchall()
             
@@ -106,6 +108,8 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
             cur=conn.cursor()
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
                         {"lineid":f})
