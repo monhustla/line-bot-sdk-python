@@ -51,7 +51,7 @@ password = url.password
 host = url.hostname
 port = url.port
 
-con = psycopg2.connect(
+conn = psycopg2.connect(
             dbname=dbname,
             user=user,
             password=password,
