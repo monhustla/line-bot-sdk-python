@@ -2,3 +2,4 @@ requests >= 2.0
 future
 flask==0.12.2
 psycopg2
+urllib
