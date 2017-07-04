@@ -91,7 +91,7 @@ def callback():
             print(f)
             cur=conn.cursor()
             cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
-                        (f, "whocares", "whocares"))
+                        (f, "Living Tribunal", "whocares"))
             cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data""")
             rows = cur.fetchall()
             
@@ -99,7 +99,24 @@ def callback():
             for row in rows:
                 print("    LINE ID: " + row[0] + "\n")
                 print("    Summoner: " + row[1] + "\n")
-                champs = row[3]
+                
+        if event.message.text=="Mc3 my name":
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            f=str(user)
+            cur=conn.cursor()
+            cur.execute("""SELECT * FROM prestige_data WHERE lineid= %(lineid)s""",
+                        {"lineid":f})
+            rows= cur.fetchall()
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=
+                                for row in rows:
+                                ("    Summoner: " + row[1] + "\n")))
+                
+                
                    
                         
                         
