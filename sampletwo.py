@@ -2,7 +2,7 @@ import os
 from os import environ
 import sys
 import tempfile
-impost psycopg2
+import psycopg2
 import urlparse
 
 from flask import Flask, request, abort
