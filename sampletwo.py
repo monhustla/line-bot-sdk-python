@@ -389,8 +389,7 @@ def callback():
                     original_content_url='https://i.imgur.com/Zmec8Hs.jpg',
                     preview_image_url='https://example.com/preview.jpg'))
         
-    Else:
-        return 'ok'
+    return 'ok'
             
             
             
