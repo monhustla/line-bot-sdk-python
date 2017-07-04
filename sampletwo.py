@@ -387,7 +387,9 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/Zmec8Hs.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))                
+                    preview_image_url='https://example.com/preview.jpg'))
+        
+        Else:
             
             
             
