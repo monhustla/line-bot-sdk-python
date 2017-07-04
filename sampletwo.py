@@ -95,7 +95,7 @@ def callback():
             cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data""")
             rows = cur.fetchall()
             
-            print "\nQuery result:\n"
+            print ("\nQuery result:\n")
             for row in rows:
                 print("    LINE ID: " + row[0] + "\n")
                 print("    Summoner: " + row[1] + "\n")
