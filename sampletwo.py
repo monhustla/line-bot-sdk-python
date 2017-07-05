@@ -136,8 +136,8 @@ def callback():
             for row in rows:
                 h=str(row[sig1])
             cur=conn.cursor()
-            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data, champ1_name, champ1_prestige) VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s, %(champ1_name)s, %(champ1_prestige)s);""",
-                        (f, name, '{}', champ, h))
+            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data, champ1_name, champ1_prestige) VALUES (%s, %s, %s, %s, %s);""",
+                        (f, name, "{}", champ, h))
 
             rows=cur.fetchall()
             for row in rows:
