@@ -118,9 +118,11 @@ def callback():
             s2=":"
             s3="*"
             champ=(s1[s1.index(s2) + len(s2):])
+            sig=(s1[s1.index(s3) + len(s3):])
             champ1=str(champ)
             print(champ1)
-            
+            print (sig)
+            sig1=str(sig)
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
@@ -130,12 +132,12 @@ def callback():
             cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
             rows=cur.fetchall()
             for row in rows:
-                content=("   ", row[0],":", row[3])
+                content=("   ", row[sig1])
                 print (content)
                 data=str(content)
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=content))
+                    TextSendMessage(text=data))
             #profile= line_bot_api.get_profile(user)
             #name=(profile.display_name)
             #cur=conn.cursor()
