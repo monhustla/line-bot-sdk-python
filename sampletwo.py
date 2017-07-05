@@ -134,14 +134,9 @@ def callback():
             for row in rows:
                 h=str(row[sig1])
                 print (h)
-
-                #print ("Prestige: " + content)
-                #data=str(content)
-                #print (data)
-                #print("hey")
-                #line_bot_api.reply_message(
-                    #event.reply_token,
-                    #TextSendMessage(text=data))
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=h))
             #profile= line_bot_api.get_profile(user)
             #name=(profile.display_name)
             #cur=conn.cursor()
