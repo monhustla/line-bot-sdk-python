@@ -6,6 +6,7 @@ import tempfile
 import psycopg2
 import urllib.parse as urlparse
 import json
+import gspread
 
 from flask import Flask, request, abort
 from argparse import ArgumentParser
@@ -35,7 +36,9 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-
+scope = ['https://spreadsheets.google.com/feeds']
+credentials = ServiceAccountCredentials.from_json_keyfile_name('My Project-3164a19e689c.json', scope)
+gc = gspread.authorize(credentials)
 
 line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('2f8bf1b9951192d713bc216bdc585df2')
@@ -107,6 +110,30 @@ def callback():
             for row in rows:
                 print("    LINE ID: " + row[0] + "\n")
                 print("    Summoner: " + row[1] + "\n")
+                
+        if "Mc3 input champ:" in event.message.text:
+            s1=event.message.text
+            s2=":"
+            champ=(s1[s1.index(s2) + len(s2):])
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            f=str(user)
+            wks = gc.open("Prestige Calc").sheet1
+            wks.update_acell('B6', champ)
+            cell_list=wks.range('B6')
+            cur=conn.cursor()
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
+                        {"champ_data":cell_list})
+            cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data""")
+            rows = cur.fetchall()
+            rows= cur.fetchall()
+            for row in rows:
+                g=("Summoner: " + row[2] + "\n")
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=g))
                 
         if event.message.text=="Mc3 my name":
             json_line = request.get_json()
