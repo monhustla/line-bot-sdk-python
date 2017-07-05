@@ -124,6 +124,8 @@ def callback():
             wks = gc.open("Prestige Calc").sheet1
             wks.update_acell('B6', champ)
             cell_list=wks.range('B6')
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
             cur=conn.cursor()
             cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
             (f, name, cell_list))
