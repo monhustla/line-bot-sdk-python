@@ -142,11 +142,12 @@ def callback():
             cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data  WHERE lineid= %(lineid)s""",
                         {"lineid":f})
             rows=cur.fetchall()
+            print (rows)
             for row in rows:
-                print(row[2]+ ":" + row[4] + "\n")
+                print(row[1]+ ":" + row[3] + "\n")
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=(row[2]+":" + row[4])))
+                    TextSendMessage(text=(row[1]+":" + row[3])))
             #profile= line_bot_api.get_profile(user)
             #name=(profile.display_name)
             #cur=conn.cursor()
