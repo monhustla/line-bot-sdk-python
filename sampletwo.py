@@ -129,10 +129,11 @@ def callback():
             rows=cur.fetchall()
             for row in rows:
                 content=("   ", row[0],":", row[sig])
+                print (content)
                 data=str(content)
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=data))
+                    TextSendMessage(text=content))
             #profile= line_bot_api.get_profile(user)
             #name=(profile.display_name)
             #cur=conn.cursor()
