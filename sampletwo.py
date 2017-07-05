@@ -113,7 +113,7 @@ def callback():
                 print("    LINE ID: " + row[0] + "\n")
                 print("    Summoner: " + row[1] + "\n")
                 
-        if "Mc3 input champ:" in event.message.text:
+        if "Mc3 input champ1:" in event.message.text:
             s1=event.message.text
             s2=":"
             s3="*"
@@ -128,8 +128,17 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
             cur=conn.cursor()
             cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
+            rows=cur.fetchall()
+            for row in rows:
+                h=str(row[sig1])
+            cur=conn.cursor()
+            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data, champ1_name, champ1_prestige) VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s, %(champ1_name)s, %(champ1_prestige)s);""",
+                        (f, name, '{}', champ, h))
+
             rows=cur.fetchall()
             for row in rows:
                 h=str(row[sig1])
