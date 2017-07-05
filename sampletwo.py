@@ -63,7 +63,8 @@ conn = psycopg2.connect(
             host=host,
             port=port
             )
-                                 
+
+conn1=psycopg2.connect("dbname='Prestige' user='postgres' host='localhost' password='Bboy123!'")
 
 
 
@@ -115,15 +116,19 @@ def callback():
         if "Mc3 input champ:" in event.message.text:
             s1=event.message.text
             s2=":"
+            s3="-"
             champ=(s1[s1.index(s2) + len(s2):])
+            sig=(s1[s1.index(s3)+len(s3):])
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
-            wks = gc.open("Prestige Calc").sheet1
-            wks.update_acell('B6', champ)
-            content=wks.cell(3,3).value
+            cur1=conn1.cursor()
+            cur1.execute("SELECT * FROM public.prestigedata where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ})
+            rows=cur1.fetchall()
+            for row in rows:
+                content=("   ", row[0],":", row[sig])
             data=str(content)
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
