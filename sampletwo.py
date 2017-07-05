@@ -123,7 +123,7 @@ def callback():
             f=str(user)
             wks = gc.open("Prestige Calc").sheet1
             wks.update_acell('B6', champ)
-            content=wks.range('C3')
+            content=wks.cell('C3').value
             data=str(content)
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
