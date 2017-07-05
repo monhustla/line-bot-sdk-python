@@ -120,7 +120,7 @@ def callback():
             champ=(s1[s1.index(s2) + len(s2):])
             champ1=str(champ)
             print(champ1)
-            sig=(s1[s1.index(s3)+len(s3):])
+            
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
