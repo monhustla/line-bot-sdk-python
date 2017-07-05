@@ -128,7 +128,7 @@ def callback():
             name=(profile.display_name)
             cur=conn.cursor()
             cur.execute("""INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
-            (f, name, cell_list))
+            {(f, name, cell_list))}
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
                         {"lineid":f})
             rows = cur.fetchall()
