@@ -118,6 +118,8 @@ def callback():
             s2=":"
             s3="*"
             champ=(s1[s1.index(s2) + len(s2):])
+            champ1=str(champ)
+            print(champ1)
             sig=(s1[s1.index(s3)+len(s3):])
             json_line = request.get_json()
             json_line = json.dumps(json_line)
@@ -125,7 +127,7 @@ def callback():
             user = decoded['events'][0]['source']['userId']
             f=str(user)
             cur=conn.cursor()
-            cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ})
+            cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
             rows=cur.fetchall()
             for row in rows:
                 content=("   ", row[0],":", row[sig])
