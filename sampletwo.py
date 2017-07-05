@@ -64,7 +64,7 @@ conn = psycopg2.connect(
             port=port
             )
 
-conn1=psycopg2.connect("dbname='Prestige' user='postgres' host='localhost' password='Bboy123!'")
+
 
 
 
@@ -124,9 +124,9 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
-            cur1=conn1.cursor()
-            cur1.execute("SELECT * FROM public.prestigedata where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ})
-            rows=cur1.fetchall()
+            cur=conn.cursor()
+            cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ})
+            rows=cur.fetchall()
             for row in rows:
                 content=("   ", row[0],":", row[sig])
             data=str(content)
