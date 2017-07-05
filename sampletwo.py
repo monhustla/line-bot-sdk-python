@@ -132,7 +132,7 @@ def callback():
             cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
             rows=cur.fetchall()
             for row in rows:
-                h=str("Summoner: " + row[1] + "\n")
+                h=str(row[1])
                 print (h)
                 content=str("prestige" + row[3])
                 print (content)
