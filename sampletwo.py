@@ -116,7 +116,7 @@ def callback():
         if "Mc3 input champ:" in event.message.text:
             s1=event.message.text
             s2=":"
-            s3="-"
+            s3="*"
             champ=(s1[s1.index(s2) + len(s2):])
             sig=(s1[s1.index(s3)+len(s3):])
             json_line = request.get_json()
