@@ -146,7 +146,7 @@ def callback():
                 print(row['summoner_name']+ ":" + row['champ1_prestige'] + "\n")
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=(row['summoner_name']+":" + row['champ1_prestige'] "\n"))
+                    TextSendMessage(text=(row['summoner_name']+":" + row['champ1_prestige'])
             #profile= line_bot_api.get_profile(user)
             #name=(profile.display_name)
             #cur=conn.cursor()
