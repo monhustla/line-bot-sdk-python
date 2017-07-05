@@ -136,9 +136,9 @@ def callback():
                 print (content)
                 data=str(content)
                 print (data)
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=data))
+            #line_bot_api.reply_message(
+               # event.reply_token,
+               # TextSendMessage(text=data))
             #profile= line_bot_api.get_profile(user)
             #name=(profile.display_name)
             #cur=conn.cursor()
