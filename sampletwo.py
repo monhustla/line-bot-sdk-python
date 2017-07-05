@@ -122,7 +122,7 @@ def callback():
             champ1=str(champ)
             print(champ1)
             print (sig)
-            sig1=str(sig)
+            sig1=int(sig)
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
@@ -132,7 +132,7 @@ def callback():
             cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
             rows=cur.fetchall()
             for row in rows:
-                content=("   ", row[sig])
+                content=("   ", row[sig1])
                 print ("Prestige: " + content)
                 data=str(content)
                 print (data)
