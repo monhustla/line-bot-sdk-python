@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "friendly-aura-172722",
+  "private_key_id": "3164a19e689cfca8e71098699c4dbe59e6cffd84",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQD7f6l79mDXAJpm\nWd3Qto+fRBtwlleCnlHQYg7DnroPClzo+UhogR9xJ6SCUZF7uYaxl69rZC4MFI4G\nKMMNISKnMjfU8EbUJmRbKA1RdBlm4TtNEIKVwktZJwPCqE/F0ceY3bH6Y5MVtbrz\n4Q/Z+lLKtoHfQtcnSjirMA9F0EyXRaUYTby6PeOAkQuvGDjnG+7kenvSWh7Bu9Uc\nzh0WPxo6bavFoiWwPdK0t71NHROsLTxTDXN66hwOnj5DF5SmxsBI5E1ixpdqV3wG\nvzDLYVqun2lC3E06LlSKWAAdDLAWfyeva+BwMAiXAsVe1QFwUrzh8Veu7SS4r+aP\nPc3JUTkvAgMBAAECggEAaE8nDsx9lr7fyvKb3rxRLifTz6rzSa/7U9fPss/K8IEG\nTvRRVVK0pTxhbVGCaxPkKxU0AvEObiE6VJCkcXYcRsc7w9wSLFxuBCbE+1MRVAu3\nijt+RbnLgYL+esZPK8dZpuvQLP8OmpMAorTmW6yImR4AGIbC8L9GaK3qr7R4h8Ze\n+pwsQoXq+wlYrwQKPwl5U8cZpLzb3yI+AZ+GWU1qHNWQXm1nVsL/WtSM5Kqe1WAR\nyY1wSuCVBc6s/oY7saLv2bszjwWtyv7PMBweoXy2cfHDSkoH2KkiMUwARvqvwEUB\nQdeHOyJzQeyfobhBugkT2fTmfnvlaGsX6J24XvMwHQKBgQD/RzF1kc2YuK3qwi70\nIYX70u8XlE5fWk2DrtcK9HtQhD5TC6xQ7QPko3z6CLz+FeihbWpYCmPuTJXtGkGa\nw8J/ATEP/uZcxl+OQpp3Sqb3pU4zKaZDa7XsRIYfmzaSry/5IPgfvn4jpskEl5l9\nsSMRGM+B1/TVZBbYtGfQDjbokwKBgQD8NbuWaPcvDxERgSV5/kC3YOXh0Pz4M0uq\n1TKIX7qq0CFePHJLX5yhm4WrBwLYLQQhpqt6CF10nKP2rWFc7L6OUucPgLF5a55c\nOSbjduk+Ln5WFjj2HIAEwZxF0/owYa8quYYCV4mqZDnB2UO97fVs6N546WcArlpf\nhI898T4adQKBgFsZsRDgA5so7QgGXHNLM2F3GVQ03PMyas8/qgaC0S8ewo8ob0pC\nC02g+ozQaYHTl71kKrtYmekE88w1vovYqKRibHvk35jkQl2mbzF7NrLSD2I6ztbo\nrXevzJ2i6orWcixaE7JgbOuULdCxuVkdygHj9MnFo94zZePYHeQl7np5AoGATo92\nNS3RASmSSX+O6ucVxYk7UhHFGpLv2PC74trezGI0YqQ1feD0ayqEgneWnTu4c7r0\n4vhEFBTOxgHPuCBOYwrTynJt1cJ9+4AZ6vSZRrM4yxv09kR+Y/zi7qVO408qPwa3\nBXe6/AZoL0e74CeFMT2APu2FFiM5J1OlQsgobhkCgYEAtNw0pVTPxUBbYk3+/UlL\nrwl5NboBnsqJvQUrK1NLT/qLl+r0KxrkPuuGJx/DNj38GTAnJSzI0o6MrQ6ru/Lu\n320c5yL4viZ5MjDMaV8oN97R49CYWUp57aYFV2mVHzRUWLlx8GC0fS/O+FFt0/7M\nc1LWa9NADd7AdgZbTl9vN+0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mcocconcierge@friendly-aura-172722.iam.gserviceaccount.com",
+  "client_id": "109759624261111071321",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mcocconcierge%40friendly-aura-172722.iam.gserviceaccount.com"
+}
