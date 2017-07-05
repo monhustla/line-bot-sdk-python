@@ -125,7 +125,7 @@ def callback():
             wks.update_acell('B6', champ)
             cell_list=wks.range('B6')
             cur=conn.cursor()
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(user)s""",
                         {"champ_data":cell_list})
             cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data""")
             rows = cur.fetchall()
