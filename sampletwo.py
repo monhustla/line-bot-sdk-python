@@ -130,7 +130,7 @@ def callback():
             cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
             rows=cur.fetchall()
             for row in rows:
-                content=("   ", row[0],":", row[sig])
+                content=("   ", row[0],":", row[3])
                 print (content)
                 data=str(content)
                 line_bot_api.reply_message(
