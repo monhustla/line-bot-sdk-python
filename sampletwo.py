@@ -123,7 +123,7 @@ def callback():
             f=str(user)
             wks = gc.open("Prestige Calc").sheet1
             wks.update_acell('B6', champ)
-            cell_list=wks.range('C3')
+            content=wks.range('C3')
             data=str(cell_list)
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
@@ -137,7 +137,7 @@ def callback():
                 g=("Summoner: " + row[1] + "\n")
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=data))
+                    TextSendMessage(text=content))
                 
         if event.message.text=="Mc3 my name":
             json_line = request.get_json()
