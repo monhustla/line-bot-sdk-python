@@ -127,13 +127,11 @@ def callback():
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
             cur=conn.cursor()
-            cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
+            cur.execute("""INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
             (f, name, cell_list))
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
                         {"lineid":f})
-            cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data""")
             rows = cur.fetchall()
-            rows= cur.fetchall()
             for row in rows:
                 g=("Summoner: " + row[2] + "\n")
                 line_bot_api.reply_message(
