@@ -137,7 +137,7 @@ def callback():
                 g=("Summoner: " + row[1] + "\n")
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=cell_list))
+                    TextSendMessage(text=data))
                 
         if event.message.text=="Mc3 my name":
             json_line = request.get_json()
