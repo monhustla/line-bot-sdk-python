@@ -143,7 +143,7 @@ def callback():
                         {"lineid":f})
             rows=cur.fetchall()
             for row in rows:
-                print(row['summoner_name']+ ":" + row['champ1_prestige'] "\n")
+                print(row['summoner_name']+ ":" + row['champ1_prestige'] + "\n")
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=(row['summoner_name']+":" + row['champ1_prestige'] "\n"))
