@@ -131,16 +131,15 @@ def callback():
             cur=conn.cursor()
             cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
             rows=cur.fetchall()
-            print(rows)
             for row in rows:
-                content=("   " + row[3])
+                content=("prestige" + row[sig1])
                 print ("Prestige: " + content)
                 data=str(content)
                 print (data)
                 print("hey")
-            #line_bot_api.reply_message(
-               # event.reply_token,
-               # TextSendMessage(text=data))
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=data))
             #profile= line_bot_api.get_profile(user)
             #name=(profile.display_name)
             #cur=conn.cursor()
