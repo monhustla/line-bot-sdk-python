@@ -179,8 +179,14 @@ def callback():
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=h))
-                                
                 
+          
+                                
+        cur=conn.cursor()
+        cur.execute("UPDATE prestige_data SET champ1_name= 'HEY' WHERE lineid= %(lineid)s""",
+                        {"lineid":f})
+        rows= cur.fetchall()
+        print (rows)
                 
                    
                         
