@@ -4,6 +4,7 @@ from os import environ
 import sys
 import tempfile
 import psycopg2
+import psycopg2.extras
 import urllib.parse as urlparse
 import json
 import gspread
