@@ -180,7 +180,12 @@ def callback():
                     event.reply_token,
                     TextSendMessage(text=h))
                 
-          
+        if event.message.text=="Mc3 yayyy":
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            f=str(user)          
                                 
         cur=conn.cursor()
         cur.execute("UPDATE prestige_data SET champ1_name= 'HEY' WHERE lineid= %(lineid)s""",
