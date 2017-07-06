@@ -190,6 +190,9 @@ def callback():
             cur.execute("""UPDATE prestige_data SET champ1_name= 'HEY' WHERE lineid= %(lineid)s""",
                         {"lineid":f})
             rows= cur.fetchall()
+            cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data  WHERE lineid= %(lineid)s""",
+                        {"lineid":f})
+            rows = cur.fetchall()
             print (rows)
                 
                    
