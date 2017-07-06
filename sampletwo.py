@@ -163,7 +163,7 @@ def callback():
 
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=champ + " (" + champ_prestige + ") added")
+                TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
                 
                    
                         
