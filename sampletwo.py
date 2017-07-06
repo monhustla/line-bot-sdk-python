@@ -140,30 +140,30 @@ def callback():
                 #champ_data = json.loads('{}')                     # start with an empty list of champs
                 champs = {}                                    # creates an empty Python list
             # either way, let's move on
-            finally:
+           
                 # this will make sure that the Summoner's name is always updated if their Line profile has changed
-                summoner_name = name
+               summoner_name = name
 
-                champ_prestige = getPrestigeForChampion(champ, sig)
+               champ_prestige = getPrestigeForChampion(champ, sig)
 
                 # add or update the user's champ
-                champs[champ] = champ_prestige
+               champs[champ] = champ_prestige
 
                 # put everything together and send it back to the database
-                champ_data = json.whatever(champs)
+               champ_data = json.whatever(champs)
 
 
                 # Checks for an existing line ID and updates if it exists or adds if it doesn't
-                cur = conn.cursor()
-                cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
-                               VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s'
-                               ON CONFLICT (lineid)
-                               DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
-                            {lineid, summoner_name, champ_data})
+               cur = conn.cursor()
+               cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
+               VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s'
+               ON CONFLICT (lineid)
+               DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
+                           {lineid, summoner_name, champ_data})
 
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=champ + " (" + champ_prestige + ") added")
+               line_bot_api.reply_message(
+                   event.reply_token,
+                   TextSendMessage(text=champ + " (" + champ_prestige + ") added")
                 
                    
                         
