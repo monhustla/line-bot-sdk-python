@@ -93,6 +93,12 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue            
+        if event.message.text=="Mc3 test":
+            cur=conn.cursor()
+            cur.execute("SELECT * FROM prestige_data""")
+            rows=cur.fetchall()
+            print(rows)
+
         if event.message.text=="Mc3 save profile":
             json_line = request.get_json()
             json_line = json.dumps(json_line)
