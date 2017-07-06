@@ -65,7 +65,7 @@ conn = psycopg2.connect(
             )
 
 
-def getPrestigeForChampion(champ, sig):
+def get_prestige_for_champion(champ, sig):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)i'""", {champ, int(sig)})
     rows = cur.fetchall
@@ -73,6 +73,25 @@ def getPrestigeForChampion(champ, sig):
         return str(row['prestige'])                               # Returns a prestige value
     else:
         return None                                               # Returns None if a champ or sig wasn't found
+
+def calculate_prestige(champs):
+    if champs is None:                                            # can't calculate a prestige from nothing, prevents a divide by 0 error
+        return 0
+
+    # if champs isn't a dict, it might still be a JSON string
+    if not type(champs) is dict:
+        champs = json.loads(champs)
+
+    # Ok, here's a little one-liner wonder:
+    #    First, we sort the array in descending order
+    #    Then, we slice off the first 5 elements (if there are that many)
+    top_champs = sorted(champs.values(), reverse=True)[:5]
+
+    # And grab the average (as an integer since all inputs are integers
+    # It has a precision of 1 so converting to int again will remove the trailing 0) e.g. 1234.0
+    return int(sum(top_champs) / len(top_champs))
+
+
 
 
 @app.route("/callback", methods=['POST'])
@@ -90,8 +109,15 @@ def callback():
     except InvalidSignatureError:
         abort(400)
         
-    for event in events:
-        #eventText = event.message.text   
+    for event in events: 
+        eventText = event.message.text
+
+        #user = decoded['events'][0]['source']['userId']
+        user = event.source.userId                            # <---- pretty sure this works
+        profile = line_bot_api.get_profile(user)
+        name = profile.display_name   
+         
+                
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
@@ -102,69 +128,87 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue            
             
-        #trigger = "Mc3 input champ"
-        #if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
-        #    s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
-        #   pieces = s.split()                                    # ['4-nebula-4', '30']
-        #    champ = pieces[0]
-        #    sig = pieces[1]
+        trigger = "mc3 input champ"
+        if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
+            s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
+            pieces = s.split()                                    # ['4-nebula-4', '30']
+            champ = pieces[0]
+            sig = pieces[1]
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
-        #    champ_prestige = getPrestigeForChampion(champ, sig)
-        #    if champ_prestige is None:
-                # TODO: inform the user that they provided an invalid champion name or sig level
-        #        continue                                          # this breaks out of our branch without exiting the bot script
+            champ_prestige = get_prestige_for_champion(champ, sig)
+            if champ_prestige is None:
+                line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Oops! You've entered an invalid champion or signature level."))
+                continue                                          # this breaks out of our branch without exiting the bot script
 
-            #user = decoded['events'][0]['source']['userId']
-        #    user = event.source.userId                            # <---- pretty sure this works
-        #    profile = line_bot_api.get_profile(user)
-        #    name = profile.display_name
 
-        #    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
             # get the user's information if it exists
-        #    cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s'""", {"lineid": user})
-        #    rows = cur.fetchall
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s'""", {"lineid": user})
+            rows = cur.fetchall
 
             # The user exists in the database and a result was returned
-        #    for row in rows:
-        #        lineid = row['lineid']
-        #        summoner_name = row['summoner_name']
-        #        champs = json.loads(row['champ_data'])        # contains a list of the user's champs
-        #        break                                             # we should only have one result, but we'll stop just in case
+            for row in rows:
+                lineid = row['lineid']
+                summoner_name = row['summoner_name']
+                champs = json.loads(row['champ_data'])            # contains a list of the user's champs
+                break                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
-        #    else:
-        #        lineid = user
-        #        summoner_name = name
+            else:
+                lineid = user
+                summoner_name = name
                 #champ_data = json.loads('{}')                     # start with an empty list of champs
-        #        champs = {}                                    # creates an empty Python list
-          
-           
-                # this will make sure that the Summoner's name is always updated if their Line profile has changed
-        #    summoner_name = name
+                champs = {}                                    # creates an empty Python list
+            
+            # either way, let's move on
 
-        #    champ_prestige = getPrestigeForChampion(champ, sig)
+            # this will make sure that the Summoner's name is always updated if their Line profile has changed
+            summoner_name = name
 
-                # add or update the user's champ
-        #    champs[champ] = champ_prestige
+            # add or update the user's champ
+            champs[champ] = champ_prestige
 
-                # put everything together and send it back to the database
-        #    champ_data = json.whatever(champs)
+            # put everything together and send it back to the database
+            champ_data = json.whatever(champs)
 
 
-                # Checks for an existing line ID and updates if it exists or adds if it doesn't
-        #    cur = conn.cursor()
-        #    cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
-        #    VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s')
-        #    ON CONFLICT (lineid)
-        #    DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
-        #               {lineid, summoner_name, champ_data})
+            # Checks for an existing line ID and updates if it exists or adds if it doesn't
+            cur = conn.cursor()
+            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
+                           VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s')
+                           ON CONFLICT (lineid)
+                           DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
+                        {lineid, summoner_name, champ_data})
 
-        #    line_bot_api.reply_message(
-        #        event.reply_token,
-        #        TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
+
+        trigger = "mc3 get prestige"
+        if eventText.lower().startswith(trigger):
+            # Grab the user's champ data
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+            # get the user's information if it exists
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s' LIMIT 1""", {"lineid": user})
+            rows = cur.fetchall
+
+            # The user exists in the database and a result was returned
+            for row in rows:
+                msg = get_prestige_for_champion(row['champ_data'])
+                break                                             # we should only have one result, but we'll stop just in case
+            # The user does not exist in the database already
+            else:
+                msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
+
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=msg))
                 
                    
                         
