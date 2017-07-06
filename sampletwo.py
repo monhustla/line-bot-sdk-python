@@ -138,7 +138,7 @@ def callback():
             s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
             champ = pieces[0]
-            sig = pieces[1]
+            sig = "30"#pieces[1]
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
