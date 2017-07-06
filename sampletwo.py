@@ -66,31 +66,7 @@ conn = psycopg2.connect(
             )
 
 
-def get_prestige_for_champion(champ, sig):
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)i'""", {champ, int(sig)})
-    rows = cur.fetchall
-    for row in rows:
-        return str(row['prestige'])                               # Returns a prestige value
-    else:
-        return None                                               # Returns None if a champ or sig wasn't found
 
-def calculate_prestige(champs):
-    if champs is None:                                            # can't calculate a prestige from nothing, prevents a divide by 0 error
-        return 0
-
-    # if champs isn't a dict, it might still be a JSON string
-    if not type(champs) is dict:
-        champs = json.loads(champs)
-
-    # Ok, here's a little one-liner wonder:
-    #    First, we sort the array in descending order
-    #    Then, we slice off the first 5 elements (if there are that many)
-    top_champs = sorted(champs.values(), reverse=True)[:5]
-
-    # And grab the average (as an integer since all inputs are integers
-    # It has a precision of 1 so converting to int again will remove the trailing 0) e.g. 1234.0
-    return int(sum(top_champs) / len(top_champs))
 
 
 
