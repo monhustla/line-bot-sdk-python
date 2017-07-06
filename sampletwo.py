@@ -152,6 +152,11 @@ def callback():
                 h=str(row[sig1])
             cur=conn.cursor()
 
+            cur.execute("UPDATE prestige_data SET champ1_name= "(champ)"WHERE lineid= %(lineid)s,"
+                        {"lineid":f})
+            cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data""")
+            rows=cur.fetchall()
+            print (rows)
             cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);""",
                         (f, name, champ, h, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}'))
             cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data  WHERE lineid= %(lineid)s""",
