@@ -185,13 +185,12 @@ def callback():
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
-            f=str(user)          
-                                
-        cur=conn.cursor()
-        cur.execute("UPDATE prestige_data SET champ1_name= 'HEY' WHERE lineid= %(lineid)s""",
+            f=str(user)
+            cur=conn.cursor()
+            cur.execute("UPDATE prestige_data SET champ1_name= 'HEY' WHERE lineid= %(lineid)s""",
                         {"lineid":f})
-        rows= cur.fetchall()
-        print (rows)
+            rows= cur.fetchall()
+            print (rows)
                 
                    
                         
