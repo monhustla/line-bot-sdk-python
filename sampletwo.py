@@ -94,6 +94,11 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue            
         if event.message.text=="Mc3 test":
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            f=str(user)
             cur=conn.cursor()
             cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data  WHERE lineid= %(lineid)s""",
                         {"lineid":f})
