@@ -91,7 +91,7 @@ def callback():
         abort(400)
         
     for event in events:
-        eventText = event.message.text   
+        #eventText = event.message.text   
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
@@ -102,69 +102,69 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue            
             
-        trigger = "Mc3 input champ"
-        if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
-            s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
-            pieces = s.split()                                    # ['4-nebula-4', '30']
-            champ = pieces[0]
-            sig = pieces[1]
+        #trigger = "Mc3 input champ"
+        #if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
+        #    s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
+        #   pieces = s.split()                                    # ['4-nebula-4', '30']
+        #    champ = pieces[0]
+        #    sig = pieces[1]
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
-            champ_prestige = getPrestigeForChampion(champ, sig)
-            if champ_prestige is None:
+        #    champ_prestige = getPrestigeForChampion(champ, sig)
+        #    if champ_prestige is None:
                 # TODO: inform the user that they provided an invalid champion name or sig level
-                continue                                          # this breaks out of our branch without exiting the bot script
+        #        continue                                          # this breaks out of our branch without exiting the bot script
 
             #user = decoded['events'][0]['source']['userId']
-            user = event.source.userId                            # <---- pretty sure this works
-            profile = line_bot_api.get_profile(user)
-            name = profile.display_name
+        #    user = event.source.userId                            # <---- pretty sure this works
+        #    profile = line_bot_api.get_profile(user)
+        #    name = profile.display_name
 
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        #    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
             # get the user's information if it exists
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s'""", {"lineid": user})
-            rows = cur.fetchall
+        #    cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s'""", {"lineid": user})
+        #    rows = cur.fetchall
 
             # The user exists in the database and a result was returned
-            for row in rows:
-                lineid = row['lineid']
-                summoner_name = row['summoner_name']
-                champs = json.loads(row['champ_data'])        # contains a list of the user's champs
-                break                                             # we should only have one result, but we'll stop just in case
+        #    for row in rows:
+        #        lineid = row['lineid']
+        #        summoner_name = row['summoner_name']
+        #        champs = json.loads(row['champ_data'])        # contains a list of the user's champs
+        #        break                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
-            else:
-                lineid = user
-                summoner_name = name
+        #    else:
+        #        lineid = user
+        #        summoner_name = name
                 #champ_data = json.loads('{}')                     # start with an empty list of champs
-                champs = {}                                    # creates an empty Python list
+        #        champs = {}                                    # creates an empty Python list
           
            
                 # this will make sure that the Summoner's name is always updated if their Line profile has changed
-            summoner_name = name
+        #    summoner_name = name
 
-            champ_prestige = getPrestigeForChampion(champ, sig)
+        #    champ_prestige = getPrestigeForChampion(champ, sig)
 
                 # add or update the user's champ
-            champs[champ] = champ_prestige
+        #    champs[champ] = champ_prestige
 
                 # put everything together and send it back to the database
-            champ_data = json.whatever(champs)
+        #    champ_data = json.whatever(champs)
 
 
                 # Checks for an existing line ID and updates if it exists or adds if it doesn't
-            cur = conn.cursor()
-            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
-            VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s')
-            ON CONFLICT (lineid)
-            DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
-                        {lineid, summoner_name, champ_data})
+        #    cur = conn.cursor()
+        #    cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
+        #    VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s')
+        #    ON CONFLICT (lineid)
+        #    DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
+        #               {lineid, summoner_name, champ_data})
 
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
+        #    line_bot_api.reply_message(
+        #        event.reply_token,
+        #        TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
                 
                    
                         
