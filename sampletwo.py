@@ -189,7 +189,6 @@ def callback():
             cur=conn.cursor()
             cur.execute("""UPDATE prestige_data SET champ1_name= 'HEY' WHERE lineid= %(lineid)s""",
                         {"lineid":f})
-            rows= cur.fetchall()
             cur.execute("""SELECT * FROM prestige_data""")
             rows=cur.fetchall()
             print (rows)
