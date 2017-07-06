@@ -112,8 +112,8 @@ def callback():
     for event in events: 
         eventText = event.message.text
 
-        #user = decoded['events'][0]['source']['userId']
-        user = event.source.userId                            # <---- pretty sure this works
+        user = decoded['events'][0]['source']['userId'] #I had to set it like this, compare changes
+                                   
         profile = line_bot_api.get_profile(user)
         name = profile.display_name   
          
