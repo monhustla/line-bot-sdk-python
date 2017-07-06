@@ -65,7 +65,14 @@ conn = psycopg2.connect(
             )
 
 
-
+def getPrestigeForChampion(champ, sig):
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)i'""", {champ, int(sig)})
+    rows = cur.fetchall
+    for row in rows:
+        return str(row['prestige'])                               # Returns a prestige value
+    else:
+        return None                                               # Returns None if a champ or sig wasn't found
 
 
 @app.route("/callback", methods=['POST'])
@@ -93,125 +100,70 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue            
-        if event.message.text=="Mc3 test":
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
-            cur=conn.cursor()
-            cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data  WHERE lineid= %(lineid)s""",
-                        {"lineid":f})
-            rows = cur.fetchall()
-            print(rows)
-            for row in rows:
-                print("    LINE ID: " + row[0] + "\n")
-                print("    Summoner: " + row[1] + "\n")
-
-        if event.message.text=="Mc3 save profile":
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
-            profile= line_bot_api.get_profile(user)
-            name=(profile.display_name)
-            print(f)
-            cur=conn.cursor()
-            cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
-                        (f, name, "whocares"))
-            cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data""")
-            rows = cur.fetchall()
             
-            
-            for row in rows:
-                print("    LINE ID: " + row[0] + "\n")
-                print("    Summoner: " + row[1] + "\n")
-                
-        if "Mc3 input champ1:" in event.message.text:
-            s1=event.message.text
-            s2=":"
-            s3="*"
-            champ=s1[s1.find(s2)+1 : s1.find(s3)]
-            sig=(s1[s1.index(s3) + len(s3):])
-            champ1=str(champ)
-            print(champ1)
-            print (sig)
-            sig1=int(sig)
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
-            profile= line_bot_api.get_profile(user)
-            name=(profile.display_name)
-            cur=conn.cursor()
-            cur.execute("SELECT * FROM prestige where stars_champ_rank=%(stars_champ_rank)s",{"stars_champ_rank":champ1})
-            rows=cur.fetchall()
-            for row in rows:
-                h=str(row[sig1])
-            cur=conn.cursor()
+        trigger = "Mc3 input champ"
+        if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
+            s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
+            pieces = s.split()                                    # ['4-nebula-4', '30']
+            champ = pieces[0]
+            sig = pieces[1]
 
-            cur.execute("UPDATE prestige_data SET champ1_name=(champ)WHERE lineid= %(lineid)s",
-                        {"lineid":f})
-            cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data""")
-            rows=cur.fetchall()
-            print (rows)
-            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);""",
-                        (f, name, champ, h, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}'))
-            cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data  WHERE lineid= %(lineid)s""",
-                        {"lineid":f})
-            rows=cur.fetchall()
-            print (rows)
+            # We're going to bail out if the champion name isn't a valid one.
+            # We should probably send back a message to the user too
+            # We're returning the prestige now too so we don't have to hit the database twice!
+            champ_prestige = getPrestigeForChampion(champ, sig)
+            if champ_prestige is None:
+                # TODO: inform the user that they provided an invalid champion name or sig level
+                continue                                          # this breaks out of our branch without exiting the bot script
+
+            #user = decoded['events'][0]['source']['userId']
+            user = event.source.userId                            # <---- pretty sure this works
+            profile = line_bot_api.get_profile(user)
+            name = profile.display_name
+
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+            # get the user's information if it exists
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s'""", {"lineid": user})
+            rows = cur.fetchall
+
+            # The user exists in the database and a result was returned
             for row in rows:
-                print(row[1]+ ":" + row[3] + "\n")
+                lineid = row['lineid']
+                summoner_name = row['summoner_name']
+                champs = json.loads(row['champ_data'])        # contains a list of the user's champs
+                break                                             # we should only have one result, but we'll stop just in case
+            # The user does not exist in the database already
+            else:
+                lineid = user
+                summoner_name = name
+                #champ_data = json.loads('{}')                     # start with an empty list of champs
+                champs = {}                                    # creates an empty Python list
+            # either way, let's move on
+            finally:
+                # this will make sure that the Summoner's name is always updated if their Line profile has changed
+                summoner_name = name
+
+                champ_prestige = getPrestigeForChampion(champ, sig)
+
+                # add or update the user's champ
+                champs[champ] = champ_prestige
+
+                # put everything together and send it back to the database
+                champ_data = json.whatever(champs)
+
+
+                # Checks for an existing line ID and updates if it exists or adds if it doesn't
+                cur = conn.cursor()
+                cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
+                               VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s'
+                               ON CONFLICT (lineid)
+                               DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
+                            {lineid, summoner_name, champ_data})
+
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=(row[1]+":" + row[3])))
-            #profile= line_bot_api.get_profile(user)
-            #name=(profile.display_name)
-            #cur=conn.cursor()
-            #cur.execute("""INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
-            #(f, name, data))
-            #cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
-             #           {"lineid":f})
-            #rows = cur.fetchall()
-            #for row in rows:
-              #  g=("Summoner: " + row[1] + "\n")
-               # line_bot_api.reply_message(
-                #    event.reply_token,
-                 #   TextSendMessage(text=content))
-                
-        if event.message.text=="Mc3 my name":
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
-            profile= line_bot_api.get_profile(user)
-            name=(profile.display_name)
-            cur=conn.cursor()
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid= %(lineid)s""",
-                        {"lineid":f})
-            rows= cur.fetchall()
-            for row in rows:
-                h=("Summoner: " + row[1] + "\n")
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=h))
-                
-        if event.message.text=="Mc3 yayyy":
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
-            cur=conn.cursor()
-            cur.execute("""UPDATE prestige_data SET champ2_name= 'HEY' WHERE lineid= %(lineid)s""",
-                        {"lineid":f})
-            cur.execute("SELECT lineid, summoner_name,champ1_name, champ1_prestige, champ2_name, champ2_prestige, champ3_name, champ3_prestige, champ4_name, champ4_prestige, champ5_name, champ5_prestige FROM prestige_data""")
-            rows=cur.fetchall()
-            print (rows)
+                    TextSendMessage(text=champ + " (" + champ_prestige + ") added")
                 
                    
                         
