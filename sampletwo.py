@@ -130,7 +130,7 @@ def callback():
         if eventText.lower().startswith(trigger):
             
             print(eventText)
-            s = eventText[eventText.lower().find(trigger) + len(trigger):]
+            s = eventText[eventText.find(trigger) + len(trigger):]
             print(s) # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
             champ = pieces[0]
