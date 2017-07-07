@@ -260,7 +260,7 @@ def callback():
 
             # The user exists in the database and a result was returned
             for row in rows:
-                msg = ("Youre prestige is:"+(calculate_prestige(row[2])))
+                msg = ("Youre prestige is:"+(calculate_prestige(int(row[2]))))
                                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             else:
