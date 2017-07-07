@@ -129,14 +129,13 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue            
         eventText=event.message.text            
-        trigger = "mc3 input champ"
-        if event.message.text.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
-            s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
-            print (s)
-            pieces = s.split()                                    # ['4-nebula-4', '30']
-            champ = pieces[0]
+        if "Mc3 input champ1:" in event.message.text:
+            s1=event.message.text
+            s2=":"
+            s3=" "
+            champ=s1[s1.find(s2)+1 : s1.find(s3)]
+            sig=(s1[s1.index(s3) + len(s3):])
             print (champ)
-            sig1 = pieces[1]
             print (sig1)
             
 
