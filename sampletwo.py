@@ -143,7 +143,7 @@ def callback():
                 print("    Summoner: " + row[1] + "\n")
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=(row[1]+": " + "added."))
+                    TextSendMessage(text=(row[1]+": " + "added.")))
             
             
         eventText=event.message.text
