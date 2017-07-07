@@ -211,7 +211,7 @@ def callback():
 
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
+                TextSendMessage(text=champ + ":" + champ_prestige + "-" + " added"))
 
         trigger = "mc3 get prestige"
         if eventText.lower().startswith(trigger):
@@ -229,7 +229,7 @@ def callback():
 
             # The user exists in the database and a result was returned
             for row in rows:
-                msg = ("Youre prestige is:"+(row[3]))
+                msg = ("Youre prestige is:"+(row[2]))
                 break                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             else:
