@@ -197,7 +197,7 @@ def callback():
             champs[champ] = champ_prestige
 
             # put everything together and send it back to the database
-            champ_data = json.whatever(champs)
+            champ_data = json.dumps(champs)
 
 
             # Checks for an existing line ID and updates if it exists or adds if it doesn't
