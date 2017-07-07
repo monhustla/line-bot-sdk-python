@@ -304,7 +304,9 @@ def callback():
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
-            if not type(champs) is dict:
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+            rows = cur.fetchall()
+            for row in rows:
                 champs = json.loads(champs)
                 top_champs = sorted(champs.values(), reverse=True)[:5]
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
