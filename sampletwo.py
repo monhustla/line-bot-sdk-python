@@ -248,6 +248,7 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
+            champs = json.loads(champs)
             # Grab the user's champ data
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
@@ -257,7 +258,7 @@ def callback():
 
             # The user exists in the database and a result was returned
             for row in rows:
-                msg = ("Youre prestige is:"+(calculate_prestige(row[champs])))
+                msg = ("Youre prestige is:"+(calculate_prestige(row[2])))
                                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             else:
