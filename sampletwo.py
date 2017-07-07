@@ -284,7 +284,7 @@ def callback():
                     print (rows)
                     print (yay)
                 for row in rows:
-                    msg = "Your prestige is: "+yay)
+                    msg = ("Your prestige is: "+yay)
                     break                                             # we should only have one result, but we'll stop just in case
                 # The user does not exist in the database already
                 else:
