@@ -67,7 +67,7 @@ conn = psycopg2.connect(
 
 def get_prestige_for_champion(champ, sig):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)i'""", {champ, int(sig)})
+    cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)i'""", {champ, int(sig1)})
     rows = cur.fetchall()
     for row in rows:
         return str(row['prestige'])                               # Returns a prestige value
@@ -137,12 +137,14 @@ def callback():
             print (champ)
             sig = pieces[1]
             print (sig)
+            sig1=int(sig)
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
-            champ_prestige = get_prestige_for_champion(champ, sig)
+            champ_prestige = get_prestige_for_champion(champ, sig1)
             if champ_prestige is None:
+                print(none)
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Oops! You've entered an invalid champion or signature level."))
@@ -154,6 +156,7 @@ def callback():
             # get the user's information if it exists
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s'""", {"lineid": user})
             rows = cur.fetchall()
+            print (rows)
 
             # The user exists in the database and a result was returned
             for row in rows:
