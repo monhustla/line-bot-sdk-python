@@ -65,9 +65,9 @@ conn = psycopg2.connect(
             port=port
             )
 
-def get_prestige_for_champion(champ, sig1):
+def get_prestige_for_champion(champ, sig):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)s'""", {champ, int(sig1)})
+    cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)s'""", {champ, sig})
     rows = cur.fetchall()
     for row in rows:
         return str(row['prestige'])                               # Returns a prestige value
@@ -137,12 +137,13 @@ def callback():
             print (champ)
             sig = pieces[1]
             print (sig)
-            sig1=int(sig)
+            
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
-            champ_prestige = get_prestige_for_champion(champ, sig1)
+            champ_prestige = get_prestige_for_champion(champ, sig)
+            print (champ_prestige)
             if champ_prestige is None:
                 print(none)
                 line_bot_api.reply_message(
