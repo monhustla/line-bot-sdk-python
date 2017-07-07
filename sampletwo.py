@@ -133,7 +133,7 @@ def callback():
             continue            
             
         trigger = "mc3 input champ"
-        if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
+        if event.message.text.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
             s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
             champ = pieces[0]
