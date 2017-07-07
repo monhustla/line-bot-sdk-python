@@ -152,7 +152,7 @@ def callback():
             else:
                 line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=champ_prestige)
+                TextSendMessage(text=champ_prestige))
                 # this breaks out of our branch without exiting the bot script
 
 
