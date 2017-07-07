@@ -289,7 +289,7 @@ def callback():
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
             rows = cur.fetchall()
             for row in rows:
-                msg = get_prestige_for_champion(row['champ_data'])
+                msg = row[2]
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=msg))
