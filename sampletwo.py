@@ -199,7 +199,7 @@ def callback():
                 else:
                     lineid = user
                     summoner_name = name
-                    #champ_data = json.loads('{}')                     # start with an empty list of champs
+                    champ_data = json.loads('{}')                     # start with an empty list of champs
                     champs = {}                                    # creates an empty Python list
             #except BaseException:
                 #if cur is not None:
