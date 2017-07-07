@@ -307,8 +307,9 @@ def callback():
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""Update prestige_data SET champ_data='No' WHERE lineid = %(lineid)s""", {'lineid': user})
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})    
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {'lineid': user})    
             rows = cur.fetchall()
+            print (rows)
             for row in rows:
                 msg = row[2]
                 line_bot_api.reply_message(
