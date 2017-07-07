@@ -135,6 +135,17 @@ def callback():
             cur=conn.cursor()
             cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
                         (f, name, "whocares"))
+            cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data  WHERE lineid= %(lineid)s""",
+                        {"lineid":f})
+            rows = cur.fetchall()
+            print(rows)
+            for row in rows:
+                print("    LINE ID: " + row[0] + "\n")
+                print("    Summoner: " + row[1] + "\n")
+                    line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=(row[1]+": " + "added."))
+            
             
         eventText=event.message.text
         trigger = "Mc3 input champ:"
