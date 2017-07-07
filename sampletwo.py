@@ -207,7 +207,7 @@ def callback():
 
             # get the user's information if it exists
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
-            rows = cur.fetchall
+            rows = cur.fetchall()
 
             # The user exists in the database and a result was returned
             for row in rows:
