@@ -128,7 +128,6 @@ def callback():
         trigger = "Mc3 input champ:"
         eventText=event.message.text 
         if eventText.lower().startswith(trigger):
-            eventText=event.messaget.text 
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
@@ -136,6 +135,7 @@ def callback():
             f=str(user)
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
+            print (name)
             s = eventText[eventText.lower().find(trigger) + len(trigger):]   # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
             champ = pieces[0]
