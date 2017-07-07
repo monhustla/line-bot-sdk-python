@@ -136,7 +136,8 @@ def callback():
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
             print (name)
-            s = eventText[eventText.lower().find(trigger) + len(trigger):]   # 4-nebula-4 30
+            s = eventText[eventText.lower().find(trigger) + len(trigger):]
+            print(s) # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
             champ = pieces[0]
             sig = pieces[1]
