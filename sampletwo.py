@@ -204,7 +204,7 @@ def callback():
             # Checks for an existing line ID and updates if it exists or adds if it doesn't
             cur = conn.cursor()
             cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data)
-                           VALUES('%(lineid)s', '%(summoner_name)s', '%(champ_data)s')
+                           VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s)
                            ON CONFLICT (lineid)
                            DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
                         {'lineid':lineid, 'summoner_name':summoner_name, 'champ_data':champ_data})
