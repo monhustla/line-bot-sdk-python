@@ -144,7 +144,7 @@ def callback():
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
-            champ_prestige = get_prestige_for_champion(champ, int(sig))
+            champ_prestige = get_prestige_for_champion(champ, sig)
             if champ_prestige is None:
                 line_bot_api.reply_message(
                 event.reply_token,
