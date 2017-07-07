@@ -250,7 +250,7 @@ def callback():
             f=str(user)
             # Grab the user's champ data
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            champs = json.loads(champs)
+
 
             # get the user's information if it exists
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
