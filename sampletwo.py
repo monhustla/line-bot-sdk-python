@@ -123,7 +123,19 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        
+        if event.message.text=="Mc3 save profile":
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            f=str(user)
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
+            print(f)
+            cur=conn.cursor()
+            cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
+                        (f, name, "whocares"))
+            
         eventText=event.message.text
         trigger = "Mc3 input champ:"
         if eventText.startswith(trigger):
@@ -179,11 +191,11 @@ def callback():
                     summoner_name = name
                     #champ_data = json.loads('{}')                     # start with an empty list of champs
                     champs = {}                                    # creates an empty Python list
-            except BaseException:
-                if cur is not None:
-                    cur.rollback()
-                    cur.close()
-                    continue
+            #except BaseException:
+                #if cur is not None:
+                    #cur.rollback()
+                    #cur.close()
+                    #continue
             finally:
                 if cur is not None:
                     cur.close()
