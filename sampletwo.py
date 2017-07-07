@@ -65,7 +65,7 @@ conn = psycopg2.connect(
             port=port
             )
 
-def get_prestige_for_champion(champ, sig):
+def get_prestige_for_champion(champ, sig1):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)s'""", {champ, int(sig1)})
     rows = cur.fetchall()
