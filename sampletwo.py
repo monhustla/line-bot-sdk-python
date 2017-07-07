@@ -290,13 +290,14 @@ def callback():
             rows = cur.fetchall()
             for row in rows:
                 msg = get_prestige_for_champion(row['champ_data'])
-                break                                             # we should only have one result, but we'll stop just in case
-                # The user does not exist in the database already
-                else:
-                msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."                
-            line_bot_api.reply_message(
+                line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=msg))
+                #break                                             # we should only have one result, but we'll stop just in case
+                # The user does not exist in the database already
+                #else:
+                #msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."                
+
                 
                    
                         
