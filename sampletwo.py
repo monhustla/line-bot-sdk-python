@@ -295,12 +295,7 @@ def callback():
                     TextSendMessage(text=msg))
 
 
-            except BaseException:
-                if cur is not None:
-                    cur.rollback()
-            finally:
-                if cur is not None:
-                    cur.close() 
+
                     
                                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
@@ -330,12 +325,7 @@ def callback():
                     line_bot_api.reply_message(
                         event.reply_token,
                         TextSendMessage(text=msg))
-            except BaseException:
-                if cur is not None:
-                    cur.rollback()
-            finally:
-                if cur is not None:
-                    cur.close()                    
+                 
                 #break                                             # we should only have one result, but we'll stop just in case
                 # The user does not exist in the database already
                 #else:
