@@ -126,8 +126,7 @@ def callback():
         
         eventText=event.message.text
         trigger = "Mc3 input champ:"
-        print (trigger)
-        if eventText.lower().startswith(trigger):
+        if eventText.startswith(trigger):
             
             print(eventText)
             s = eventText[eventText.find(trigger) + len(trigger):]
