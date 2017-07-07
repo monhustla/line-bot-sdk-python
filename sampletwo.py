@@ -251,7 +251,7 @@ def callback():
                 if cur is not None:
                     cur.close()
 
-        trigger = "mc3 get prestige"
+        trigger = "mc3 my prestige"
         if eventText.lower().startswith(trigger):
             json_line = request.get_json()
             json_line = json.dumps(json_line)
@@ -271,7 +271,7 @@ def callback():
                 yay=calculate_prestige(row[2])
                 print (rows)
                 print (yay)
-                msg = ("Youre prestige is:"+yay)
+                msg = ("Youre prestige is: "+yay)
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=msg))
@@ -280,7 +280,23 @@ def callback():
             #else:
                 #msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
 
-
+        if event.message.text == "Mc3 my champs":
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+            rows = cur.fetchall()
+            for row in rows:
+                msg = get_prestige_for_champion(row['champ_data'])
+                break                                             # we should only have one result, but we'll stop just in case
+                # The user does not exist in the database already
+                else:
+                msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."                
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=msg))
                 
                    
                         
