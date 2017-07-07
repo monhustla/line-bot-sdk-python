@@ -109,16 +109,17 @@ def callback():
         events = parser.parse(body, signature)
     except InvalidSignatureError:
         abort(400)
-       json_line = request.get_json()
+    json_line = request.get_json()
     json_line = json.dumps(json_line)
     decoded = json.loads(json_line)
     user = decoded['events'][0]['source']['userId']
     profile = line_bot_api.get_profile(user)
     name = profile.display_name
     eventText=event.message.text
-    name = profile.display_name    
+    name = profile.display_name
+    
     for event in events:
-        eventText=event.message.text
+        
                                    
    
          
