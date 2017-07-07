@@ -131,28 +131,28 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        if event.message.text=="Mc3 save profile":
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
-            profile= line_bot_api.get_profile(user)
-            name=(profile.display_name)
-            print(f)
-            cur=conn.cursor()
-            cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
-                        (f, name, "whocares"))
-            cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data  WHERE lineid= %(lineid)s""",
-                        {"lineid":f})
-            rows = cur.fetchall()
-            print(rows)
-            for row in rows:
-                print("    LINE ID: " + row[0] + "\n")
-                print("    Summoner: " + row[1] + "\n")
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=(row[1]+": " + "added.")))
+        #if event.message.text=="Mc3 save profile":
+            #json_line = request.get_json()
+            #json_line = json.dumps(json_line)
+           # decoded = json.loads(json_line)
+            #user = decoded['events'][0]['source']['userId']
+            #f=str(user)
+            #profile= line_bot_api.get_profile(user)
+            #name=(profile.display_name)
+            #print(f)
+            #cur=conn.cursor()
+            #cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
+           ##             (f, name, "whocares"))
+           # cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data  WHERE lineid= %(lineid)s""",
+           #             {"lineid":f})
+           # rows = cur.fetchall()
+           # print(rows)
+            #for row in rows:
+                #print("    LINE ID: " + row[0] + "\n")
+               # print("    Summoner: " + row[1] + "\n")
+                #line_bot_api.reply_message(
+                    #event.reply_token,
+                    #TextSendMessage(text=(row[1]+": " + "added.")))
             
             
         eventText=event.message.text
@@ -566,7 +566,7 @@ def callback():
                     original_content_url='https://i.imgur.com/Zmec8Hs.jpg',
                     preview_image_url='https://example.com/preview.jpg'))
         
-    return 'ok'
+
             
             
             
