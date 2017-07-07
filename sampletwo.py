@@ -134,7 +134,7 @@ def callback():
         pieces = s.split()                                    # ['4-nebula-4', '30']
         champ = pieces[0]
         sig = pieces[1]
-            $#s1=eventText
+            #s1=eventText
             #s2=":"
             #s3="{}"
             #champ=s1[s1.find(s2)+1 : s1.find(s3)]
