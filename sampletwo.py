@@ -127,8 +127,8 @@ def callback():
         
         trigger = "Mc3 input champ:"
         eventText=event.message.text
-        print (event.message.text)
         if eventText.lower().startswith(trigger):
+            print(eventText)
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
