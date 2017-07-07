@@ -300,7 +300,22 @@ def callback():
                 # The user does not exist in the database already
                 #else:
                 #msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."                
-
+        if event.message.text == "Mc3 clear champs":
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            if not type(champs) is dict:
+                champs = json.loads(champs)
+                top_champs = sorted(champs.values(), reverse=True)[:5]
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                cur.execute("""Update prestige_data SET champ_data='No' WHERE lineid = %(lineid)s""", {'lineid': user})
+                rows = cur.fetchall()
+                for row in rows:
+                    msg = row[2]
+                    line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text="You now have "+msg+" saved."))
                 
                    
                         
@@ -567,7 +582,7 @@ def callback():
                     preview_image_url='https://example.com/preview.jpg'))
         
 
-        return ok
+        return 'ok'
             
             
             
