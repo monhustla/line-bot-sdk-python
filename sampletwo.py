@@ -306,7 +306,8 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)                      
-            cur.execute("""DELETE FROM prestige_data WHERE lineid = %(lineid)s""", {'lineid': user})
+            cur.execute("""DELETE FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+            conn.commit()
             rows=cur.fetchall()
             print (rows)
     
