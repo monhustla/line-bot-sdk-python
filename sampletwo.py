@@ -305,8 +305,13 @@ def callback():
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            cur.execute("""Update prestige_data SET champ_data='No' WHERE lineid = %(lineid)s""", {'lineid': user})
+            champ_data=json.loads('{}')
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)                      
+            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data)
+            VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s)
+            ON CONFLICT (lineid)
+            DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
+            {"lineid": lineid, "summoner_name": summoner_name, "champ_data": champ_data})
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             conn.commit()
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {'lineid': user})    
@@ -316,7 +321,7 @@ def callback():
                 msg = row[2]
                 line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="You now have "+msg+" saved."))
+                TextSendMessage(text="You now have "+"("msg")"+" saved."))
                 
                    
                         
