@@ -115,6 +115,7 @@ def callback():
     user = decoded['events'][0]['source']['userId']
     profile = line_bot_api.get_profile(user)
     name = profile.display_name
+    eventText=event.message.text
         
     for event in events: 
 
