@@ -236,7 +236,7 @@ def callback():
                     TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
             except BaseException:
                 if cur is not None:
-                    cur.rollback()
+                    conn.rollback()
             finally:
                 if cur is not None:
                     cur.close()
