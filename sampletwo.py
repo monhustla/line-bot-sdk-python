@@ -258,7 +258,7 @@ def callback():
             # The user exists in the database and a result was returned
             for row in rows:
                 msg = ("Youre prestige is:"+(calculate_prestige(row[champ_data]))
-                break                                             # we should only have one result, but we'll stop just in case
+                                                            # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             else:
                 msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
