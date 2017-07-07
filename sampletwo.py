@@ -499,7 +499,7 @@ def callback():
         if event.message.text == "Mc3 prestige":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="prestige calculator"+'\n'+"prestige list"))         
+                TextSendMessage(text="prestige calculator"+'\n'+"prestige list"+'\n'+"prestige tools"))         
             #Prestige Keywords
         if event.message.text == "Mc3 prestige calculator":
             line_bot_api.reply_message(
@@ -508,7 +508,11 @@ def callback():
         if event.message.text == "Mc3 prestige list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="https://docs.google.com/spreadsheets/d/1Cd3-X2lAQyJBlBuxBld6fsWBw4HkBdm2AFybHk3nfS4/pubhtml#"))  
+                TextSendMessage(text="https://docs.google.com/spreadsheets/d/1Cd3-X2lAQyJBlBuxBld6fsWBw4HkBdm2AFybHk3nfS4/pubhtml#"))
+        if event.message.text == "Mc3 prestige tools":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Mc3 input champ:(5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99"+'\n'+"Mc3 my champs"+'\n'+"Mc3 my prestige"+'\n'+"Mc3 clear champs (clears all of your saved champs"))            
             
         #Special Quest Command Tree
         if event.message.text == "Mc3 special quests":
