@@ -85,6 +85,7 @@ def calculate_prestige(champs):
     #    First, we sort the array in descending order
     #    Then, we slice off the first 5 elements (if there are that many)
     top_champs = sorted(champs.values(), reverse=True)[:5]
+    top_champs1=split(str(top_champs))
     print("Here are your top champs: " + str(top_champs))
 
     # And grab the average (as an integer since all inputs are integers
@@ -260,7 +261,7 @@ def callback():
 
             # The user exists in the database and a result was returned
             for row in rows:
-                msg = ("Youre prestige is:"+(calculate_prestige(values(row[2]))))
+                msg = ("Youre prestige is:"+(calculate_prestige(row[2])))
                                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             else:
