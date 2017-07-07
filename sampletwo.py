@@ -114,11 +114,6 @@ def callback():
 
     
     for event in events:
-        
-                                   
-   
-         
-                
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
@@ -128,65 +123,63 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue            
-        trigger = "mc3 input champ:"
-        eventText=event.message.text
+        
+        trigger = "Mc3 input champ:"
         if eventText.lower().startswith(trigger):
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             f=str(user)
-            print(f)
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
-            print(name)# mc3 input champ 4-nebula-4 30
             s = eventText[eventText.lower().find(trigger) + len(trigger):]   # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
             champ = pieces[0]
-            print (champ)
             sig = pieces[1]
+            print (champ)
             print (sig)
-            profile= line_bot_api.get_profile(user)
-            name=(profile.display_name)
-            print(name)
-            
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
-            
             champ_prestige = get_prestige_for_champion(champ, sig)
-            print (champ_prestige)
             if champ_prestige is None:
-                print(none)
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Oops! You've entered an invalid champion or signature level."))
-            else:
+                continue                                          # this breaks out of our branch without exiting the bot script
 
-                # this breaks out of our branch without exiting the bot script
+            cur = None
+            try:
+                print (champ_prestige)
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
+                # get the user's information if it exists
+                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":f})
+                rows = cur.fetchall
 
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                # The user exists in the database and a result was returned
+                for row in rows:
+                    lineid = row['lineid']
+                    summoner_name = row['summoner_name']
+                    champs = json.loads(row['champ_data'])            # contains a list of the user's champs
+                    break                                             # we should only have one result, but we'll stop just in case
+                # The user does not exist in the database already
+                else:
+                    lineid = user
+                    summoner_name = name
+                    #champ_data = json.loads('{}')                     # start with an empty list of champs
+                    champs = {}                                    # creates an empty Python list
+            except BaseException:
+                if cur is not None:
+                    cur.rollback()
+                    cur.close()
+                    continue
+            finally:
+                if cur is not None:
+                    cur.close()
 
-            # get the user's information if it exists
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {'lineid': user})
-            rows = cur.fetchall()
-            print (rows)
-
-            # The user exists in the database and a result was returned
-            for row in rows:
-                lineid = row['lineid']
-                summoner_name = row['summoner_name']
-                champs = json.loads(row['champ_data'])            # contains a list of the user's champs
-                break                                             # we should only have one result, but we'll stop just in case
-            # The user does not exist in the database already
-            else:
-                lineid = user
-                summoner_name = name
-                #champ_data = json.loads('{}')                     # start with an empty list of champs
-                champs = {}                                    # creates an empty Python list
-            
             # either way, let's move on
 
             # this will make sure that the Summoner's name is always updated if their Line profile has changed
@@ -200,16 +193,23 @@ def callback():
 
 
             # Checks for an existing line ID and updates if it exists or adds if it doesn't
-            cur = conn.cursor()
-            cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data)
-                           VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s)
-                           ON CONFLICT (lineid)
-                           DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
-                        {"lineid": lineid, "summoner_name": summoner_name, "champ_data":champ_data})
-
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=champ + ":" + champ_prestige + "-" + " added"))
+            cur = None
+            try:
+                cur = conn.cursor()
+                cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
+                               VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s)
+                               ON CONFLICT (lineid)
+                               DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
+                            {"lineid": lineid, "summoner_name": summoner_name, "champ_data": champ_data})
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
+            except BaseException:
+                if cur is not None:
+                    cur.rollback()
+            finally:
+                if cur is not None:
+                    cur.close()
 
         trigger = "mc3 get prestige"
         if eventText.lower().startswith(trigger):
