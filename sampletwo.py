@@ -129,14 +129,6 @@ def callback():
         eventText=event.message.text
         if eventText.lower().startswith(trigger):
             print(eventText)
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
-            profile= line_bot_api.get_profile(user)
-            name=(profile.display_name)
-            print (name)
             s = eventText[eventText.lower().find(trigger) + len(trigger):]
             print(s) # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
@@ -144,6 +136,17 @@ def callback():
             sig = pieces[1]
             print (champ)
             print (sig)
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            print (user)
+            f=str(user)
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
+            print (name)
+
+
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
