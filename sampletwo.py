@@ -91,8 +91,9 @@ def calculate_prestige(champs):
     top_champamount=sum(results)
     print (top_champamount)
     average=(top_champamount/top_champcount)
+    print (average)
     
-    print("Here are your top champs: " + str(top_champs1))
+    
 
     # And grab the average (as an integer since all inputs are integers
     # It has a precision of 1 so converting to int again will remove the trailing 0) e.g. 1234.0
