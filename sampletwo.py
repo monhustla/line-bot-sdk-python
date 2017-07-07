@@ -214,6 +214,11 @@ def callback():
 
         trigger = "mc3 get prestige"
         if eventText.lower().startswith(trigger):
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            f=str(user)
             # Grab the user's champ data
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
