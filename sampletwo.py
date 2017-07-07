@@ -129,11 +129,11 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue            
         eventText=event.message.text            
-        if "Mc3 input champ1:" in event.message.text:
-            s1=event.message.text
+        if "Mc3 input champ1:" in eventText:
+            s1=eventText
             s2=":"
             s3=" "
-            champ=s1[s1.find(s2)+1 : s1.find(s2)]
+            champ=s1[s1.find(s2)+1 : s1.find(s3)]
             print (champ)
             sig=champ[champ.index(s3) + len(s3):]
             print (champ)
