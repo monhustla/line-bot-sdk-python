@@ -90,7 +90,7 @@ def calculate_prestige(champs):
     print (top_champcount)
     top_champamount=sum(results)
     print (top_champamount)
-    average=(top_champamount/top_champcount)
+    average=float((top_champamount/top_champcount))
     print (average)
     
     
