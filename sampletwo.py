@@ -154,7 +154,7 @@ def callback():
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
-            conn.rollback()
+            
             champ_prestige = get_prestige_for_champion(champ, sig)
             print (champ_prestige)
             if champ_prestige is None:
@@ -163,9 +163,7 @@ def callback():
                 event.reply_token,
                 TextSendMessage(text="Oops! You've entered an invalid champion or signature level."))
             else:
-                line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=champ_prestige))
+
                 # this breaks out of our branch without exiting the bot script
 
 
