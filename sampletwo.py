@@ -41,12 +41,12 @@ scope = ['https://spreadsheets.google.com/feeds']
 credentials = ServiceAccountCredentials.from_json_keyfile_name('MyProject-3164a19e689c.json', scope)
 gc = gspread.authorize(credentials)
 
-line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('2f8bf1b9951192d713bc216bdc585df2')
+line_bot_api = LineBotApi('EF7cmk1BxOG/UqSMMhiIMVw9Fy1EH4k3f+AGQnRSiaATp67WvyVwX62bpqGw6yPhOCznEfcePwycayIb6bQwCWQjvkR6ZuRnNl2WUFRzNALCfVkrY/+XwATYL3au1agq8C5KCY2b1lrCE5tZZh8ctAdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('1ba0ee354caf9e4f0e1b52c627b86ffc')
 
 
-line_bot_api = LineBotApi('jCCJTBH9PKP0UzrCtVCpT99E2kOPn3bowhUA8KX1hcxMHwqdZbfLzP/I6leONvKqZmNyqKC1w/2pZYau7cKtSQePM/Wb+Vj8t3F9XbyRavOLgd/1Y6PUccEc5/8ce/BJjGcGlHH0T/7l2nUlpqsAIgdB04t89/1O/w1cDnyilFU=')
-parser = WebhookParser('2f8bf1b9951192d713bc216bdc585df2')
+line_bot_api = LineBotApi('EF7cmk1BxOG/UqSMMhiIMVw9Fy1EH4k3f+AGQnRSiaATp67WvyVwX62bpqGw6yPhOCznEfcePwycayIb6bQwCWQjvkR6ZuRnNl2WUFRzNALCfVkrY/+XwATYL3au1agq8C5KCY2b1lrCE5tZZh8ctAdB04t89/1O/w1cDnyilFU=')
+parser = WebhookParser('1ba0ee354caf9e4f0e1b52c627b86ffc')
 
 
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
