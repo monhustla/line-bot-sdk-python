@@ -254,28 +254,42 @@ def callback():
 
         trigger = "mc3 my prestige"
         if eventText.lower().startswith(trigger):
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            f=str(user)
+            cur=None
+            try:
+                json_line = request.get_json()
+                json_line = json.dumps(json_line)
+                decoded = json.loads(json_line)
+                user = decoded['events'][0]['source']['userId']
+                f=str(user)
             # Grab the user's champ data
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 
             # get the user's information if it exists
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
-            rows = cur.fetchall()
+                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+                rows = cur.fetchall()
 
             # The user exists in the database and a result was returned
-            for row in rows:
-                yay=calculate_prestige(row[2])
-                print (rows)
-                print (yay)
-                msg = ("Youre prestige is: "+yay)
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=msg))
+                for row in rows:
+                    yay=calculate_prestige(row[2])
+                    print (rows)
+                    print (yay)
+                    msg = ("Youre prestige is: "+yay)
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text=msg))
+                else:
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text="Oop! Input was incorrect"))
+
+            except BaseException:
+                if cur is not None:
+                    cur.rollback()
+            finally:
+                if cur is not None:
+                    cur.close() 
+                    
                                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             #else:
