@@ -137,6 +137,8 @@ def callback():
             print (champ)
             sig = pieces[1]
             print (sig)
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
             
 
             # We're going to bail out if the champion name isn't a valid one.
@@ -172,7 +174,7 @@ def callback():
             # The user does not exist in the database already
             else:
                 lineid = user
-                summoner_name = summoner_name
+                summoner_name = name
                 #champ_data = json.loads('{}')                     # start with an empty list of champs
                 champs = {}                                    # creates an empty Python list
             
