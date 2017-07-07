@@ -122,10 +122,13 @@ def callback():
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
-            continue            
+            continue
+        
         
         trigger = "Mc3 input champ:"
+        eventText=event.messaget.text 
         if eventText.lower().startswith(trigger):
+            eventText=event.messaget.text 
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
