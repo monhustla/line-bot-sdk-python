@@ -133,8 +133,9 @@ def callback():
             s1=event.message.text
             s2=":"
             s3=" "
-            champ=s1[s1.find(s2)+1 : s1.find(s3)]
-            sig=s1[s1.index(s3) + len(s3):]
+            champ=s1[s1.find(s2)+1 : s1.find(s2)]
+            print (champ)
+            sig=champ[champ.index(s3) + len(s3):]
             print (champ)
             print (sig)
             
