@@ -130,7 +130,16 @@ def callback():
             continue            
         trigger = "mc3 input champ:"
         eventText=event.message.text
-        if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
+        if eventText.lower().startswith(trigger):
+             json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            f=str(user)
+            print(f)
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
+            print(name)# mc3 input champ 4-nebula-4 30
             s = eventText[eventText.lower().find(trigger) + len(trigger):]   # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
             champ = pieces[0]
@@ -139,6 +148,7 @@ def callback():
             print (sig)
             profile= line_bot_api.get_profile(user)
             name=(profile.display_name)
+            print(name)
             
 
             # We're going to bail out if the champion name isn't a valid one.
