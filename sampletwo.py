@@ -290,7 +290,7 @@ def callback():
                 else:
                     msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
                     
-                Line_bot_api.reply_message(
+                line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=msg))
 
