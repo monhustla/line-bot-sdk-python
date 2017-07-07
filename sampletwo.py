@@ -65,15 +65,21 @@ conn = psycopg2.connect(
             )
 
 def get_prestige_for_champion(champ, sig):
-    cur=None
+    cur = None
     try:
         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        cur.execute("""SELECT prestige FROM prestige_table WHERE champ =%(champ)s AND sig =%(sig)s""", {'champ':champ, 'sig': sig})
-        rows = cur.fetchall()
+        cur.execute("""SELECT prestige FROM prestige_table WHERE champ = %(champ)s AND sig = %(sig)s""", {"champ": champ, "sig": sig})
+        rows = cur.fetchall
         for row in rows:
-            return str(row['prestige'])                               # Returns a prestige value
+            return str(row['prestige'])                           # Returns a prestige value
         else:
-            return None
+            return None                                           # Returns None if a champ or sig wasn't found
+    except BaseException:
+        if cur is not None:
+            cur.rollback()
+    finally:
+        if cur is not None:
+            cur.close()
 
 
 def calculate_prestige(champs):
