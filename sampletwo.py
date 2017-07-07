@@ -149,7 +149,11 @@ def callback():
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Oops! You've entered an invalid champion or signature level."))
-                continue                                          # this breaks out of our branch without exiting the bot script
+            else:
+                line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=champ_prestige)
+                # this breaks out of our branch without exiting the bot script
 
 
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
