@@ -226,7 +226,7 @@ def callback():
             cur = None
             try:
                 cur = conn.cursor()
-                cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data),
+                cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data)
                                VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s)
                                ON CONFLICT (lineid)
                                DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
