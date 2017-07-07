@@ -129,15 +129,19 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue            
         eventText=event.message.text            
-        if "Mc3 input champ1:" in eventText:
-            s1=eventText
-            s2=":"
-            s3="{}"
-            champ=s1[s1.find(s2)+1 : s1.find(s3)]
-            print (champ)
-            sig=champ[champ.index(s3) + len(s3):]
-            print (champ)
-            print (sig)
+            trigger = "Mc3 input champ"
+            s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
+            pieces = s.split()                                    # ['4-nebula-4', '30']
+            champ = pieces[0]
+            sig = pieces[1]
+            $#s1=eventText
+            #s2=":"
+            #s3="{}"
+            #champ=s1[s1.find(s2)+1 : s1.find(s3)]
+            #print (champ)
+            #sig=champ[champ.index(s3) + len(s3):]
+            #print (champ)
+            #print (sig)
             
 
             # We're going to bail out if the champion name isn't a valid one.
