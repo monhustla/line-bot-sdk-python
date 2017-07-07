@@ -68,7 +68,7 @@ conn = psycopg2.connect(
 def get_prestige_for_champion(champ, sig):
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cur.execute("""SELECT prestige FROM prestige_table WHERE champ = '%(champ)s' AND sig = '%(sig)i'""", {champ, sig})
-    rows = cur.fetchall
+    rows = cur.fetchall()
     for row in rows:
         return str(row['prestige'])                               # Returns a prestige value
     else:
@@ -153,7 +153,7 @@ def callback():
 
             # get the user's information if it exists
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = '%(lineid)s'""", {"lineid": user})
-            rows = cur.fetchall
+            rows = cur.fetchall()
 
             # The user exists in the database and a result was returned
             for row in rows:
