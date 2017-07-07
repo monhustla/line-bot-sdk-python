@@ -194,7 +194,7 @@ def callback():
                 TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
 
         trigger = "mc3 get prestige"
-        if eventText.lower().startswith(trigger):
+        if event.message.text.lower().startswith(trigger):
             # Grab the user's champ data
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
