@@ -128,21 +128,13 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue            
-        eventText=event.message.text            
-        trigger = "Mc3 input champ"
-        s = eventText[eventText.lower().find(trigger) + 1:]   # 4-nebula-4 30
-        pieces = s.split()                                    # ['4-nebula-4', '30']
-        champ = pieces[0]
-        sig = pieces[1]
-            #s1=eventText
-            #s2=":"
-            #s3="{}"
-            #champ=s1[s1.find(s2)+1 : s1.find(s3)]
-            #print (champ)
-            #sig=champ[champ.index(s3) + len(s3):]
-            #print (champ)
-            #print (sig)
-            
+        trigger = "mc3 input champ"
+        eventText=event.message.text
+        if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
+            s = eventText[eventText.lower().find(trigger) + len(trigger):]   # 4-nebula-4 30
+            pieces = s.split()                                    # ['4-nebula-4', '30']
+            champ = pieces[0]
+            sig = pieces[1]
 
             # We're going to bail out if the champion name isn't a valid one.
             # We should probably send back a message to the user too
@@ -199,7 +191,7 @@ def callback():
                 TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
 
         trigger = "mc3 get prestige"
-        if event.message.text.lower().startswith(trigger):
+        if eventText.lower().startswith(trigger):
             # Grab the user's champ data
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
