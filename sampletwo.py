@@ -292,27 +292,30 @@ def callback():
                     
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=msg))
-
-
-
-                    
+                    TextSendMessage(text=msg))                 
                                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             #else:
                 #msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
 
         if event.message.text == "Mc3 my champs":
-            cur=None
-            try:
-                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-                json_line = request.get_json()
-                json_line = json.dumps(json_line)
-                decoded = json.loads(json_line)
-                user = decoded['events'][0]['source']['userId']
-                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
-                rows = cur.fetchall()
+        cur=None
+        try:
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+            rows = cur.fetchall()
+            champs=row[2]
+            if champs is None:
+                msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=msg))
+            else:
                 for row in rows:
                     champs = row[2]
                     champs = json.loads(champs)
@@ -320,16 +323,12 @@ def callback():
                     line_bot_api.reply_message(
                         event.reply_token,
                         TextSendMessage(text=str(champs)))
-                else:
-                    msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextSendMessage(text=msg))
-                 
-                #break                                             # we should only have one result, but we'll stop just in case
-                # The user does not exist in the database already
                 #else:
-                #msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."                
+               #     msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
+                #    line_bot_api.reply_message(
+                #        event.reply_token,
+                #        TextSendMessage(text=msg))
+          
         if event.message.text == "Mc3 clear champs":
             json_line = request.get_json()
             json_line = json.dumps(json_line)
