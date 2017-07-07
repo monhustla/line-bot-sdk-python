@@ -172,7 +172,7 @@ def callback():
             # The user does not exist in the database already
             else:
                 lineid = user
-                summoner_name = name
+                summoner_name = summoner_name
                 #champ_data = json.loads('{}')                     # start with an empty list of champs
                 champs = {}                                    # creates an empty Python list
             
