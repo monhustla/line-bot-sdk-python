@@ -85,10 +85,11 @@ def calculate_prestige(champs):
     #    First, we sort the array in descending order
     #    Then, we slice off the first 5 elements (if there are that many)
     top_champs = sorted(champs.values(), reverse=True)[:5]
+ 
     top_champs1=''.join(top_champs)
-    top_champcount=len(top_champs1)
+    top_champcount=len(top_champs)
     print (top_champcount)
-    top_champamount=sum(top_champs1)
+    top_champamount=sum(top_champs)
     print (top_champamount)
     
     print("Here are your top champs: " + str(top_champs1))
