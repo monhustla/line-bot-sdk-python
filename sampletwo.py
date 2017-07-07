@@ -141,7 +141,7 @@ def callback():
             for row in rows:
                 print("    LINE ID: " + row[0] + "\n")
                 print("    Summoner: " + row[1] + "\n")
-                    line_bot_api.reply_message(
+                line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=(row[1]+": " + "added."))
             
