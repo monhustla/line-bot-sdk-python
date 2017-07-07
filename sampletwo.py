@@ -16,7 +16,7 @@ from argparse import ArgumentParser
 import requests
 
 
-from linebot import (
+ linebot import (
     LineBotApi, WebhookHandler, WebhookParser
 )
 from linebot.exceptions import (
