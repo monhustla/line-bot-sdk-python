@@ -283,16 +283,15 @@ def callback():
                     yay=calculate_prestige(row[2])
                     print (rows)
                     print (yay)
-                for row in rows:
                     msg = ("Your prestige is: "+yay)
                     break                                             # we should only have one result, but we'll stop just in case
                 # The user does not exist in the database already
-            else:
-                msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
+                else:
+                    msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
                     
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=msg))                 
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=msg))                 
                                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             #else:
