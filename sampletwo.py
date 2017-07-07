@@ -86,12 +86,16 @@ def calculate_prestige(champs):
     #    Then, we slice off the first 5 elements (if there are that many)
     top_champs = sorted(champs.values(), reverse=True)[:5]
     top_champs1=''.join(top_champs)
+    top_champcount=len(top_champs1)
+    print (top_champcount)
+    top_champamount=sum(top_champs1)
+    print (top_champamount)
     
     print("Here are your top champs: " + str(top_champs1))
 
     # And grab the average (as an integer since all inputs are integers
     # It has a precision of 1 so converting to int again will remove the trailing 0) e.g. 1234.0
-    return (sum(int(top_champs1)) / len(top_champs1))
+    #return (sum(int(top_champs1)) / len(top_champs1))
 
 
 
