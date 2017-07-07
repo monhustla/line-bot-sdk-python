@@ -128,7 +128,7 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue            
-        trigger = "mc3 input champ"
+        trigger = "mc3 input champ "
         eventText=event.message.text
         if eventText.lower().startswith(trigger):                 # mc3 input champ 4-nebula-4 30
             s = eventText[eventText.lower().find(trigger) + len(trigger):]   # 4-nebula-4 30
