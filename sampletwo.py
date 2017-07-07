@@ -294,7 +294,7 @@ def callback():
                 top_champs = sorted(champs.values(), reverse=True)[:5]
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=msg))
+                    TextSendMessage(text=str(top_champs)))
                 #break                                             # we should only have one result, but we'll stop just in case
                 # The user does not exist in the database already
                 #else:
@@ -305,19 +305,15 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+            cur.execute("""Update prestige_data SET champ_data='No' WHERE lineid = %(lineid)s""", {'lineid': user})
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})    
             rows = cur.fetchall()
             for row in rows:
-                champs = json.loads(champs)
-                top_champs = sorted(champs.values(), reverse=True)[:5]
-                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-                cur.execute("""Update prestige_data SET champ_data='No' WHERE lineid = %(lineid)s""", {'lineid': user})
-                rows = cur.fetchall()
-                for row in rows:
-                    msg = row[2]
-                    line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text="You now have "+msg+" saved."))
+                msg = row[2]
+                line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="You now have "+msg+" saved."))
                 
                    
                         
