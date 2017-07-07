@@ -516,7 +516,7 @@ def callback():
                                 "(Mc3 input champ:5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99"+'\n'+
                                 "(Mc3 my champs)"+'\n'+
                                 "(Mc3 my prestige)"+'\n'+
-                                "(Mc3 clear champs) clears all of your saved champs")))            
+                                "(Mc3 clear champs) clears all of your saved champs"))            
             
         #Special Quest Command Tree
         if event.message.text == "Mc3 special quests":
