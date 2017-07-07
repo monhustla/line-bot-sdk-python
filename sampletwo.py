@@ -241,6 +241,7 @@ def callback():
                                ON CONFLICT (lineid)
                                DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
                             {"lineid": lineid, "summoner_name": summoner_name, "champ_data": champ_data})
+                conn.commit()
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=champ + " (" + champ_prestige + ") added"))
@@ -307,6 +308,7 @@ def callback():
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""Update prestige_data SET champ_data='No' WHERE lineid = %(lineid)s""", {'lineid': user})
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            conn.commit()
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {'lineid': user})    
             rows = cur.fetchall()
             print (rows)
