@@ -512,7 +512,7 @@ def callback():
         if event.message.text == "Mc3 prestige tools":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Mc3 input champ:(5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99"+'\n'+"Mc3 my champs"+'\n'+"Mc3 my prestige"+'\n'+"Mc3 clear champs (clears all of your saved champs"))            
+                TextSendMessage(text="You must first add the bot to use the prestige tools. Also, becareful of spaces and syntax."+'\n'+"(Mc3 input champ:5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99"+'\n'+"(Mc3 my champs)"+'\n'+"(Mc3 my prestige)"+'\n'+"(Mc3 clear champs) clears all of your saved champs"))            
             
         #Special Quest Command Tree
         if event.message.text == "Mc3 special quests":
