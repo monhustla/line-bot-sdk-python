@@ -568,7 +568,7 @@ def callback():
         
 
         else:
-            x=y
+            x=1
             
             
             
