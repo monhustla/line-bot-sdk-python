@@ -567,7 +567,8 @@ def callback():
                     preview_image_url='https://example.com/preview.jpg'))
         
 
-            
+        else:
+            x=y
             
             
             
