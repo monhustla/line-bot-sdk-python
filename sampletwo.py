@@ -211,7 +211,7 @@ def callback():
 
             # The user exists in the database and a result was returned
             for row in rows:
-                msg = get_prestige_for_champion(row[champ_data])
+                msg = ("Youre prestige is:"+(row[3]))
                 break                                             # we should only have one result, but we'll stop just in case
             # The user does not exist in the database already
             else:
