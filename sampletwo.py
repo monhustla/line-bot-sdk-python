@@ -74,12 +74,13 @@ def get_prestige_for_champion(champ, sig):
             return str(row['prestige'])                           # Returns a prestige value
         else:
             return None                                           # Returns None if a champ or sig wasn't found
-    except BaseException as e:
-        print(e)
+    except psycopg2.Error:
+        conn.rollback()
+        print("PostgreSQL Error: " + e.diag.message_primary)
         pass
     finally:
         if cur is not None:
-            conn.close()
+            cur.close()
 
 
 def calculate_prestige(champs):
