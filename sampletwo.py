@@ -303,7 +303,7 @@ def callback():
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
             rows = cur.fetchall()
-            champs=row[2]
+            champs=rows[2]
             if champs is None:
                 msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
                 line_bot_api.reply_message(
