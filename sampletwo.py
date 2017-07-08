@@ -342,11 +342,11 @@ def callback():
     
                 
                    
-        if event.message.text == "Mc3 vision lol":
+        if event.message.text == "Mc3 abomination lol":
             line_bot_api.reply_message(
                 event.reply_token,
                 VideoSendMessage(
-                    original_content_url='https://www.youtube.com/watch?v=6z9rkHDRMAc',
+                    original_content_url='https://s3.us-east-2.amazonaws.com/mcocconcierge/Abomination+-+MCOC+Concierge.mp4',
                     preview_image_url='https://example.com/preview.jpg'))                
                         
         #Whole List Breakdown    
