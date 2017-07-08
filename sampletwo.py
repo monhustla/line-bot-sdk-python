@@ -79,7 +79,7 @@ def get_prestige_for_champion(champ, sig):
         pass
     finally:
         if cur is not None:
-            cur.close()
+            conn.close()
 
 
 def calculate_prestige(champs):
