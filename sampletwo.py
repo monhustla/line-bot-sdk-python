@@ -76,10 +76,10 @@ def get_prestige_for_champion(champ, sig):
             return None                                           # Returns None if a champ or sig wasn't found
     except BaseException:
         if cur is not None:
-            cur.rollback()
+            conn.rollback()
     finally:
         if cur is not None:
-            cur.close()
+            conn.close()
 
 
 def calculate_prestige(champs):
