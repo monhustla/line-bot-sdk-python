@@ -342,7 +342,12 @@ def callback():
     
                 
                    
-                        
+        if event.message.text == "Mc3 vision lol":
+            line_bot_api.reply_message(
+                event.reply_token,
+                VideoSendMessage(
+                    original_content_url='https://vimeo.com/223912305/48fe9b5c39.mp4',
+                    preview_image_url='https://example.com/preview.jpg'))                
                         
         #Whole List Breakdown    
         if event.message.text == "Mc3 list":
@@ -370,9 +375,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/BvLSyYt.jpg',
-                    preview_image_url='https://example.com/preview.jpg'
-                )
-            )
+                    preview_image_url='https://example.com/preview.jpg'))
                     
         if event.message.text == "Mc3 aq rewards":
             line_bot_api.reply_message(
