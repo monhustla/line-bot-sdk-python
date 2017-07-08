@@ -546,7 +546,7 @@ def callback():
         if event.message.text == "Mc3 prestige instructions":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="This won't work if you haven't set a line id yet. That's how everything is stored. If you don't have one, set it and restart your device. Everyone who has a line id, just add the bot and input a champ to store yourself. You will be free to use the bot anywhere after a champ has been added.")
+                TextSendMessage(text="This won't work if you haven't set a line id yet. That's how everything is stored. If you don't have one, set it and restart your device. Everyone who has a line id, just add the bot and input a champ to store yourself. You will be free to use the bot anywhere after a champ has been added."))
        
                         
         #Special Quest Command Tree
