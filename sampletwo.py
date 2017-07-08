@@ -303,12 +303,13 @@ def callback():
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
             rows = cur.fetchall()
-            champs=rows[2]
-            if champs is None:
-                msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=msg))
+            champs=row[2]
+            for row in rows:
+                if champs is None:
+                    msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text=msg))
             else:
                 for row in rows:
                     champs = row[2]
