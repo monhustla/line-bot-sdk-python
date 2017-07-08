@@ -329,6 +329,10 @@ def callback():
             conn.commit()
             rows=cur.fetchall()
             print (rows)
+            if cur is not None:
+                conn.rollback()
+            if cur is not None:
+                conn.close()
     
                 
                    
