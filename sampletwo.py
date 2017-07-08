@@ -261,38 +261,33 @@ def callback():
                 if cur is not None:
                     cur.close()
 
-        trigger = "mc3 my prestige"
+
+        trigger = "mc3 get prestige"
         if eventText.lower().startswith(trigger):
+            # Grab the user's champ data
+            cur = None
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
             try:
-                cur=None
-                json_line = request.get_json()
-                json_line = json.dumps(json_line)
-                decoded = json.loads(json_line)
-                user = decoded['events'][0]['source']['userId']
-                f=str(user)
-                # Grab the user's champ data
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-
                 # get the user's information if it exists
-                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
-                rows = cur.fetchall()
- 
+                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {"lineid": user})
+                rows = cur.fetchall
+
                 # The user exists in the database and a result was returned
-                if calculate_prestige(row[2]) is None:
-                    msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextSendMessage(text=msg))
+                for row in rows:
+                    msg = get_prestige_for_champion(row['champ_data'])
+                    break                                             # we should only have one result, but we'll stop just in case
+                # The user does not exist in the database already
                 else:
-                    yay=calculate_prestige(row[2])
-                    print (rows)
-                    print (yay)
-                    msg = ("Your prestige is: "+yay)
-                    line_bot_api.reply_message(
+                    msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
+
+                line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=msg))
-
             except BaseException as e:
                 print(e)
             finally:
