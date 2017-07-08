@@ -287,9 +287,9 @@ def callback():
                     print (yay)
                     msg = ("Your prestige is: "+yay)
                     
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=msg))                 
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=msg))                 
 
         if event.message.text == "Mc3 my champs":
             cur=None
