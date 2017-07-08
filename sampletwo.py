@@ -319,12 +319,7 @@ def callback():
                         line_bot_api.reply_message(
                             event.reply_token,
                             TextSendMessage(text=str(champs)))
-                #else:
-               #     msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
-                #    line_bot_api.reply_message(
-                #        event.reply_token,
-                #        TextSendMessage(text=msg))
-          
+                        
         if event.message.text == "Mc3 clear champs":
             json_line = request.get_json()
             json_line = json.dumps(json_line)
