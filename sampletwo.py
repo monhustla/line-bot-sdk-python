@@ -220,11 +220,11 @@ def callback():
                     summoner_name = name
                     champ_data = json.loads('{}')                     # start with an empty list of champs
                     champs = {}                                    # creates an empty Python list
-            #except BaseException:
-                #if cur is not None:
-                    #cur.rollback()
-                    #cur.close()
-                    #continue
+            except BaseException:
+                if cur is not None:
+                    cur.rollback()
+                    cur.close()
+                    continue
             finally:
                 if cur is not None:
                     cur.close()
