@@ -310,6 +310,9 @@ def callback():
                     line_bot_api.reply_message(
                         event.reply_token,
                         TextSendMessage(text=msg))
+            if conn is None:
+                cur.close()
+              
             else:
                 for row in rows:
                     champs = row[2]
