@@ -262,7 +262,7 @@ def callback():
                     cur.close()
 
 
-        if event.text.message=="Mc3 my prestige":
+        if event.message.text == "Mc3 my prestige":
             # Grab the user's champ data
             cur = None
             json_line = request.get_json()
