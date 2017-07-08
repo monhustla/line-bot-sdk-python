@@ -274,16 +274,16 @@ def callback():
 
 
             # get the user's information if it exists
-             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
-             rows = cur.fetchall()
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+            rows = cur.fetchall()
 
             # The user exists in the database and a result was returned
-             if calculate_prestige(row[2]) is None:
+            if calculate_prestige(row[2]) is None:
                     msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
                     line_bot_api.reply_message(
                         event.reply_token,
                         TextSendMessage(text=msg))
-             else:
+            else:
                 yay=calculate_prestige(row[2])
                 print (rows)
                 print (yay)
