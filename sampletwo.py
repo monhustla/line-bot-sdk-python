@@ -286,15 +286,10 @@ def callback():
                     print (rows)
                     print (yay)
                     msg = ("Your prestige is: "+yay)
-
                     
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=msg))                 
-                                                            # we should only have one result, but we'll stop just in case
-            # The user does not exist in the database already
-            #else:
-                #msg = "Oops! You need to add some champs first. Try 'mc3 input champ'."
 
         if event.message.text == "Mc3 my champs":
             cur=None
