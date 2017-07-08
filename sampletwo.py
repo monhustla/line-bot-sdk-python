@@ -289,8 +289,14 @@ def callback():
                 print (yay)
                 msg = ("Your prestige is: "+yay)
                 line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=msg))                 
+                    event.reply_token,
+                    TextSendMessage(text=msg))
+
+            except BaseException as e:
+                print(e)
+            finally:
+                if cur is not None:
+                    cur.close()
 
         if eventText == "Mc3 my champs":
             cur=None
