@@ -135,7 +135,9 @@ def callback():
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3. To use prestige tools, you must first add the bot. To get started type: Mc3 list"))
+                TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3."+'\n'+
+                                "Make sure you have auto-download images turned on in photos & videos settings!"+'\n'+
+                                "To use prestige tools, you must first add the bot. To get started type: Mc3 list"))
            
         if not isinstance(event, MessageEvent):
             continue
@@ -346,7 +348,8 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"+'\n'+"synergies"))     
+                TextSendMessage(text="Make sure you auto-download images turned on in photos & videos settings!"+'\n'
+                                "aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"+'\n'+"synergies"))     
         
         #Specific List Breakdown, make sure to follow the headers identifying the class.
             #Aq Trigger
@@ -549,8 +552,13 @@ def callback():
         if event.message.text == "Mc3 prestige instructions":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="This won't work if you haven't set a line id yet. That's how everything is stored. If you don't have one, set it and restart your device. Everyone who has a line id, just add the bot and input a champ to store yourself. You will be free to use the bot anywhere after a champ has been added."))
-       
+                TextSendMessage(text="This won't work if you haven't set a line id yet. That's how everything is stored. If you don't have one, set it and restart your device. Everyone who has a line id, just add the bot and input a champ to store yourself. You will be free to use the bot anywhere after a champ has been added. For a picture example of getting set-yp type: Mc3 prestige example"))
+        if event.message.text == "Mc3 prestige example":
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url='https://i.imgur.com/9IHlaLj.jpg',
+                    preview_image_url='https://example.com/preview.jpg'))       
                         
         #Special Quest Command Tree
         if event.message.text == "Mc3 special quests":
