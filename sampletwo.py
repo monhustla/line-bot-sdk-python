@@ -293,7 +293,7 @@ def callback():
                         event.reply_token,
                         TextSendMessage(text=msg))                 
 
-        if event.message.text == "Mc3 my champs":
+        if eventText == "Mc3 my champs":
             cur=None
             try:
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
