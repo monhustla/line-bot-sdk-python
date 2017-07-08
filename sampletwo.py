@@ -301,7 +301,7 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {'lineid': user})
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {'lineid': user})
             rows = cur.fetchall()
             for row in rows:
                 champs=row[2]
