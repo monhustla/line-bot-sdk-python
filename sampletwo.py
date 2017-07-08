@@ -74,12 +74,12 @@ def get_prestige_for_champion(champ, sig):
             return str(row['prestige'])                           # Returns a prestige value
         else:
             return None                                           # Returns None if a champ or sig wasn't found
-    except BaseException:
-        if cur is not None:
-            conn.rollback()
+    except BaseException as e:
+        print(e)
+        pass
     finally:
         if cur is not None:
-            conn.close()
+            cur.close()
 
 
 def calculate_prestige(champs):
