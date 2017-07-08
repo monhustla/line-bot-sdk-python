@@ -262,8 +262,7 @@ def callback():
                     cur.close()
 
 
-        trigger = "mc3 get prestige"
-        if event.test.message=="Mc3 my prestige":
+        if event.text.message=="Mc3 my prestige":
             # Grab the user's champ data
             cur = None
             json_line = request.get_json()
