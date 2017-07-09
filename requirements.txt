@@ -4,3 +4,4 @@ flask==0.12.2
 psycopg2
 gspread
 oauth2client
+openpyxl
