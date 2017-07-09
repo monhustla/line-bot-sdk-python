@@ -136,9 +136,10 @@ def callback():
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3."+'\n'+
-                                "Make sure you have auto-download images turned on in photos & videos settings!"+'\n'+
-                                "To use prestige tools, you must first add the bot. To get started type: Mc3 list"))
+                TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3."+'\n'+'\n'+
+                                "Make sure you have auto-download images turned on in photos & videos settings!"+'\n'+'\n'+
+                                "To learn how to setup the line prestige tool type: Mc3 prestige instructions."+'\n'+'\n'+
+                                "To get started type: Mc3 list"))
            
         if not isinstance(event, MessageEvent):
             continue
