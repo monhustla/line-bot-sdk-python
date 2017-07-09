@@ -356,7 +356,7 @@ def callback():
             wb = load_workbook('champbios.xlsx')
             ws=wb[name]
             signature=ws.cell(column=2,row=4).value
-            passive=str(ws.cell(column=2,row=5).value)
+            passive=ws.cell(column=2,row=8).value
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Signature Ability: "+'\n'+signature+'\n'+'\n'+
