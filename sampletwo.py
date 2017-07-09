@@ -346,7 +346,7 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 VideoSendMessage(
-                    original_content_url='https://dl.dropboxusercontent.com/s/rht4v1drnjastsw/Abomination%2B-%2BMCOC%2BConcierge_1.mp4',
+                    original_content_url='https://drive.google.com/file/d/0B4o2DGevYrdiOEZ4LV94YTJkMGM/view.mp4',
                     preview_image_url='https://example.com/preview.jpg'))                
                         
         #Whole List Breakdown    
