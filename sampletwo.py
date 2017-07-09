@@ -356,12 +356,11 @@ def callback():
             wb = load_workbook('champbios.xlsx')
             ws=wb[name]
             signature=ws.cell(column=2,row=4).value
-            #passive=str(ws.cell(column=2,row=5).value)
+            passive=str(ws.cell(column=2,row=5).value)
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Signature Ability: "+'\n'+signature))
-                #+'\n'+
-                               #"Passive Ability: "+'\n'+passive))            
+                TextSendMessage(text="Signature Ability: "+'\n'+signature+'\n'+'\n'+
+                               "Passive Ability: "+'\n'+passive))            
                         
         #Whole List Breakdown    
         if event.message.text == "Mc3 list":
