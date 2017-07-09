@@ -346,7 +346,7 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 VideoSendMessage(
-                    original_content_url='https://www.dropbox.com/s/hiak83i7qzr7p5a/og%20vision.mp4',
+                    original_content_url='https://www.dropbox.com/s/hiak83i7qzr7p5a/og%20vision.mp4?dl=0',
                     preview_image_url='https://example.com/preview.jpg'))                
                         
         #Whole List Breakdown    
