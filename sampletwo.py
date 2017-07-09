@@ -349,16 +349,18 @@ def callback():
                 VideoSendMessage(
                     original_content_url='https://dl.dropboxusercontent.com/s/hiak83i7qzr7p5a/og%20vision.mp4',
                     preview_image_url='https://example.com/preview.jpg'))
-        if event.message.text == "Mc3 abilities:abomination":
+        if "Mc3 abilities:" in event.message.text:
             s1=event.message.text
             s2=":"
             name=(s1[s1.index(s2)+len(s2):])
             wb = load_workbook('champbios.xlsx')
-            ws=wb['Abomination']
-            bio=ws.cell(column=2,row=4).value
+            ws=wb[name]
+            signature=ws.cell(column=2,row=4).value
+            passive=ws.cell(column=2,row=5).value
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Passive Ability: "+'\n'+bio))            
+                TextSendMessage(text="Signature Ability: "+'\n'+signature+'\n'+
+                               "Passive Ability: "+'\n'+passive))            
                         
         #Whole List Breakdown    
         if event.message.text == "Mc3 list":
