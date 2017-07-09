@@ -353,7 +353,8 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Make sure you auto-download images turned on in photos & videos settings!"+'\n'
+                TextSendMessage(text="Make sure you have auto-download images turned on in photos & videos settings!"+'\n'+'\n'+
+                                "Command List:"+'\n'+                                
                                 "aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"+'\n'+"synergies"))     
         
         #Specific List Breakdown, make sure to follow the headers identifying the class.
