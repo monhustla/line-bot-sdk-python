@@ -9,6 +9,7 @@ import urllib.parse as urlparse
 import json
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from openpyxl import Workbook, load_workbook
 
 from flask import Flask, request, abort
 from argparse import ArgumentParser
@@ -347,7 +348,17 @@ def callback():
                 event.reply_token,
                 VideoSendMessage(
                     original_content_url='https://dl.dropboxusercontent.com/s/hiak83i7qzr7p5a/og%20vision.mp4',
-                    preview_image_url='https://example.com/preview.jpg'))                
+                    preview_image_url='https://example.com/preview.jpg'))
+        if event.message.text == "Mc3 abilities:abomination":
+            s1=event.message.text
+            s2=":"
+            name=(s1[s1.index(s2)+len(s2):])
+            wb = load_workbook('champbios.xlsx')
+            ws=wb[name]
+            bio=ws.cell(column=2,row=4).value
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Passive Ability: "+'\n'+bio)            
                         
         #Whole List Breakdown    
         if event.message.text == "Mc3 list":
