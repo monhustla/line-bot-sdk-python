@@ -367,9 +367,15 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Make sure you have auto-download images turned on in photos & videos settings!"+'\n'+'\n'+
-                                "Command List:"+'\n'+                                
+                                "Command List:"+'\n'+
+                                "abilities"+'\n'+
                                 "aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"+'\n'+"synergies"))     
         
+        if event.message.text == "Mc3 abilities":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="To use Mc3 abilities, you must type: Mc3 abilities:(champname). An example would be: Mc3 abilities:spidergwen"))
+            
         #Specific List Breakdown, make sure to follow the headers identifying the class.
             #Aq Trigger
         if event.message.text == "Mc3 aq":
