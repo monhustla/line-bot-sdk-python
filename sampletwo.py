@@ -358,7 +358,7 @@ def callback():
             bio=ws.cell(column=2,row=4).value
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Passive Ability: "+'\n'+bio)            
+                TextSendMessage(text="Passive Ability: "+'\n'+bio))            
                         
         #Whole List Breakdown    
         if event.message.text == "Mc3 list":
