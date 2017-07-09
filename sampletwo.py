@@ -354,7 +354,7 @@ def callback():
             s2=":"
             name=(s1[s1.index(s2)+len(s2):])
             wb = load_workbook('champbios.xlsx')
-            ws=wb[name]
+            ws=wb("Abomination")
             bio=ws.cell(column=2,row=4).value
             line_bot_api.reply_message(
                 event.reply_token,
