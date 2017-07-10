@@ -363,10 +363,13 @@ def callback():
                 event.reply_token,
                 TextSendMessage(text=champ+'\n'+" has been removed."))
                 conn.commit()
+                rows=cur.fetchall()
+                print (rows)
                 if cur is not None:
                     conn.rollback()
                 if cur is not None:
                     conn.close()
+                    
                 
                 
                 
