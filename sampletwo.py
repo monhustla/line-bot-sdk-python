@@ -328,9 +328,11 @@ def callback():
                     champsdict=dict.items(champs)
                     champs_sorted=sorted(champsdict, key=lambda student: student[1], reverse=True)
                     l=('\n'.join(map(str,champs_sorted)))
+                    hello=str(l).replace('(', '').replace(')', '')
+                    yay=str(hello).replace("'", "").replace("'", "")
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=l+'\n'+"--------------------------"))
+                        TextSendMessage(text=yay+'\n'+"--------------------------"))
                                         
                                         
                                        
