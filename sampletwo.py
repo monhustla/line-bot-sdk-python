@@ -358,13 +358,17 @@ def callback():
                 cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
                 rows = cur.fetchall()
                 for row in rows:
-                    champs = json.loads(row['champ_data'])   
+                    champs = json.loads(row['champ_data'])
+                    print(rows)
                     champs.pop(champ, None)
                     line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=champ+'\n'+" has been removed."))
                     conn.commit()
                     rows=cur.fetchall()
+                    print(rows)
+                    champs=json.loads(row['champ_data'])
+                    print (champs)
             except psycopg2.Error:
                 conn.rollback()
                 print("PostgreSQL Error: " + e.diag.message_primary)
