@@ -398,14 +398,14 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/BvLSyYt.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/BvLSyYt.jpg'))
                     
         if event.message.text == "Mc3 aq rewards":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/ZwdRIoj.jpg',
-                    preview_image_url='https://example.com/preview.jpg'
+                    preview_image_url='https://i.imgur.com/ZwdRIoj.jpg'
                 )
             )
             
@@ -414,7 +414,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/71x09Rm.jpg',
-                    preview_image_url='https://example.com/preview.jpg'
+                    preview_image_url='https://i.imgur.com/71x09Rm.jpg'
                 )
             )
             
@@ -427,7 +427,7 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url='https://i.imgur.com/GZYgvhS.jpg',
+                    original_content_url='https://i.imgur.com/GZYgvhS.jpg',  #updated
                     preview_image_url='https://i.imgur.com/fSejvcF.jpg'))
             
         if event.message.text == "Mc3 map 4":
@@ -439,14 +439,14 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url='https://i.imgur.com/TqTHnKB.jpg',
+                    original_content_url='https://i.imgur.com/TqTHnKB.jpg',  #updated
                     preview_image_url='https://i.imgur.com/IddfRDM.jpg'))
             
         if event.message.text == "Mc3 map 6":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url='https://i.imgur.com/Eie596I.jpg',
+                    original_content_url='https://i.imgur.com/Eie596I.jpg',  #updated
                     preview_image_url='https://i.imgur.com/8cOa78V.jpg'))
             
         #AW Command Tree
@@ -461,7 +461,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/ZxgWTY7.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/ZxgWTY7.jpg'))
         
         #Arena Command Tree
         if event.message.text == "Mc3 arena":
@@ -474,13 +474,13 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/LWHaCCv.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/LWHaCCv.jpg'))
         if event.message.text == "Mc3 t4b":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/EwC1hdp.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/EwC1hdp.jpg'))
         if event.message.text == "Mc3 cutoffs":
             line_bot_api.reply_message(
                 event.reply_token,
@@ -497,7 +497,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/iyNbSOk.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))            
+                    preview_image_url='https://i.imgur.com/iyNbSOk.jpg'))            
         if event.message.text == "Mc3 monthly calendar":
             line_bot_api.reply_message(
                 event.reply_token,
@@ -538,7 +538,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/Mc3aao5.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))           
+                    preview_image_url='https://i.imgur.com/Mc3aao5.jpg'))           
         if event.message.text == "Mc3 mastery builder":
             line_bot_api.reply_message(
                 event.reply_token,
@@ -548,7 +548,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/T12L38x.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))          
+                    preview_image_url='https://i.imgur.com/T12L38x.jpg'))          
             
             
         #Prestige Command Tree
@@ -584,7 +584,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/9IHlaLj.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))       
+                    preview_image_url='https://i.imgur.com/9IHlaLj.jpg'))       
                         
         #Special Quest Command Tree
         if event.message.text == "Mc3 special quests":
@@ -602,7 +602,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/vB3Ix7L.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/vB3Ix7L.jpg'))
         if event.message.text == "Mc3 lol fights":
             line_bot_api.reply_message(
                 event.reply_token,
@@ -628,7 +628,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/WTyyl7t.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/WTyyl7t.jpg'))
         if event.message.text == "Mc3 bleed teams":
             line_bot_api.reply_message(
                 event.reply_token,
@@ -638,19 +638,19 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/UsIqiH4.jpg',
-                    preview_image_url='https://example.com/preview.jpg')) 
+                    preview_image_url='https://i.imgur.com/UsIqiH4.jpg')) 
         if event.message.text == "Mc3 power gain teams":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/LBF0Rr9.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))   
+                    preview_image_url='https://i.imgur.com/LBF0Rr9.jpg'))   
         if event.message.text == "Mc3 unique teams":
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/Zmec8Hs.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/Zmec8Hs.jpg'))
         
 
         return 'ok'
