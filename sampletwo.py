@@ -349,7 +349,7 @@ def callback():
                 json_line = request.get_json()
                 json_line = json.dumps(json_line)
                 decoded = json.loads(json_line)
-                user = decoded['events'][0]['source']['userId']
+                user = decoded['events'][0]['source']['userId']                
                 s1=event.message.text
                 s2=":"
                 champ=(s1[s1.index(s2)+len(s2):])
@@ -357,6 +357,7 @@ def callback():
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
                 cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
                 rows = cur.fetchall()
+                print (rows)
                 for row in rows:
                     champs = json.loads(row['champ_data'])
                     print(rows)
@@ -365,6 +366,8 @@ def callback():
                     event.reply_token,
                     TextSendMessage(text=champ+'\n'+" has been removed."))
                     conn.commit()
+                    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
+                    cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
                     rows=cur.fetchall()
                     print(rows)
                     champs=json.loads(row['champ_data'])
