@@ -137,7 +137,7 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3."+'\n'+'\n'+
-                                "Make sure you have auto-download images turned on in photos & videos settings!"+'\n'+'\n'+
+                                "Example:Mc3 arena"+'\n'+"Make sure every letter is lower case after the M in Mc3, and also make sure to now have spaces after the last letter in the command"+'\n'+'\n'+
                                 "To learn how to setup the line prestige tool type: Mc3 prestige instructions."+"You can also join the bot support group here:"+'\n'+
                                 "http://line.me/ti/g/r0yetwDGpc"
                                 '\n'+'\n'+
@@ -411,10 +411,10 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Make sure you have auto-download images turned on in photos & videos settings!"+'\n'+'\n'+
+                TextSendMessage(text="Make sure all commands start with the Mc3 trigger and there are no spaces after the last letter in the command!"+'\n'+'\n'+
                                 "Command List:"+'\n'+
                                 "abilities"+'\n'+
-                                "aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"special quests"+'\n'+"synergies"))     
+                                "aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"prestige tools"+'\n'+"special quests"+'\n'+"synergies"))     
         
         if event.message.text == "Mc3 abilities":
             line_bot_api.reply_message(
@@ -612,17 +612,19 @@ def callback():
         if event.message.text == "Mc3 prestige tools":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="You must first add the bot to use the prestige tools. Also, becareful of spaces and syntax."+'\n'+'\n'+
+                TextSendMessage(text="Steps to get started:"+'\n'+'\n'+
+                                "1:Make sure your line version is 7.5 or above"+'\n'+
+                                "2:Click on the bot to start chatting to him"+'\n'+
+                                "3:Send him your first champ input command. Example: (Mc3 input champ:5-magik-4 33) That's a 5* rank 4 sig level 33 Magik. Simply remove the parenthesis and paste that in a pm to the bot. Make sure you don't have spaces after the sig level.For an picture example type: Mc3 prestige example"+'\n'+
+                                "4:If the bot responds that the champ was added you are now free to use the following commands in any chat where the bot exists"+'\n'+'\n'+
                                 "The following commands are verbatim, simply remove the parenthesis and plug in the code within the parenthesis:"+'\n'+
-                                "(Mc3 prestige instructions)- Instructions on how to get setup."+'\n'+
-                                "(Mc3 input champ:5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99"+'\n'+
+                                "(Mc3 input champ:5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99."+'\n'+
                                 "(Mc3 my champs)"+'\n'+
                                 "(Mc3 my prestige)"+'\n'+
-                                "(Mc3 clear champs) clears all of your saved champs"))
-        if event.message.text == "Mc3 prestige instructions":
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="This won't work if you haven't set a line id yet. That's how everything is stored. If you don't have one, set it and restart your device. Everyone who has a line id, just add the bot and input a champ to store yourself. You will be free to use the bot anywhere after a champ has been added. For a picture example of getting set-yp type: Mc3 prestige example"))
+                                "(Mc3 clear champs) -clears all of your saved champs"+'\n'+
+                                "(Mc3 remove:)- this removes one specific champ from your saved roster. An example would be: Mc3 remove:4-drvoodoo-5"
+                                
+       
         if event.message.text == "Mc3 prestige example":
             line_bot_api.reply_message(
                 event.reply_token,
