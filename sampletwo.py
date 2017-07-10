@@ -345,25 +345,26 @@ def callback():
                 conn.close()
                
         if "Mc3 remove:" in event.message.text:
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            s1=event.message.text
-            s2=":"
-            champ=(s1[s1.index(s2)+len(s2):])
-            cur=None
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
-            rows = cur.fetchall()
-            for row in rows:
-                champs = json.loads(row['champ_data'])   
-                champs.pop(champ, None)
-                line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=champ+'\n'+" has been removed."))
-                conn.commit()
-                rows=cur.fetchall()
+            try:
+                json_line = request.get_json()
+                json_line = json.dumps(json_line)
+                decoded = json.loads(json_line)
+                user = decoded['events'][0]['source']['userId']
+                s1=event.message.text
+                s2=":"
+                champ=(s1[s1.index(s2)+len(s2):])
+                cur=None
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
+                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
+                rows = cur.fetchall()
+                for row in rows:
+                    champs = json.loads(row['champ_data'])   
+                    champs.pop(champ, None)
+                    line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=champ+'\n'+" has been removed."))
+                    conn.commit()
+                    rows=cur.fetchall()
             except BaseException as e:
                 print(e)
             finally:
