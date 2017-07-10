@@ -336,7 +336,7 @@ def callback():
                     line_bot_api.reply_message(
                         event.reply_token,
                         TextSendMessage(text=yay+'\n'+"-----------------------------"+'\n'+
-                        name+"  Your prestige is:"+prestige))
+                        name+"  Prestige:"+prestige))
                                         
                                         
                                        
