@@ -335,8 +335,8 @@ def callback():
                     yay=str(hello).replace("'", "").replace("'", "")
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=yay+'\n'+"-----------------------------"+'\n'+
-                        name+"  Prestige:"+prestige))
+                        TextSendMessage(text=yay+'\n'+"---------------------------"+'\n'+
+                        name+'\n'+"Prestige:"+prestige))
                                         
                                         
                                        
