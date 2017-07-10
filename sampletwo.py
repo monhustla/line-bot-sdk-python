@@ -370,7 +370,7 @@ def callback():
                                VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s)
                                ON CONFLICT (lineid)
                                DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
-                            {"lineid": lineid, "summoner_name": name, "champ_data": champ_data})
+                            {"lineid": user, "summoner_name": name, "champ_data": champ_data})
                     line_bot_api.reply_message(
                         event.reply_token,
                         TextSendMessage(text=champ+'\n'+" has been removed."))
