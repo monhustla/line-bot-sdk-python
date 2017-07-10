@@ -327,9 +327,9 @@ def callback():
                     print(champs)
                     champs_sorted=sorted(champs, key=lambda student: student[1], reverse=True)
                     l=('\n'.join(map(str,champs_sorted)))
-                        line_bot_api.reply_message(
-                            event.reply_token,
-                            TextSendMessage(text=l))
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text=l+'\n'+"--------------------------"))
                                         
                                         
                                        
