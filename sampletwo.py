@@ -622,7 +622,7 @@ def callback():
                                 "(Mc3 my champs)"+'\n'+
                                 "(Mc3 my prestige)"+'\n'+
                                 "(Mc3 clear champs) -clears all of your saved champs"+'\n'+
-                                "(Mc3 remove:)- this removes one specific champ from your saved roster. An example would be: Mc3 remove:4-drvoodoo-5"
+                                "(Mc3 remove:)- this removes one specific champ from your saved roster. An example would be: Mc3 remove:4-drvoodoo-5"))
                                 
        
         if event.message.text == "Mc3 prestige example":
