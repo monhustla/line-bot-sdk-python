@@ -325,7 +325,8 @@ def callback():
                     champs = row[2]
                     champs = json.loads(champs)
                     print(champs)
-                    champs_sorted=sorted(champs, key=lambda student: student[1], reverse=True)
+                    champsdict=dict.items(champs)
+                    champs_sorted=sorted(champsdict, key=lambda student: student[1], reverse=True)
                     l=('\n'.join(map(str,champs_sorted)))
                     line_bot_api.reply_message(
                         event.reply_token,
