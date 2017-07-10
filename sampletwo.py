@@ -362,10 +362,12 @@ def callback():
                     champs = json.loads(row['champ_data'])
                     print(rows)
                     champs.pop(champ, None)
+                    champ_data = json.dumps(champs)
                     line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=champ+'\n'+" has been removed."))
+                        event.reply_token,
+                        TextSendMessage(text=champ+'\n'+" has been removed."))
                     conn.commit()
+                    cur.close()
                     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
                     cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
                     rows=cur.fetchall()
