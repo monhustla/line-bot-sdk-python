@@ -307,6 +307,8 @@ def callback():
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {'lineid': user})
             rows = cur.fetchall()
@@ -323,6 +325,7 @@ def callback():
             else:
                 for row in rows:
                     champs = row[2]
+                    prestige=calculate_prestige(champs)
                     champs = json.loads(champs)
                     print(champs)
                     champsdict=dict.items(champs)
@@ -332,7 +335,8 @@ def callback():
                     yay=str(hello).replace("'", "").replace("'", "")
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=yay+'\n'+"--------------------------"))
+                        TextSendMessage(text=yay+'\n'+"-----------------------------")+'\n'+
+                    name+"  Your prestige is:"+prestige)
                                         
                                         
                                        
