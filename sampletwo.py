@@ -376,7 +376,7 @@ def callback():
                 event.reply_token,
                 VideoSendMessage(
                     original_content_url='https://dl.dropboxusercontent.com/s/hiak83i7qzr7p5a/og%20vision.mp4',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://dl.dropboxusercontent.com/s/hiak83i7qzr7p5a/og%20vision.mp4'))
         if "Mc3 abilities:" in event.message.text:
             s1=event.message.text
             s2=":"
