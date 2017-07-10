@@ -428,7 +428,7 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/GZYgvhS.jpg',
-                    preview_image_url='https://example.com/preview.jpg'))
+                    preview_image_url='https://i.imgur.com/GZYgvhS.jpg'))
             
         if event.message.text == "Mc3 map 4":
             line_bot_api.reply_message(
