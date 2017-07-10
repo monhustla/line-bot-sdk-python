@@ -324,10 +324,14 @@ def callback():
                 for row in rows:
                     champs = row[2]
                     champs = json.loads(champs)
-                    top_champs = sorted(champs, reverse=True)[:5]
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextSendMessage(text=str(champs)))
+                    champs_sorted=sorted(champs, key=lambda student: student[1], reverse=True)
+                    for champs_sorted in champs_sorted:
+                        line_bot_api.reply_message(
+                            event.reply_token,
+                            TextSendMessage(text=champs_sorted))
+                                        
+                                        
+                                       
                         
         if event.message.text == "Mc3 clear champs":
             json_line = request.get_json()
