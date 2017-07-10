@@ -376,12 +376,6 @@ def callback():
                         TextSendMessage(text=champ+'\n'+" has been removed."))
                     conn.commit()
                     cur.close()
-                    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
-                    cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
-                    rows=cur.fetchall()
-                    print(rows)
-                    champs=json.loads(row['champ_data'])
-                    print (champs)
             except psycopg2.Error:
                 conn.rollback()
                 print("PostgreSQL Error: " + e.diag.message_primary)
