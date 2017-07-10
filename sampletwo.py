@@ -349,7 +349,9 @@ def callback():
                 json_line = request.get_json()
                 json_line = json.dumps(json_line)
                 decoded = json.loads(json_line)
-                user = decoded['events'][0]['source']['userId']                
+                user = decoded['events'][0]['source']['userId']
+                profile= line_bot_api.get_profile(user)
+                name=(profile.display_name)
                 s1=event.message.text
                 s2=":"
                 champ=(s1[s1.index(s2)+len(s2):])
@@ -363,6 +365,12 @@ def callback():
                     print(rows)
                     champs.pop(champ, None)
                     champ_data = json.dumps(champs)
+                    cur = conn.cursor()
+                    cur.execute("""INSERT INTO prestige_data(lineid, summoner_name, champ_data)
+                               VALUES(%(lineid)s, %(summoner_name)s, %(champ_data)s)
+                               ON CONFLICT (lineid)
+                               DO UPDATE SET summoner_name = Excluded.summoner_name, champ_data = Excluded.champ_data;""",
+                            {"lineid": lineid, "summoner_name": name, "champ_data": champ_data})
                     line_bot_api.reply_message(
                         event.reply_token,
                         TextSendMessage(text=champ+'\n'+" has been removed."))
