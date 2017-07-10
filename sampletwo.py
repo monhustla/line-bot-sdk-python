@@ -365,11 +365,13 @@ def callback():
                     TextSendMessage(text=champ+'\n'+" has been removed."))
                     conn.commit()
                     rows=cur.fetchall()
-            except BaseException as e:
-                print(e)
+            except psycopg2.Error:
+                conn.rollback()
+                print("PostgreSQL Error: " + e.diag.message_primary)
+                pass
             finally:
-                if cur is not None:
-                    cur.close()
+            if cur is not None:
+                cur.close()
                     
                 
                 
