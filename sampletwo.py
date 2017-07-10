@@ -374,8 +374,8 @@ def callback():
                 print("PostgreSQL Error: " + e.diag.message_primary)
                 pass
             finally:
-            if cur is not None:
-                cur.close()
+                if cur is not None:
+                    cur.close()
                     
                 
                 
