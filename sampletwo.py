@@ -364,11 +364,11 @@ def callback():
                 TextSendMessage(text=champ+'\n'+" has been removed."))
                 conn.commit()
                 rows=cur.fetchall()
-                print (rows)
+            except BaseException as e:
+                print(e)
+            finally:
                 if cur is not None:
-                    conn.rollback()
-                if cur is not None:
-                    conn.close()
+                    cur.close()
                     
                 
                 
