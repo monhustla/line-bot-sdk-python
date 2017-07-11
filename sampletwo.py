@@ -444,22 +444,22 @@ def callback():
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
                 # get the user's information if it exists
-                cur.execute("""SELECT alliance_name, alliance_password, player_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
+                cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
                 rows = cur.fetchall()
                 for row in rows:
                     alliance_name = row['alliance_name']
                     alliance_password = row['alliance_password']
-                    player_prestige = json.loads(row['player_prestige'])            # contains a list of the user's champs
+                    player_prestige = json.loads(row['players_prestige'])            # contains a list of the user's champs
                     break                                             # we should only have one result, but we'll stop just in case
                 # The user does not exist in the database already
                 else:
                     alliance_name = alliance
                     alliance_password = password
-                    player_prestige = json.loads('{}')                     # start with an empty list of champs
+                    players_prestige = json.loads('{}')                     # start with an empty list of champs
                     players = {}                                    # creates an empty Python list
             except BaseException:
                 if cur is not None:
-                    cur.rollback()
+
                     cur.close()
                     continue
             finally:
@@ -474,25 +474,25 @@ def callback():
             players[player] = player_info
 
             # put everything together and send it back to the database
-            player_prestige = json.dumps(players)
+            players_prestige = json.dumps(players)
 
 
             # Checks for an existing line ID and updates if it exists or adds if it doesn't
             cur = None
             try:
                 cur = conn.cursor()
-                cur.execute("""INSERT INTO alliance_table(alliance_name, alliance_password, player_prestige)
-                               VALUES(%(alliance_name)s, %(alliance_password)s, %(player_prestige)s)
+                cur.execute("""INSERT INTO alliance_table(alliance_name, alliance_password, players_prestige)
+                               VALUES(%(alliance_name)s, %(alliance_password)s, %(players_prestige)s)
                                ON CONFLICT (alliance_name)
-                               DO UPDATE SET alliance_name = Excluded.alliance_name, player_prestige = Excluded.player_prestige;""",
-                            {"alliance_name":alliance_name , "alliance_password": password, "player_prestige": player_prestige})
+                               DO UPDATE SET alliance_name = Excluded.alliance_name, players_prestige = Excluded.players_prestige;""",
+                            {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": player_prestige})
                 conn.commit()
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=alliance_name+" has been added."))
                 
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
-                cur.execute("""SELECT alliance_name, alliance_password, player_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
+                cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
                 rows = cur.fetchall()
                 print(rows)
                  
