@@ -635,7 +635,7 @@ def callback():
                                 "3.)Send him your first champ input command."+'\n'+ '\n'+
                                 "Example:"+'\n'+ 
                                 "Mc3 input champ:5-magik-4 33"+'\n'+'\n'+
-                                "That's a 5* rank 4 sig level 33 Magik. Simply remove the parenthesis and paste that in a pm to the bot. Make sure you don't have spaces after the sig level.For an picture example type: Mc3 prestige example"+'\n'+
+                                "That's a 5* rank 4 sig level 33 Magik. Simply remove the parenthesis and paste that in a pm to the bot. Make sure you don't have spaces after the sig level.For a picture example type: 'Mc3 prestige example'"+'\n'+'\n'+
                                 "4.)If the bot responds that the champ was added you are now free to use the following commands in any chat where the bot exists"+'\n'+'\n'+
                                 "Type 'Mc3 prestige tools' for a list of commands"))
 
