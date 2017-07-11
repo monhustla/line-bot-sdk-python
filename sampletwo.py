@@ -655,7 +655,7 @@ def callback():
                                 "daredevilnetflix"+'\n'+"deadpool"+'\n'+"deadpoolxforce"+'\n'+"dormammu"+'\n'+"drax"+'\n'+"drstrange"+'\n'+"drvoodoo"+'\n'+"electro"+'\n'+"elektra"+'\n'+"falcon"+'\n'+"gambit"+'\n'+"gamora"
                                 "ghostrider"+'\n'+"groot"+'\n'+"guillotine"+'\n'+"gwenpool"+'\n'+"hawkeye"+'\n'+"hood"+'\n'+
                                 "howard"+'\n'+"hulk"+'\n'+"hulkbuster"+'\n'+"hyperion"+'\n'+"iceman"+'\n'+"ironfist"+'\n'+
-                                "ironfistwhite"+'\n'+"ironman"+'\n'+"ironpatriot"+'\n'+"joefixit"+'\n'+"juggernaut"+'\n'+"kamalakhan"
+                                "ironfistwhite"+'\n'+"ironman"+'\n'+"ironpatriot"+'\n'+"joefixit"+'\n'+"juggernaut"+'\n'+"kamalakhan"))
 #"kang"+’\n’+"karnak"+’\n’+"kinggroot"+’\n’+"loki"+’\n’+"lukecage"+’\n’+"magik"+’\n’+"magneto"
 #"magnetomarvelnow"+’\n’+"moonknight"+’\n’+"mordo"+’\n’+"msmarvel"+’\n’+"nebula"+’\n’+
 #"nightcrawler"+’\n’+"phoenix"+’\n’+"psylocke"+’\n’+"punisher"+’\n’+"quake"+’\n’+"redhulk"
