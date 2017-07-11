@@ -425,14 +425,13 @@ def callback():
                 # get the user's information if it exists
                 cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {"lineid": user})
                 rows = cur.fetchall()
+                print (rows)
                 for row in rows:
                     champs = row['champ_data']
                     prestige=calculate_prestige(champs)
                     print(prestige)
            
-                if conn is None:
-                 cur.close()
-                cur=None
+
             except BaseException:
                 if cur is not None:
                     cur.rollback()
@@ -491,10 +490,10 @@ def callback():
                     event.reply_token,
                     TextSendMessage(text=alliance_name+" has been added."))
                 
-                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
-                cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
-                rows = cur.fetchall()
-                print(rows)
+                #cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
+                #cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
+                #rows = cur.fetchall()
+                #print(rows)
                  
             except BaseException:
                 print("error1")
