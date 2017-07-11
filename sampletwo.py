@@ -495,13 +495,13 @@ def callback():
                 #rows = cur.fetchall()
                 #print(rows)
                  
-            #except BaseException:
-              #  print("error1")
-                #if cur is not None:
-                 #   conn.rollback()
-            #finally:
-            #    if cur is not None:
-                    #cur.close()    
+            except BaseException:
+                print("error1")
+                if cur is not None:
+                    conn.rollback()
+            finally:
+                if cur is not None:
+                    cur.close()    
                 
                 
                    
