@@ -199,7 +199,7 @@ def callback():
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
             champ_prestige = get_prestige_for_champion(champ, sig)
-            print ("The champs prestige is:"champ_prestige)
+            print ("The champs prestige is:"+champ_prestige)
             if champ_prestige is None:
                 line_bot_api.reply_message(
                 event.reply_token,
