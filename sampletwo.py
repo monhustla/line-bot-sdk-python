@@ -522,20 +522,25 @@ def callback():
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)       
             cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
             rows = cur.fetchall()
+            if conn is None:
+                cur.close()
             for row in rows:
                 password1=str(row[1])
                 print (password)
-                if password != password1:
-                    msg = "Incorrect password."
+                players=row[2]
+                if password==password1:
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=msg))
-            if conn is None:
-                cur.close()
+                            TextSendMessage(text=players))
+                else:
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text="Incorrect password))
+
               
-            else:
-                for row in rows:
-                    players = row[2]
+            #else:
+                #line_bot_api.reply_message(
+                
                     #prestige=calculate_prestige(champs)
                     #champs = json.loads(champs)
                     #print(champs)
@@ -544,9 +549,9 @@ def callback():
                     #l=('\n'.join(map(str,champs_sorted)))
                     #hello=str(l).replace('(', '').replace(')', '')
                     #yay=str(hello).replace("'", "").replace("'", "")
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextSendMessage(text=players))
+                    #line_bot_api.reply_message(
+                        #event.reply_token,
+                        #TextSendMessage(text=players))
                 
                    
         if event.message.text == "Mc3 og vision lol":
