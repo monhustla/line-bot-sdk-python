@@ -410,6 +410,7 @@ def callback():
             alliance = pieces[0]
             print(alliance)
             ps = pieces[1]
+            trigger1="password:"
             password=ps[ps.find(trigger1) + len(trigger1):]
             print (ss)
             json_line = request.get_json()
