@@ -423,7 +423,7 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Make sure all commands start with the Mc3 trigger and there are no spaces after the last letter in the command!"+'\n'+'\n'+
+                TextSendMessage(text="Make sure all commands start with the 'Mc3' trigger and there are no spaces after the last letter in the command!"+'\n'+"Example:Mc3 aq"+'\n'+'\n'+
                                 "Command List:"+'\n'+
                                 "abilities"+'\n'+
                                 "aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"prestige tools"+'\n'+"special quests"+'\n'+"synergies"))     
