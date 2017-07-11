@@ -472,7 +472,7 @@ def callback():
             alliance_name = alliance    
 
             # add or update the user's champ
-            players[player] = player_info
+            players[player] = prestige
 
             # put everything together and send it back to the database
             players_prestige = json.dumps(players)
