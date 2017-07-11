@@ -628,7 +628,7 @@ def callback():
                                 "1:Make sure your line version is 7.5 or above"+'\n'+
                                 "2:Click on the bot to start chatting to him"+'\n'+
                                 "3:Send him your first champ input command."+'\n'+ 
-                                "Example: (Mc3 input champ:5-magik-4 33)+'\n'+
+                                "Example: (Mc3 input champ:5-magik-4 33)"+'\n'+
                                 "That's a 5* rank 4 sig level 33 Magik. Simply remove the parenthesis and paste that in a pm to the bot. Make sure you don't have spaces after the sig level.For an picture example type: Mc3 prestige example"+'\n'+
                                 "4:If the bot responds that the champ was added you are now free to use the following commands in any chat where the bot exists"+'\n'+'\n'+
                                 "The following commands are verbatim, simply remove the parenthesis and plug in the code within the parenthesis:"+'\n'+
