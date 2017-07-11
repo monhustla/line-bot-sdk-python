@@ -652,19 +652,14 @@ def callback():
                 event.reply_token,
                 TextSendMessage(text="abomination"+'\n'+"agentvenom"+'\n'+"angela"+'\n'+"antman"+'\n'+"archangel"+'\n'+"beast"+'\n'+"blackbolt"+'\n'+"blackpanther"+'\n'+"blackpanthercw"+'\n'+"blackwidow"+'\n'+"cable"+'\n'+
                                 "captainamerica"+'\n'+"captainamericawwii"+'\n'+"captainmarvel"+'\n'+"carnage"+'\n'+"civilwarrior"+'\n'+"colossus"+'\n'+"crossbones"+'\n'+"cyclops"+'\n'+"cyclops90s"+'\n'+"daredevil"+'\n'+
-                                "daredevilnetflix"+'\n'+"deadpool"+'\n'+"deadpoolxforce"+'\n'+"dormammu"+'\n'+"drax"+'\n'+"drstrange"+'\n'+"drvoodoo"+'\n'+"electro"+'\n'+"elektra"+'\n'+"falcon"+'\n'+"gambit"+'\n'+"gamora"
-                                "ghostrider"+'\n'+"groot"+'\n'+"guillotine"+'\n'+"gwenpool"+'\n'+"hawkeye"+'\n'+"hood"+'\n'+
-                                "howard"+'\n'+"hulk"+'\n'+"hulkbuster"+'\n'+"hyperion"+'\n'+"iceman"+'\n'+"ironfist"+'\n'+
-                                "ironfistwhite"+'\n'+"ironman"+'\n'+"ironpatriot"+'\n'+"joefixit"+'\n'+"juggernaut"+'\n'+"kamalakhan"))
-#"kang"+’\n’+"karnak"+’\n’+"kinggroot"+’\n’+"loki"+’\n’+"lukecage"+’\n’+"magik"+’\n’+"magneto"
-#"magnetomarvelnow"+’\n’+"moonknight"+’\n’+"mordo"+’\n’+"msmarvel"+’\n’+"nebula"+’\n’+
-#"nightcrawler"+’\n’+"phoenix"+’\n’+"psylocke"+’\n’+"punisher"+’\n’+"quake"+’\n’+"redhulk"
-#"rhino"+’\n’+"rocket"+’\n’+"rogue"+’\n’+"ronan"+’\n’+"scarletwitch"+’\n’+"shehulk"+’\n’+"spidergwen"
-#"spiderman"+’\n’+"spidermanblack"+’\n’+"spidermanmorales"+’\n’+"starlord"+’\n’+"storm"
-#"superiorironman"+’\n’+"thanos"+’\n’+"thevision"+’\n’+"thor"+’\n’+"thorjanefoster"
-#"ultron"+’\n’+"ultron_classic"+’\n’+"unstoppablecolossus"+’\n’+"venom"+’\n’+"venompool"
-#"vision"+’\n’+"warmachine"+’\n’+"wintersoldier"+’\n’+"wolverine"+’\n’+"wolverineoldman"
-#"x23"+’\n’+"yellowjacket"+’\n’+"yondu"
+                                "daredevilnetflix"+'\n'+"deadpool"+'\n'+"deadpoolxforce"+'\n'+"dormammu"+'\n'+"drax"+'\n'+"drstrange"+'\n'+"drvoodoo"+'\n'+"electro"+'\n'+"elektra"+'\n'+"falcon"+'\n'+"gambit"+'\n'+"gamora"+'\n'+
+                                "ghostrider"+'\n'+"groot"+'\n'+"guillotine"+'\n'+"gwenpool"+'\n'+"hawkeye"+'\n'+"hood"+'\n'+"howard"+'\n'+"hulk"+'\n'+"hulkbuster"+'\n'+"hyperion"+'\n'+"iceman"+'\n'+"ironfist"+'\n'+
+                                "ironfistwhite"+'\n'+"ironman"+'\n'+"ironpatriot"+'\n'+"joefixit"+'\n'+"juggernaut"+'\n'+"kamalakhan"+'\n'+"kang"+'\n'+"karnak"+'\n'+"kinggroot"+'\n'+"loki"+'\n'+"lukecage"+'\n'+"magik"+'\n'+"magneto"+'\n'+
+                                "magnetomarvelnow"+'\n'+"moonknight"+'\n'+"mordo"+'\n'+"msmarvel"+'\n'+"nebula"+'\n'+"nightcrawler"+'\n'+"phoenix"+'\n'+"psylocke"+'\n'+"punisher"+'\n'+"quake"+'\n'+"redhulk"+'\n'+
+                                "rhino"+'\n'+"rocket"+'\n'+"rogue"+'\n'+"ronan"+'\n'+"scarletwitch"+'\n'+"shehulk"+'\n'+"spidergwen"+'\n'+
+                                "spiderman"+'\n'+"spidermanblack"+'\n'+"spidermanmorales"+'\n'+"starlord"+'\n'+"storm"+'\n'+"superiorironman"+'\n'+"thanos"+'\n'+"thevision"+'\n'+"thor"+'\n'+"thorjanefoster"+'\n'+
+                                "ultron"+'\n'+"ultron_classic"+'\n'+"unstoppablecolossus"+'\n'+"venom"+'\n'+"venompool"+'\n'+"vision"+'\n'+"warmachine"+'\n'+"wintersoldier"+'\n'+"wolverine"+'\n'+"wolverineoldman"+'\n'+
+                                "x23"+'\n'+"yellowjacket"+'\n'+"yondu"))
                   
         #Special Quest Command Tree
         if event.message.text == "Mc3 special quests":
