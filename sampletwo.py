@@ -506,7 +506,7 @@ def callback():
         if "Mc3 alliance:" in event.message.text:
             trigger="Mc3 alliance:"
             trigger1="password:"
-            eventText="Mc3 alliance:TLTUH password:Bboy123!"
+            eventText=event.message.text
             s = eventText[eventText.find(trigger) + len(trigger):]
             print(s) # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
