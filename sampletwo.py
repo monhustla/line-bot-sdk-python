@@ -418,6 +418,7 @@ def callback():
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             profile= line_bot_api.get_profile(user)
+            player=(profile.display_name)
             try:
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
