@@ -50,7 +50,7 @@ line_bot_api = LineBotApi('EF7cmk1BxOG/UqSMMhiIMVw9Fy1EH4k3f+AGQnRSiaATp67WvyVwX
 parser = WebhookParser('1ba0ee354caf9e4f0e1b52c627b86ffc')
 
 
-url = urlparse.urlparse(os.environ['DATABASE_URL'])
+url = urlparse.urlparse(os.environ['HEROKU_POSTGRESQL_CRIMSON_URL'])
 dbname = url.path[1:]
 user = url.username
 password = url.password
