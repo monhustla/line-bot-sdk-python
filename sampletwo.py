@@ -460,7 +460,6 @@ def callback():
                     players = {}                                    # creates an empty Python list
             except BaseException:
                 if cur is not None:
-
                     cur.close()
                     continue
             finally:
@@ -498,7 +497,7 @@ def callback():
                 print(rows)
                  
             except BaseException:
-                print("error1)
+                print("error1")
                 if cur is not None:
                     conn.rollback()
             finally:
