@@ -525,8 +525,9 @@ def callback():
             if conn is None:
                 cur.close()
             for row in rows:
-                password1=str(row[1])
+                password1=(row[1])
                 print (password)
+                print (password1)
                 players=row[2]
                 if password==password1:
                     line_bot_api.reply_message(
