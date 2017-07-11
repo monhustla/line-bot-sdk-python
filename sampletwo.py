@@ -83,14 +83,7 @@ def get_prestige_for_champion(champ, sig):
         if cur is not None:
             cur.close()
 
-#def add_alliance(alliancename):
-   # if alliancename is None:                                            # can't calculate a prestige from nothing, prevents a divide by 0 error
-       # return 0
 
-    # if champs isn't a dict, it might still be a JSON string
-   # if not type(alliancename) is dict:
-      #  alliancename = json.loads(alliancename)
-            
 def calculate_prestige(champs):
     if champs is None:                                            # can't calculate a prestige from nothing, prevents a divide by 0 error
         return 0
@@ -214,7 +207,7 @@ def callback():
 
             cur = None
             try:
-                print (champ_prestige)
+                print ("The champs prestige is:"champ_prestige)
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
                 # get the user's information if it exists
@@ -250,6 +243,7 @@ def callback():
 
             # add or update the user's champ
             champs[champ] = champ_prestige
+            print ("Did this work for packaging name and prestige?" champs[champ])
 
             # put everything together and send it back to the database
             champ_data = json.dumps(champs)
@@ -403,59 +397,7 @@ def callback():
                 if cur is not None:
                     cur.close()
                     
-        #if event.message.test=="Mc3 add alliance:":
-            #s1=event.message.text
-            #s2=":"
-            #alliance=(s1[s1.index(s2)+len(s2):])
-            #print(alliance)
-            #try:
-                #cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-                # get the user's information if it exists
-                #cur.execute("""SELECT alliance_name, alliance_password, player_prestige FROM prestige_data WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
-                #rows = cur.fetchall()
-                #for row in rows:
-                    #alliance_name = row['alliance_name']
-                    #alliance_password = row['alliance_password']
-                    #player_prestige = json.loads(row['player_prestige'])            # contains a list of the user's champs
-                    #break                                             # we should only have one result, but we'll stop just in case
-                # The user does not exist in the database already
-                #else:
-                    #alliance_name = alliance
-                   # alliance_password = #password ADD THIS
-                    #player_prestige = json.loads('{}')                     # start with an empty list of champs
-                   # players = {}                                    # creates an empty Python list
-            #except BaseException:
-                #if cur is not None:
-                    #cur.rollback()
-                    #cur.close()
-                    #continue
-            #finally:
-                #if cur is not None:
-                    #cur.close()                    
-            # either way, let's move on
-
-            # this will make sure that the Summoner's name is always updated if their Line profile has changed
-            #alliance_name = alliance    
-
-            # add or update the user's champ
-            #players[player] = player_info
-
-            # put everything together and send it back to the database
-            #player_prestige = json.dumps(players)
-
-
-            # Checks for an existing line ID and updates if it exists or adds if it doesn't
-            #cur = None
-            #try:
-                #cur = conn.cursor()
-                #cur.execute("""INSERT INTO alliance_table(alliance_name, alliance_password, player_prestige)
-                               #VALUES(%(alliance_name)s, %(alliance_password)s, %(player_prestige)s)
-                               #ON CONFLICT (alliance_name)
-                               #DO UPDATE SET alliance_name = Excluded.alliance_name, player_prestige = Excluded.player_prestige;""",
-                            #{"alliance_name": , "alliance_password": password, "player_prestige": player_prestige})
-                #conn.commit()
-            
+                
                 
                 
                    
