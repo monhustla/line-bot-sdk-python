@@ -515,7 +515,6 @@ def callback():
             print(ps)
             print(champ)
             password=ps[ps.find(trigger1) + len(trigger1):]
-            print (ss)
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
