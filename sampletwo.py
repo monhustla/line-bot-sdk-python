@@ -510,10 +510,8 @@ def callback():
             s = eventText[eventText.find(trigger) + len(trigger):]
             print(s) # 4-nebula-4 30
             pieces = s.split()                                    # ['4-nebula-4', '30']
-            champ = pieces[0]
+            alliance = pieces[0]
             ps = pieces[1]
-            print(ps)
-            print(champ)
             password=ps[ps.find(trigger1) + len(trigger1):]
             json_line = request.get_json()
             json_line = json.dumps(json_line)
