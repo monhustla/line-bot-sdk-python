@@ -627,12 +627,15 @@ def callback():
                 TextSendMessage(text="Steps to get started:"+'\n'+'\n'+
                                 "1:Make sure your line version is 7.5 or above"+'\n'+
                                 "2:Click on the bot to start chatting to him"+'\n'+
-                                "3:Send him your first champ input command. Example: (Mc3 input champ:5-magik-4 33) That's a 5* rank 4 sig level 33 Magik. Simply remove the parenthesis and paste that in a pm to the bot. Make sure you don't have spaces after the sig level.For an picture example type: Mc3 prestige example"+'\n'+
+                                "3:Send him your first champ input command."+'\n'+ 
+                                "Example: (Mc3 input champ:5-magik-4 33)+'\n'+
+                                "That's a 5* rank 4 sig level 33 Magik. Simply remove the parenthesis and paste that in a pm to the bot. Make sure you don't have spaces after the sig level.For an picture example type: Mc3 prestige example"+'\n'+
                                 "4:If the bot responds that the champ was added you are now free to use the following commands in any chat where the bot exists"+'\n'+'\n'+
                                 "The following commands are verbatim, simply remove the parenthesis and plug in the code within the parenthesis:"+'\n'+
                                 "(Mc3 input champ:5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99."+'\n'+
                                 "(Mc3 my champs)"+'\n'+
                                 "(Mc3 my prestige)"+'\n'+
+                                "(Mc3 champ list) This is a list of the syntax for all champs in the prestige tool."+'\n'+
                                 "(Mc3 clear champs) -clears all of your saved champs"+'\n'+
                                 "(Mc3 remove:)- this removes one specific champ from your saved roster. An example would be: Mc3 remove:4-drvoodoo-5"))
                                 
@@ -642,8 +645,27 @@ def callback():
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url='https://i.imgur.com/9IHlaLj.jpg',
-                    preview_image_url='https://i.imgur.com/9IHlaLj.jpg'))       
-                        
+                    preview_image_url='https://i.imgur.com/9IHlaLj.jpg'))
+            
+        if event.message.text == "Mc3 prestige example":
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="abomination"+'\n'+"agentvenom"+'\n'+"angela"+'\n'+"antman"+'\n'+"archangel"+'\n'+"beast"+'\n'+"blackbolt"+'\n'+"blackpanther"+'\n'+"blackpanthercw"+'\n'+"blackwidow"+'\n'+"cable"+'\n'+
+                                "captainamerica"+'\n'+"captainamericawwii"+'\n'+"captainmarvel"+'\n'+"carnage"+'\n'+"civilwarrior"+'\n'+"colossus"+'\n'+"crossbones"+'\n'+"cyclops"+'\n'+"cyclops90s"+'\n'+"daredevil"+'\n'+
+                                "daredevilnetflix"+'\n'+"deadpool"+'\n'+"deadpoolxforce"+'\n'+"dormammu"+'\n'+"drax"+'\n'+"drstrange"+'\n'+"drvoodoo"+'\n'+"electro"+'\n'+"elektra"+'\n'+"falcon"+'\n'+"gambit"+'\n'+"gamora"
+                                "ghostrider"+'\n'+"groot"+'\n'+"guillotine"+'\n'+"gwenpool"+'\n'+"hawkeye"+'\n'+"hood"+'\n'+
+                                "howard"+'\n'+"hulk"+'\n'+"hulkbuster"+'\n'+"hyperion"+'\n'+"iceman"+'\n'+"ironfist"+'\n'+
+                                "ironfistwhite"+'\n'+"ironman"+'\n'+"ironpatriot"+'\n'+"joefixit"+'\n'+"juggernaut"+'\n'+"kamalakhan"
+#"kang"+’\n’+"karnak"+’\n’+"kinggroot"+’\n’+"loki"+’\n’+"lukecage"+’\n’+"magik"+’\n’+"magneto"
+#"magnetomarvelnow"+’\n’+"moonknight"+’\n’+"mordo"+’\n’+"msmarvel"+’\n’+"nebula"+’\n’+
+#"nightcrawler"+’\n’+"phoenix"+’\n’+"psylocke"+’\n’+"punisher"+’\n’+"quake"+’\n’+"redhulk"
+#"rhino"+’\n’+"rocket"+’\n’+"rogue"+’\n’+"ronan"+’\n’+"scarletwitch"+’\n’+"shehulk"+’\n’+"spidergwen"
+#"spiderman"+’\n’+"spidermanblack"+’\n’+"spidermanmorales"+’\n’+"starlord"+’\n’+"storm"
+#"superiorironman"+’\n’+"thanos"+’\n’+"thevision"+’\n’+"thor"+’\n’+"thorjanefoster"
+#"ultron"+’\n’+"ultron_classic"+’\n’+"unstoppablecolossus"+’\n’+"venom"+’\n’+"venompool"
+#"vision"+’\n’+"warmachine"+’\n’+"wintersoldier"+’\n’+"wolverine"+’\n’+"wolverineoldman"
+#"x23"+’\n’+"yellowjacket"+’\n’+"yondu"
+                  
         #Special Quest Command Tree
         if event.message.text == "Mc3 special quests":
             line_bot_api.reply_message(
