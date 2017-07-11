@@ -502,7 +502,54 @@ def callback():
             finally:
                 if cur is not None:
                     cur.close()    
-                
+        
+        if "Mc3 alliance:" in event.message.text:
+            trigger="Mc3 alliance:"
+            trigger1="password:"
+            eventText="Mc3 alliance:TLTUH password:Bboy123!"
+            s = eventText[eventText.find(trigger) + len(trigger):]
+            print(s) # 4-nebula-4 30
+            pieces = s.split()                                    # ['4-nebula-4', '30']
+            champ = pieces[0]
+            ps = pieces[1]
+            print(ps)
+            print(champ)
+            password=ps[ps.find(trigger1) + len(trigger1):]
+            print (ss)
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            profile= line_bot_api.get_profile(user)
+            name=(profile.display_name)
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)       
+            cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
+            rows = cur.fetchall()
+            for row in rows:
+                password1=str(row[1])
+                print (password)
+                if password != password1
+                    msg = "Incorrect password."
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text=msg))
+            if conn is None:
+                cur.close()
+              
+            else:
+                for row in rows:
+                    players = row[2]
+                    #prestige=calculate_prestige(champs)
+                    #champs = json.loads(champs)
+                    #print(champs)
+                    #champsdict=dict.items(champs)
+                    #champs_sorted=sorted(champsdict, key=lambda student: student[1], reverse=True)
+                    #l=('\n'.join(map(str,champs_sorted)))
+                    #hello=str(l).replace('(', '').replace(')', '')
+                    #yay=str(hello).replace("'", "").replace("'", "")
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text=players))
                 
                    
         if event.message.text == "Mc3 og vision lol":
