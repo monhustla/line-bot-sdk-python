@@ -136,12 +136,12 @@ def callback():
         if isinstance(event, JoinEvent):
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: Mc3."+'\n'+'\n'+
-                                "Example:Mc3 arena"+'\n'+"Make sure every letter is lower case after the M in Mc3, and also make sure to now have spaces after the last letter in the command"+'\n'+'\n'+
+                TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: 'Mc3'."+'\n'+'\n'+
+                                "Example:'Mc3 arena'"+'\n'+"Make sure every letter is lower case after the M in Mc3, and also make sure to now have spaces after the last letter in the command."+'\n'+'\n'+
                                 "To learn how to setup the line prestige tool type: Mc3 prestige instructions."+"You can also join the bot support group here:"+'\n'+
                                 "http://line.me/ti/g/r0yetwDGpc"
                                 '\n'+'\n'+
-                                "To get started type: Mc3 list"))
+                                "To get started type: 'Mc3 list'"))
            
         if not isinstance(event, MessageEvent):
             continue
@@ -423,7 +423,7 @@ def callback():
         if event.message.text == "Mc3 list":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="Make sure all commands start with the 'Mc3' trigger and there are no spaces after the last letter in the command!"+'\n'+"Example:Mc3 aq"+'\n'+'\n'+
+                TextSendMessage(text="Make sure all commands start with the 'Mc3' trigger and there are no spaces after the last letter in the command!"+'\n'+"Example:'Mc3 aq'"+'\n'+'\n'+
                                 "Command List:"+'\n'+
                                 "abilities"+'\n'+
                                 "aq"+'\n'+"aw"+'\n'+"arena"+'\n'+"calendars"+'\n'+"duels"+'\n'+"masteries"+'\n'+"prestige"+'\n'+"prestige tools"+'\n'+"special quests"+'\n'+"synergies"))     
@@ -611,7 +611,7 @@ def callback():
         if event.message.text == "Mc3 prestige":
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="prestige calculator"+'\n'+"prestige list"+'\n'+"prestige tools"))         
+                TextSendMessage(text="prestige calculator"+'\n'+"prestige list"+'\n'+"prestige tools"+'\n'+"prestige instructions"))         
             #Prestige Keywords
         if event.message.text == "Mc3 prestige calculator":
             line_bot_api.reply_message(
@@ -624,20 +624,21 @@ def callback():
         if event.message.text == "Mc3 prestige tools":
             line_bot_api.reply_message(
                 event.reply_token,
+                TextSendMessage(text="'Mc3 prestige instructions'"+'\n'+"'Mc3 input champ:' Example-'Mc3 input champ:5-drvoodoo-4 99'"+'\n'+"'Mc3 my champs'"+'\n'+"'Mc3 my prestige'"+'\n'+"'Mc3 remove:' Example-'Mc3 remove:5-drvoodoo-4'"+'\n'+"'Mc3 clear champs'-This removes all saved champs"+'\n'+
+                               "'Mc3 champ list' -A list of the syntax for every champ name in the calculator"))
+        if event.message.text == "Mc3 prestige instructions":
+            line_bot_api.reply_message(
+                event.reply_token,
                 TextSendMessage(text="Steps to get started:"+'\n'+'\n'+
-                                "1:Make sure your line version is 7.5 or above"+'\n'+
-                                "2:Click on the bot to start chatting to him"+'\n'+
-                                "3:Send him your first champ input command."+'\n'+ 
-                                "Example: (Mc3 input champ:5-magik-4 33)"+'\n'+
+                                "1.)Make sure your line version is 7.5 or above"+'\n'+'\n'+
+                                "2.)Click on the bot to start chatting to him"+'\n'+'\n'+
+                                "3.)Send him your first champ input command."+'\n'+ '\n'+
+                                "Example:"+'\n'+ 
+                                "Mc3 input champ:5-magik-4 33"+'\n'+'\n'+
                                 "That's a 5* rank 4 sig level 33 Magik. Simply remove the parenthesis and paste that in a pm to the bot. Make sure you don't have spaces after the sig level.For an picture example type: Mc3 prestige example"+'\n'+
-                                "4:If the bot responds that the champ was added you are now free to use the following commands in any chat where the bot exists"+'\n'+'\n'+
-                                "The following commands are verbatim, simply remove the parenthesis and plug in the code within the parenthesis:"+'\n'+
-                                "(Mc3 input champ:5-gwenpool-4 99)-That's a 5* rank 4 gwenpool sig level 99."+'\n'+
-                                "(Mc3 my champs)"+'\n'+
-                                "(Mc3 my prestige)"+'\n'+
-                                "(Mc3 champ list) This is a list of the syntax for all champs in the prestige tool."+'\n'+
-                                "(Mc3 clear champs) -clears all of your saved champs"+'\n'+
-                                "(Mc3 remove:)- this removes one specific champ from your saved roster. An example would be: Mc3 remove:4-drvoodoo-5"))
+                                "4.)If the bot responds that the champ was added you are now free to use the following commands in any chat where the bot exists"+'\n'+'\n'+
+                                "Type 'Mc3 prestige tools' for a list of commands"))
+
                                 
        
         if event.message.text == "Mc3 prestige example":
