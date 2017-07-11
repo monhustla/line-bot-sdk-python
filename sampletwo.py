@@ -491,10 +491,10 @@ def callback():
                     event.reply_token,
                     TextSendMessage(text=alliance_name+" has been added."))
                 
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
-            rows = cur.fetchall()
-            print(rows)
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)            
+                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s""", {"lineid":user})
+                rows = cur.fetchall()
+                print(rows)
                  
             except BaseException:
                 if cur is not None:
