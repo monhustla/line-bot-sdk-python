@@ -483,7 +483,7 @@ def callback():
                 cur.execute("""INSERT INTO alliance_table(alliance_name, alliance_password, players_prestige)
                                VALUES(%(alliance_name)s, %(alliance_password)s, %(players_prestige)s)
                                ON CONFLICT (alliance_name)
-                               DO UPDATE SET alliance_name = Excluded.alliance_password, players_prestige = Excluded.players_prestige;""",
+                               DO UPDATE SET alliance_password = Excluded.alliance_password, players_prestige = Excluded.players_prestige;""",
                             {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": players_prestige})
                 conn.commit()
                 line_bot_api.reply_message(
