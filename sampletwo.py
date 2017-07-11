@@ -498,6 +498,7 @@ def callback():
                 print(rows)
                  
             except BaseException:
+                print("error1)
                 if cur is not None:
                     conn.rollback()
             finally:
