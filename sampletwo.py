@@ -647,7 +647,7 @@ def callback():
                     original_content_url='https://i.imgur.com/9IHlaLj.jpg',
                     preview_image_url='https://i.imgur.com/9IHlaLj.jpg'))
             
-        if event.message.text == "Mc3 prestige example":
+        if event.message.text == "Mc3 champ list":
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="abomination"+'\n'+"agentvenom"+'\n'+"angela"+'\n'+"antman"+'\n'+"archangel"+'\n'+"beast"+'\n'+"blackbolt"+'\n'+"blackpanther"+'\n'+"blackpanthercw"+'\n'+"blackwidow"+'\n'+"cable"+'\n'+
