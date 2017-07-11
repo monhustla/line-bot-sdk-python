@@ -83,7 +83,14 @@ def get_prestige_for_champion(champ, sig):
         if cur is not None:
             cur.close()
 
+#def add_alliance(alliancename):
+   # if alliancename is None:                                            # can't calculate a prestige from nothing, prevents a divide by 0 error
+       # return 0
 
+    # if champs isn't a dict, it might still be a JSON string
+   # if not type(alliancename) is dict:
+      #  alliancename = json.loads(alliancename)
+            
 def calculate_prestige(champs):
     if champs is None:                                            # can't calculate a prestige from nothing, prevents a divide by 0 error
         return 0
@@ -199,7 +206,6 @@ def callback():
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
             champ_prestige = get_prestige_for_champion(champ, sig)
-            print ("The champs prestige is:"+champ_prestige)
             if champ_prestige is None:
                 line_bot_api.reply_message(
                 event.reply_token,
@@ -208,7 +214,7 @@ def callback():
 
             cur = None
             try:
-                
+                print (champ_prestige)
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
                 # get the user's information if it exists
@@ -244,7 +250,6 @@ def callback():
 
             # add or update the user's champ
             champs[champ] = champ_prestige
-            print ("Did this work for packaging name and prestige?"+ champs[champ])
 
             # put everything together and send it back to the database
             champ_data = json.dumps(champs)
@@ -398,7 +403,91 @@ def callback():
                 if cur is not None:
                     cur.close()
                     
-                
+        if "Mc3 add alliance:" in event.message.text:
+            trigger="Mc3 add alliance:"
+            s = eventText[eventText.find(trigger) + len(trigger):]
+            pieces = s.split()                                    # ['4-nebula-4', '30']
+            alliance = pieces[0]
+            print(alliance)
+            ps = pieces[1]
+            password=ps[ps.find(trigger1) + len(trigger1):]
+            print (ss)
+            json_line = request.get_json()
+            json_line = json.dumps(json_line)
+            decoded = json.loads(json_line)
+            user = decoded['events'][0]['source']['userId']
+            profile= line_bot_api.get_profile(user)
+            try:
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+            # get the user's information if it exists
+            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {"lineid": user})
+            rows = cur.fetchall()
+            for row in rows:
+                champs = row['champ_data']
+                prestige=calculate_prestige(champs)
+                print(prestige)
+           
+            if conn is None:
+                cur.close()
+            cur=None
+            try:
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+                # get the user's information if it exists
+                cur.execute("""SELECT alliance_name, alliance_password, player_prestige FROM prestige_data WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
+                rows = cur.fetchall()
+                for row in rows:
+                    alliance_name = row['alliance_name']
+                    alliance_password = row['alliance_password']
+                    player_prestige = json.loads(row['player_prestige'])            # contains a list of the user's champs
+                    break                                             # we should only have one result, but we'll stop just in case
+                # The user does not exist in the database already
+                else:
+                    alliance_name = alliance
+                    alliance_password = password
+                    player_prestige = json.loads('{}')                     # start with an empty list of champs
+                    players = {}                                    # creates an empty Python list
+            except BaseException:
+                if cur is not None:
+                    cur.rollback()
+                    cur.close()
+                    continue
+            finally:
+                if cur is not None:
+                    cur.close()                    
+            # either way, let's move on
+
+            # this will make sure that the Summoner's name is always updated if their Line profile has changed
+            alliance_name = alliance    
+
+            # add or update the user's champ
+            players[player] = player_info
+
+            # put everything together and send it back to the database
+            player_prestige = json.dumps(players)
+
+
+            # Checks for an existing line ID and updates if it exists or adds if it doesn't
+            cur = None
+            try:
+                cur = conn.cursor()
+                cur.execute("""INSERT INTO alliance_table(alliance_name, alliance_password, player_prestige)
+                               VALUES(%(alliance_name)s, %(alliance_password)s, %(player_prestige)s)
+                               ON CONFLICT (alliance_name)
+                               DO UPDATE SET alliance_name = Excluded.alliance_name, player_prestige = Excluded.player_prestige;""",
+                            {"alliance_name":alliance_name , "alliance_password": password, "player_prestige": player_prestige})
+                conn.commit()
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=alliance_name+" has been added."))
+                 
+            except BaseException:
+                if cur is not None:
+                    conn.rollback()
+            finally:
+                if cur is not None:
+                    cur.close()    
                 
                 
                    
