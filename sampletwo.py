@@ -528,7 +528,7 @@ def callback():
             for row in rows:
                 password1=str(row[1])
                 print (password)
-                if password != password1
+                if password != password1:
                     msg = "Incorrect password."
                     line_bot_api.reply_message(
                         event.reply_token,
