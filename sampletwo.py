@@ -418,19 +418,19 @@ def callback():
             user = decoded['events'][0]['source']['userId']
             profile= line_bot_api.get_profile(user)
             try:
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-            # get the user's information if it exists
-            cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {"lineid": user})
-            rows = cur.fetchall()
-            for row in rows:
-                champs = row['champ_data']
-                prestige=calculate_prestige(champs)
-                print(prestige)
+                # get the user's information if it exists
+                cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {"lineid": user})
+                rows = cur.fetchall()
+                for row in rows:
+                    champs = row['champ_data']
+                    prestige=calculate_prestige(champs)
+                    print(prestige)
            
-            if conn is None:
-                cur.close()
-            cur=None
+                if conn is None:
+                 cur.close()
+                cur=None
             try:
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
