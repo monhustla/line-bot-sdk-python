@@ -244,7 +244,7 @@ def callback():
 
             # add or update the user's champ
             champs[champ] = champ_prestige
-            print ("Did this work for packaging name and prestige?" champs[champ])
+            print ("Did this work for packaging name and prestige?"+ champs[champ]
 
             # put everything together and send it back to the database
             champ_data = json.dumps(champs)
