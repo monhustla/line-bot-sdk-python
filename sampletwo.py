@@ -42,12 +42,12 @@ scope = ['https://spreadsheets.google.com/feeds']
 credentials = ServiceAccountCredentials.from_json_keyfile_name('MyProject-3164a19e689c.json', scope)
 gc = gspread.authorize(credentials)
 
-line_bot_api = LineBotApi("channel_secret")
-handler = WebhookHandler("handler")
+line_bot_api = LineBotApi(os.environ['channel_secret'])
+handler = WebhookHandler(os.environ['handler'])
 
 
-line_bot_api = LineBotApi("channel_secret")
-parser = WebhookParser("handler")
+line_bot_api = LineBotApi(os.environ['channel_secret'])
+parser = WebhookParser(os.environ['handler'])
 
 
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
