@@ -431,6 +431,14 @@ def callback():
                 if conn is None:
                  cur.close()
                 cur=None
+            except BaseException:
+                if cur is not None:
+                    cur.rollback()
+                    cur.close()
+                    continue
+            finally:
+                if cur is not None:
+                    cur.close()
             try:
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
