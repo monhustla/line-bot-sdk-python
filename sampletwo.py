@@ -42,12 +42,12 @@ scope = ['https://spreadsheets.google.com/feeds']
 credentials = ServiceAccountCredentials.from_json_keyfile_name('MyProject-3164a19e689c.json', scope)
 gc = gspread.authorize(credentials)
 
-line_bot_api = LineBotApi('EF7cmk1BxOG/UqSMMhiIMVw9Fy1EH4k3f+AGQnRSiaATp67WvyVwX62bpqGw6yPhOCznEfcePwycayIb6bQwCWQjvkR6ZuRnNl2WUFRzNALCfVkrY/+XwATYL3au1agq8C5KCY2b1lrCE5tZZh8ctAdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('1ba0ee354caf9e4f0e1b52c627b86ffc')
+line_bot_api = LineBotApi(ENV['channel_secret'])
+handler = WebhookHandler(ENV['handler'])
 
 
-line_bot_api = LineBotApi('EF7cmk1BxOG/UqSMMhiIMVw9Fy1EH4k3f+AGQnRSiaATp67WvyVwX62bpqGw6yPhOCznEfcePwycayIb6bQwCWQjvkR6ZuRnNl2WUFRzNALCfVkrY/+XwATYL3au1agq8C5KCY2b1lrCE5tZZh8ctAdB04t89/1O/w1cDnyilFU=')
-parser = WebhookParser('1ba0ee354caf9e4f0e1b52c627b86ffc')
+line_bot_api = LineBotApi(ENV['channel_secret'])
+parser = WebhookParser(ENV['handler'])
 
 
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
