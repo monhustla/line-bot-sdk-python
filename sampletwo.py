@@ -484,7 +484,7 @@ def callback():
                                VALUES(%(alliance_name)s, %(alliance_password)s, %(players_prestige)s)
                                ON CONFLICT (alliance_name)
                                DO UPDATE SET alliance_name = Excluded.alliance_name, players_prestige = Excluded.players_prestige;""",
-                            {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": player_prestige})
+                            {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": players_prestige})
                 conn.commit()
                 line_bot_api.reply_message(
                     event.reply_token,
@@ -495,13 +495,13 @@ def callback():
                 #rows = cur.fetchall()
                 #print(rows)
                  
-            except BaseException:
-                print("error1")
-                if cur is not None:
-                    conn.rollback()
-            finally:
-                if cur is not None:
-                    cur.close()    
+            #except BaseException:
+              #  print("error1")
+                #if cur is not None:
+                 #   conn.rollback()
+            #finally:
+            #    if cur is not None:
+                    #cur.close()    
                 
                 
                    
