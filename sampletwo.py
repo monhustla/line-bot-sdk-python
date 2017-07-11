@@ -199,6 +199,7 @@ def callback():
             # We should probably send back a message to the user too
             # We're returning the prestige now too so we don't have to hit the database twice!
             champ_prestige = get_prestige_for_champion(champ, sig)
+            print ("The champs prestige is:"champ_prestige)
             if champ_prestige is None:
                 line_bot_api.reply_message(
                 event.reply_token,
@@ -207,7 +208,7 @@ def callback():
 
             cur = None
             try:
-                print ("The champs prestige is:"champ_prestige)
+                
                 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
                 # get the user's information if it exists
