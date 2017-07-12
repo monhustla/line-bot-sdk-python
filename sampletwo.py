@@ -593,7 +593,7 @@ def callback():
                             conn.rollback()
                     finally:
                         if cur is not None:
-                        cur.close()    
+                            cur.close()    
 
                 else:
                     line_bot_api.reply_message(
