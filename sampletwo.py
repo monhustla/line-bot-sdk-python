@@ -553,7 +553,7 @@ def callback():
                         for row in rows:
                             alliance_name = row['alliance_name']
                             alliance_password = row['alliance_password']
-                            player_prestige = json.loads(row['players_prestige'])            # contains a list of the user's champs
+                            players = json.loads(row['players_prestige'])            # contains a list of the user's champs
                             break                                             # we should only have one result, but we'll stop just in case
                  #The user does not exist in the database already
                         else:
@@ -564,8 +564,8 @@ def callback():
                             continue
                     finally:
                         if cur is not None:
-                        cur.close()                    
-                     either way, let's move on
+                            cur.close()                    
+                     #either way, let's move on
 
                      #this will make sure that the Summoner's name is always updated if their Line profile has changed
                     alliance_name = alliance    
