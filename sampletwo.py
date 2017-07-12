@@ -547,7 +547,7 @@ def callback():
                             continue
                     finally:
                         if cur is not None:
-                        cur.close()
+                            cur.close()
                     try:
                         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
