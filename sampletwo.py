@@ -556,8 +556,8 @@ def callback():
                             player_prestige = json.loads(row['players_prestige'])            # contains a list of the user's champs
                             break                                             # we should only have one result, but we'll stop just in case
                  #The user does not exist in the database already
-                    else:
-                        print("Not there")# creates an empty Python list
+                        else:
+                            print("Not there")# creates an empty Python list
                     except BaseException:
                         if cur is not None:
                             cur.close()
