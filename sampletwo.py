@@ -551,7 +551,7 @@ def callback():
                     try:
                         cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-                         get the user's information if it exists
+                        #get the user's information if it exists
                         cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
                         rows = cur.fetchall()
                         for row in rows:
