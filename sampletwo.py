@@ -514,7 +514,7 @@ def callback():
             ps = pieces[1]
             trigger1="password:"
             alliance_password=ps[ps.find(trigger1) + len(trigger1):]
-            print (password)
+            print (alliance_password)
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
@@ -585,7 +585,7 @@ def callback():
                                        VALUES(%(alliance_name)s, %(alliance_password)s, %(players_prestige)s)
                                        ON CONFLICT (alliance_name)
                                        DO UPDATE SET alliance_password = Excluded.alliance_password, players_prestige = Excluded.players_prestige;""",
-                                    {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": players_prestige})
+                                    {"alliance_name":alliance_name , "alliance_password": alliance_password, "players_prestige": players_prestige})
                         conn.commit()
                         line_bot_api.reply_message(
                             event.reply_token,
