@@ -505,104 +505,104 @@ def callback():
                     
                     
                     
-        if "Mc3 join:" in event.message.text:
-            trigger="Mc3 add alliance:"
-            s = eventText[eventText.find(trigger) + len(trigger):]
-            pieces = s.split()                                    # ['4-nebula-4', '30']
-            alliance = pieces[0]
-            print(alliance)
-            ps = pieces[1]
-            trigger1="password:"
-            password=ps[ps.find(trigger1) + len(trigger1):]
-            print (password)
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            user = decoded['events'][0]['source']['userId']
-            profile= line_bot_api.get_profile(user)
-            player=(profile.display_name)
-            player=(profile.display_name)
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
-            rows = cur.fetchall()
-            from row in rows:
-                if alliance_password==(row[1]):
-                    try:
-                        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        #if "Mc3 join:" in event.message.text:
+            #trigger="Mc3 add alliance:"
+            #s = eventText[eventText.find(trigger) + len(trigger):]
+            #pieces = s.split()                                    # ['4-nebula-4', '30']
+            #alliance = pieces[0]
+            #print(alliance)
+            #ps = pieces[1]
+            #trigger1="password:"
+            #password=ps[ps.find(trigger1) + len(trigger1):]
+            #print (password)
+            #json_line = request.get_json()
+            #json_line = json.dumps(json_line)
+            #decoded = json.loads(json_line)
+            #user = decoded['events'][0]['source']['userId']
+            #profile= line_bot_api.get_profile(user)
+            #player=(profile.display_name)
+            #player=(profile.display_name)
+            #cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            #cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
+            #rows = cur.fetchall()
+            #from row in rows:
+                #if alliance_password==(row[1]):
+                 #   try:
+                  #      cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
                         # get the user's information if it exists
-                        cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {"lineid": user})
-                        rows = cur.fetchall()
-                        print (rows)
-                        for row in rows:
-                            champs = row['champ_data']
-                            prestige=calculate_prestige(champs)
-                            print(prestige)
+                   #     cur.execute("""SELECT lineid, summoner_name, champ_data FROM prestige_data WHERE lineid = %(lineid)s LIMIT 1""", {"lineid": user})
+                    #    rows = cur.fetchall()
+                     #   print (rows)
+                      #  for row in rows:
+                       #     champs = row['champ_data']
+                        #    prestige=calculate_prestige(champs)
+                         #   print(prestige)
            
 
-                    except BaseException:
-                        if cur is not None:
-                            cur.rollback()
-                            cur.close()
-                            continue
-                    finally:
-                        if cur is not None:
-                        cur.close()
-                    try:
-                        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                  #  except BaseException:
+                   #     if cur is not None:
+                    #        cur.rollback()
+                     #       cur.close()
+                      #      continue
+                #    finally:
+                 #       if cur is not None:
+                  #      cur.close()
+                 #   try:
+                  #      cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
                         # get the user's information if it exists
-                        cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
-                        rows = cur.fetchall()
-                        for row in rows:
-                            alliance_name = row['alliance_name']
-                            alliance_password = row['alliance_password']
-                            player_prestige = json.loads(row['players_prestige'])            # contains a list of the user's champs
-                            break                                             # we should only have one result, but we'll stop just in case
+                   #     cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
+                    #    rows = cur.fetchall()
+                     #   for row in rows:
+                      #      alliance_name = row['alliance_name']
+                       #     alliance_password = row['alliance_password']
+                        #    player_prestige = json.loads(row['players_prestige'])            # contains a list of the user's champs
+                         #   break                                             # we should only have one result, but we'll stop just in case
                 # The user does not exist in the database already
-                    else:
-                        print("Not there")# creates an empty Python list
-                    except BaseException:
-                        if cur is not None:
-                            cur.close()
-                            continue
-                    finally:
-                        if cur is not None:
-                        cur.close()                    
+                  #  else:
+                   #     print("Not there")# creates an empty Python list
+                    #except BaseException:
+                     #   if cur is not None:
+                      #      cur.close()
+                       #     continue
+                   # finally:
+                    #    if cur is not None:
+                     #   cur.close()                    
                     # either way, let's move on
 
                     # this will make sure that the Summoner's name is always updated if their Line profile has changed
-                    alliance_name = alliance    
+              #      alliance_name = alliance    
 
                     # add or update the user's champ
-                    players[player] = prestige
+               #     players[player] = prestige
 
                     # put everything together and send it back to the database
-                    players_prestige = json.dumps(players)
-                    cur = None
-                    try:
-                        cur = conn.cursor()
-                        cur.execute("""INSERT INTO alliance_table(alliance_name, alliance_password, players_prestige)
-                                       VALUES(%(alliance_name)s, %(alliance_password)s, %(players_prestige)s)
-                                       ON CONFLICT (alliance_name)
-                                       DO UPDATE SET alliance_password = Excluded.alliance_password, players_prestige = Excluded.players_prestige;""",
-                                    {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": players_prestige})
-                        conn.commit()
-                        line_bot_api.reply_message(
-                            event.reply_token,
-                            TextSendMessage(text=player+" has been added to "+ alliance_name))
-                    except BaseException:
-                        print("error1")
-                        if cur is not None:
-                            conn.rollback()
-                    finally:
-                        if cur is not None:
-                        cur.close()    
+                #    players_prestige = json.dumps(players)
+                 #   cur = None
+                  #  try:
+                   #     cur = conn.cursor()
+                    #    cur.execute("""INSERT INTO alliance_table(alliance_name, alliance_password, players_prestige)
+                     #                  VALUES(%(alliance_name)s, %(alliance_password)s, %(players_prestige)s)
+                      #                 ON CONFLICT (alliance_name)
+                       #                DO UPDATE SET alliance_password = Excluded.alliance_password, players_prestige = Excluded.players_prestige;""",
+                        #            {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": players_prestige})
+                       # conn.commit()
+                        #line_bot_api.reply_message(
+                         #   event.reply_token,
+                          #  TextSendMessage(text=player+" has been added to "+ alliance_name))
+                #    except BaseException:
+                 #       print("error1")
+                  #      if cur is not None:
+                   #         conn.rollback()
+                   # finally:
+                    #    if cur is not None:
+                     #   cur.close()    
 
-                else:
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextSendMessage(text="Incorrect password."))
+             #   else:
+              #      line_bot_api.reply_message(
+               #         event.reply_token,
+                #        TextSendMessage(text="Incorrect password."))
         
         if "Mc3 alliance:" in event.message.text:
             trigger="Mc3 alliance:"
