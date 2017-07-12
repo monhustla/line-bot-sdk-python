@@ -505,7 +505,7 @@ def callback():
                     
                     
                     
-        if "Mc3 add alliance:" in event.message.text:
+        if "Mc3 join:" in event.message.text:
             trigger="Mc3 add alliance:"
             s = eventText[eventText.find(trigger) + len(trigger):]
             pieces = s.split()                                    # ['4-nebula-4', '30']
