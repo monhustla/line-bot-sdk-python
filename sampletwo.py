@@ -111,11 +111,29 @@ def calculate_prestige(champs):
     average=str(int(top_champamount/top_champcount))
     print (average)
     
-    
+def alliance_prestige(players):
+    if players is None:                                            # can't calculate a prestige from nothing, prevents a divide by 0 error
+        return 0
+
+    # if champs isn't a dict, it might still be a JSON string
+    if not type(players) is dict:
+        players = json.loads(players)
+
+    # Ok, here's a little one-liner wonder:
+    #    First, we sort the array in descending order
+    #    Then, we slice off the first 5 elements (if there are that many)
+    top_players = sorted(players.values(), reverse=True)[:30]
+    results = list(map(int, top_players)) 
+    top_playercount=len(top_players)
+    print (top_playercount)
+    top_playeramount=sum(results)
+    print (top_playeramount)
+    alliancep=str(int(top_playeramount/top_playercount))
+    print (alliancep)    
 
     # And grab the average (as an integer since all inputs are integers
     # It has a precision of 1 so converting to int again will remove the trailing 0) e.g. 1234.0
-    return (average)
+    return (alliancep)
 
 
 
@@ -154,28 +172,6 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        #if event.message.text=="Mc3 save profile":
-            #json_line = request.get_json()
-            #json_line = json.dumps(json_line)
-           # decoded = json.loads(json_line)
-            #user = decoded['events'][0]['source']['userId']
-            #f=str(user)
-            #profile= line_bot_api.get_profile(user)
-            #name=(profile.display_name)
-            #print(f)
-            #cur=conn.cursor()
-            #cur.execute("INSERT INTO prestige_data (lineid, summoner_name, champ_data) VALUES (%s, %s, %s);""",
-           ##             (f, name, "whocares"))
-           # cur.execute("SELECT lineid, summoner_name, champ_data FROM prestige_data  WHERE lineid= %(lineid)s""",
-           #             {"lineid":f})
-           # rows = cur.fetchall()
-           # print(rows)
-            #for row in rows:
-                #print("    LINE ID: " + row[0] + "\n")
-               # print("    Summoner: " + row[1] + "\n")
-                #line_bot_api.reply_message(
-                    #event.reply_token,
-                    #TextSendMessage(text=(row[1]+": " + "added.")))
             
             
         eventText=event.message.text
@@ -449,7 +445,7 @@ def callback():
                 for row in rows:
                     alliance_name = row['alliance_name']
                     alliance_password = row['alliance_password']
-                    players = json.loads(row['players_prestige'])            # contains a list of the user's champs
+                    player_prestige = json.loads(row['players_prestige'])            # contains a list of the user's champs
                     break                                             # we should only have one result, but we'll stop just in case
                 # The user does not exist in the database already
                 else:
@@ -506,20 +502,21 @@ def callback():
                     
                     
         if "Mc3 join:" in event.message.text:
-            trigger="Mc3 join:"
+            trigger="Mc3 add alliance:"
             s = eventText[eventText.find(trigger) + len(trigger):]
             pieces = s.split()                                    # ['4-nebula-4', '30']
             alliance = pieces[0]
             print(alliance)
             ps = pieces[1]
             trigger1="password:"
-            alliance_password=ps[ps.find(trigger1) + len(trigger1):]
-            print (alliance_password)
+            password=ps[ps.find(trigger1) + len(trigger1):]
+            print (password)
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             profile= line_bot_api.get_profile(user)
+            player=(profile.display_name)
             player=(profile.display_name)
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
@@ -556,19 +553,19 @@ def callback():
                         for row in rows:
                             alliance_name = row['alliance_name']
                             alliance_password = row['alliance_password']
-                            players= json.loads(row['players_prestige'])            # contains a list of the user's champs
-                            break
-                            
-                        else:
-                            print("Not there")# creates an empty Python list
+                            player_prestige = json.loads(row['players_prestige'])            # contains a list of the user's champs
+                            break                                             # we should only have one result, but we'll stop just in case
+                 #The user does not exist in the database already
+                    else:
+                        print("Not there")# creates an empty Python list
                     except BaseException:
                         if cur is not None:
                             cur.close()
                             continue
                     finally:
                         if cur is not None:
-                            cur.close()                    
-                     #either way, let's move on
+                        cur.close()                    
+                     either way, let's move on
 
                      #this will make sure that the Summoner's name is always updated if their Line profile has changed
                     alliance_name = alliance    
@@ -585,7 +582,7 @@ def callback():
                                        VALUES(%(alliance_name)s, %(alliance_password)s, %(players_prestige)s)
                                        ON CONFLICT (alliance_name)
                                        DO UPDATE SET alliance_password = Excluded.alliance_password, players_prestige = Excluded.players_prestige;""",
-                                    {"alliance_name":alliance_name , "alliance_password": alliance_password, "players_prestige": players_prestige})
+                                    {"alliance_name":alliance_name , "alliance_password": password, "players_prestige": players_prestige})
                         conn.commit()
                         line_bot_api.reply_message(
                             event.reply_token,
@@ -596,7 +593,7 @@ def callback():
                             conn.rollback()
                     finally:
                         if cur is not None:
-                            cur.close()    
+                        cur.close()    
 
                 else:
                     line_bot_api.reply_message(
@@ -630,9 +627,24 @@ def callback():
                 print (password1)
                 players=row[2]
                 if password==password1:
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                            TextSendMessage(text=players))
+                    for row in rows:
+                        players=row[2]
+                        ap=alliance_prestige(players)
+                        players=json.loads(players)
+                        print(players)
+                        champsdict=dict.items(players)
+                        players_sorted=sorted(champsdict, key=lambda student: student[1], reverse=True)
+                        l=('\n'.join(map(str,players_sorted)))
+                        hello=str(l).replace('(', '').replace(')', '')
+                        yay=str(hello).replace("'", "").replace("'", "")
+                        line_bot_api.reply_message(
+                            event.reply_token,
+                            TextSendMessage(text=yay+'\n'+"---------------------------"+'\n'+
+                                        alliance+'\n'+"Prestige:"+ap))
+                    
+                                            
+                                            
+                                            
                 else:
                     line_bot_api.reply_message(
                         event.reply_token,
