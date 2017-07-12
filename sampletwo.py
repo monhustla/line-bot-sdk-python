@@ -513,14 +513,13 @@ def callback():
             print(alliance)
             ps = pieces[1]
             trigger1="password:"
-            password=ps[ps.find(trigger1) + len(trigger1):]
+            alliance_password=ps[ps.find(trigger1) + len(trigger1):]
             print (password)
             json_line = request.get_json()
             json_line = json.dumps(json_line)
             decoded = json.loads(json_line)
             user = decoded['events'][0]['source']['userId']
             profile= line_bot_api.get_profile(user)
-            player=(profile.display_name)
             player=(profile.display_name)
             cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cur.execute("""SELECT alliance_name, alliance_password, players_prestige FROM alliance_table WHERE alliance_name = %(alliance_name)s""", {"alliance_name":alliance})
