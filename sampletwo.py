@@ -180,7 +180,7 @@ def handle_callback(body, signature):
         trigger = "Mc3 yay"
         if eventText.startswith(trigger):
             print("Body"+body)
-            print("Events0"+events[0])
+            print(events[0])
             print("events"+str(events))
             print("event"+str(event))
            
