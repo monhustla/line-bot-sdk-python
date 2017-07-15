@@ -139,7 +139,7 @@ def handle_callback(body, signature):
     # handle webhook body
     try:
         events = parser.parse(body, signature)
-        print(events)
+        print("Parsed events "+events)
     except InvalidSignatureError:
         abort(400)
         
@@ -179,8 +179,8 @@ def handle_callback(body, signature):
         eventText=event.message.text
         trigger = "Mc3 yay"
         if eventText.startswith(trigger):
-            print(body)
-            print(events[0])
+            print("Body"+body)
+            print("Events0"+events[0])
             print("events"+str(events))
             print("event"+str(event))
            
