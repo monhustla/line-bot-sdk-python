@@ -145,15 +145,6 @@ def handle_callback(body, signature):
         print (events)
 
     for event in events:
-        if isinstance(event, JoinEvent):
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="Hey, thank you for inviting the MCOC Concierge In-Chat Bot. All commands need to be prefaced with: 'Mc3'."+'\n'+'\n'+
-                                "Example:'Mc3 arena'"+'\n'+"Make sure every letter is lower case after the M in Mc3, and also make sure to now have spaces after the last letter in the command."+'\n'+'\n'+
-                                "To learn how to setup the line prestige tool type: Mc3 prestige instructions."+"You can also join the bot support group here:"+'\n'+
-                                "http://line.me/ti/g/r0yetwDGpc"
-                                '\n'+'\n'+
-                                "To get started type: 'Mc3 list'"))
            
         if not isinstance(event, MessageEvent):
             continue
@@ -188,15 +179,8 @@ def handle_callback(body, signature):
         trigger = "Mc3 yay"
         if eventText.startswith(trigger):
             
-            print(events[0].source)
-            print("hey")
-            json_line = request.get_json()
-            asshole = json.loads(json_line)
-            print(asshole)
-            json_line = json.dumps(json_line)
-            decoded = json.loads(json_line)
-            print(decoded)
-            user = decoded['events'][0]['source']['userId']
+            fuck=event.message.user_id
+            print(fuck)
             print (user)
             line_bot_api.reply_message(
                 event.reply_token,
