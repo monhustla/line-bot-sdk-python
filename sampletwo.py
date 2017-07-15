@@ -138,7 +138,6 @@ def callback():
     except InvalidSignatureError:
         abort(400)
 
-    decoded = json.loads(request.get_json())
         
     for event in events:
         eventText = event.message.text
