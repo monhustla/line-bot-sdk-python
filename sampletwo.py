@@ -138,28 +138,25 @@ def handle_callback(body, signature):
 
     # handle webhook body
     try:
+       
         events = parser.parse(body, signature)
-        print(events)
+       
     except InvalidSignatureError:
         abort(400)
         
         
-
-    for event in events:
-        eventText=event.message.text
-        trigger = "Mc3 yay"
-        if eventText.startswith(trigger):
-            
-            print(events)
-            h=parser.parse(body,signature)
-            
-            print(h)
-            
-            print(events[0])
-           
+@handler.add(MessageEvent, message=TextMessage)
+def handle_text_message(event):
+    text = event.message.text
+    if text=="Mc3 yay":
+        if isinstance(event.source, SourceUser):
+            profile = event.source.user_id)
+            print (profile)
             line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="ok"))
+                event.reply_token, [
+                    TextSendMessage(
+                        text='Display name: ' + profile.display_name
+                    ),
            
         if not isinstance(event, MessageEvent):
             continue
