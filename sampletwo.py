@@ -122,6 +122,7 @@ def isValidCommand(command):
     return command in commands
 
 @app.route("/callback", methods=['POST'])
+
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
@@ -133,38 +134,36 @@ def callback():
     #return handle_callback(body, signature)
     
     try:
-        handler.handle(body, signature)
+        events = parser.parse(body, signature)
     except InvalidSignatureError:
         abort(400)
 
-    return 'OK'
-    
-
-
-#def handle_callback(body, signature):
-
-    # handle webhook body
-    #try:
-       
-     #   handler.handle(body, signature)
-       
-   # except InvalidSignatureError:
-    #    abort(400)
+    decoded = json.loads(request.get_json())
         
+    for event in events:
+        eventText = event.message.text
+
+        user = event.source.userId
+        profile = line_bot_api.get_profile(user)
+        name = profile.display_name
         
-@handler.add(MessageEvent, message=TextMessage)
-def handle_text_message(event):
-    text = event.message.text
-    if text=="Mc3 yay":
-        #print(event.source.user_id)
-        if isinstance(event.source, SourceGroup):
-            profile = event.source.user_id
-            print (profile)
+        if not isinstance(event, MessageEvent):
+            continue
+
+        if not isinstance(event.message, TextMessage):
+            continue
+        
+        trigger = "mc3 input champ"
+        if eventText=="Mc3 yay":
+            print(user)
             line_bot_api.reply_message(
-                event.reply_token, [
-                    TextSendMessage(
-                        text='Display name: ' + profile.display_name
-                    )])
+                event.reply_token,
+                TextSendMessage(text="user"))
+        
+           
+
+
+
            
      
         
