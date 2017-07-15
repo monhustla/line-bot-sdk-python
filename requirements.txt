@@ -5,3 +5,4 @@ psycopg2
 gspread
 oauth2client
 openpyxl
+cmd2
