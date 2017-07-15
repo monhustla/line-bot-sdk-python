@@ -150,13 +150,13 @@ def handle_text_message(event):
     text = event.message.text
     if text=="Mc3 yay":
         if isinstance(event.source, SourceUser):
-            profile = event.source.user_id)
+            profile = event.source.user_id
             print (profile)
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(
                         text='Display name: ' + profile.display_name
-                    ),
+                    )])
            
         if not isinstance(event, MessageEvent):
             continue
