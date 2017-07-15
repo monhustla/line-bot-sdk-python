@@ -141,7 +141,8 @@ def handle_callback(body, signature):
         events = parser.parse(body, signature)
     except InvalidSignatureError:
         abort(400)
-
+        
+        print (events)
 
     for event in events:
         if isinstance(event, JoinEvent):
@@ -158,6 +159,8 @@ def handle_callback(body, signature):
             continue
         if not isinstance(event.message, TextMessage):
             continue
+        
+        
         eventText=event.message.text    
 
         
@@ -186,7 +189,7 @@ def handle_callback(body, signature):
         if eventText.startswith(trigger):
             print(events)
             print(event)
-            print(events.source)
+            print(events[0].source)
             print("hey")
                  
  
