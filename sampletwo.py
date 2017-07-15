@@ -141,9 +141,9 @@ def callback():
         
     for event in events:
         eventText = event.message.text
-            
-        user = event.source.user_id
-        print(user)
+        print(event) 
+        #user = event.source.user_id
+        #print(user)
         print(event.source)
         profile = line_bot_api.get_profile(user)
         name = profile.display_name
