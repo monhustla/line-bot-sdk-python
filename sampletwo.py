@@ -140,14 +140,15 @@ def callback():
 
         
     for event in events:
+        print(events)
         eventText = event.message.text
         
         print(event) 
         #user = event.source.user_id
         #print(user)
         print(event.source)
-        user=events[0].source
-        profile = line_bot_api.get_profile(user)
+        
+        #profile = line_bot_api.get_profile(user)
         name = profile.display_name
         
         if not isinstance(event, MessageEvent):
