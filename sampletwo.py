@@ -179,6 +179,7 @@ def handle_callback(body, signature):
         eventText=event.message.text
         trigger = "Mc3 yay"
         if eventText.startswith(trigger):
+            print(body)
             print(events[0])
             print("events"+str(events))
             print("event"+str(event))
