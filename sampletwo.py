@@ -158,18 +158,15 @@ def handle_text_message(event):
                         text='Display name: ' + profile.display_name
                     )])
            
-        if not isinstance(event, MessageEvent):
-            continue
-        if not isinstance(event.message, TextMessage):
-            continue
+     
         
         
-        eventText=event.message.text    
+        #eventText=event.message.text    
 
         
 
         # verify that event is one we are interested in.
-        if eventText.startswith(Mc3.trigger):
+        #if eventText.startswith(Mc3.trigger):
             
             
             
@@ -177,14 +174,14 @@ def handle_text_message(event):
             
             
             # remove the trigger from the line and pass it to the handler
-            eventArgs = eventText[ len(Mc3.trigger) : ]
+            #eventArgs = eventText[ len(Mc3.trigger) : ]
         
-            mc3 = Mc3(line_bot_api, event)
+            #mc3 = Mc3(line_bot_api, event)
 
             # if we process the command then keep going 
             # otherwise fall through to the old handlers
-            if mc3.process(eventArgs):
-                continue
+            #if mc3.process(eventArgs):
+             #   continue
                 
 
         
