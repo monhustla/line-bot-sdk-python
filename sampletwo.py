@@ -141,10 +141,12 @@ def callback():
         
     for event in events:
         eventText = event.message.text
+        
         print(event) 
         #user = event.source.user_id
         #print(user)
         print(event.source)
+        user=events[0].source
         profile = line_bot_api.get_profile(user)
         name = profile.display_name
         
@@ -154,9 +156,9 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         
-        trigger = "mc3 input champ"
+
         if eventText=="Mc3 yay":
-            print(user)
+            
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="user"))
