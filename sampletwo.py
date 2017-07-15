@@ -182,10 +182,11 @@ def handle_callback(body, signature):
                 
 
         eventText=event.message.text
-        trigger = "Mc3 inputchamp "
+        trigger = "Mc3 yay"
         if eventText.startswith(trigger):
-            json_line = request.get_json()
-            json_line = json.dumps(json_line)
+            print(events)
+            print(event)
+            print(events.source)
             print("hey")
                  
  
