@@ -130,7 +130,14 @@ def callback():
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
-    return handle_callback(body, signature)
+    #return handle_callback(body, signature)
+    
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return 'OK'
     
 
 
