@@ -150,8 +150,9 @@ def handle_callback(body, signature):
         trigger = "Mc3 yay"
         if eventText.startswith(trigger):
             
-            print(event.message)
-            h=parser.parse(body)
+            print(events)
+            h=parser.parse(body,signature)
+            h.events[0].source.user_id
             print(h)
            
             line_bot_api.reply_message(
