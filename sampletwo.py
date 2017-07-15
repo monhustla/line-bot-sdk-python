@@ -178,12 +178,8 @@ def handle_callback(body, signature):
         eventText=event.message.text
         trigger = "Mc3 yay"
         if eventText.startswith(trigger):
-            shit=events[0]
-            print(shit)
-            fuck=event.message.user_id
-            you=events[0].source.user_id
-            print(fuck)
-            print (you)
+            print("events"+events)
+            print("event"+event)
            
             line_bot_api.reply_message(
                 event.reply_token,
