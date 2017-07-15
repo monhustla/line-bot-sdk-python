@@ -156,8 +156,7 @@ def callback():
 def handle_text_message(event):
     text = event.message.text
     if text=="Mc3 yay":
-        print(profile)
-        print(event.source.user_id)
+        #print(event.source.user_id)
         if isinstance(event.source, SourceGroup):
             profile = event.source.user_id
             print (profile)
