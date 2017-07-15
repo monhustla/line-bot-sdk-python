@@ -158,7 +158,7 @@ def handle_text_message(event):
     if text=="Mc3 yay":
         print(profile)
         print(event.source.user_id)
-        if isinstance(event.source, SourceUser):
+        if isinstance(event.source, SourceGroup):
             profile = event.source.user_id
             print (profile)
             line_bot_api.reply_message(
