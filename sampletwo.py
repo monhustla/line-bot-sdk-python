@@ -146,6 +146,17 @@ def handle_callback(body, signature):
         
 
     for event in events:
+        eventText=event.message.text
+        trigger = "Mc3 yay"
+        if eventText.startswith(trigger):
+            
+            print(event.message)
+            h=parser.parse(body)
+            print(h)
+           
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="ok"))
            
         if not isinstance(event, MessageEvent):
             continue
@@ -176,17 +187,7 @@ def handle_callback(body, signature):
                 continue
                 
 
-        eventText=event.message.text
-        trigger = "Mc3 yay"
-        if eventText.startswith(trigger):
-            
-            print(event.message)
-            h=parser.parse(body)
-            print(h)
-           
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="ok"))
+        
             
                  
  
