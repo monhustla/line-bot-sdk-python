@@ -142,7 +142,7 @@ def handle_callback(body, signature):
     except InvalidSignatureError:
         abort(400)
         
-        print (events)
+        
 
     for event in events:
            
