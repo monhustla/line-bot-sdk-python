@@ -141,21 +141,23 @@ def callback():
     
 
 
-def handle_callback(body, signature):
+#def handle_callback(body, signature):
 
     # handle webhook body
-    try:
+    #try:
        
-        handler.handle(body, signature)
+     #   handler.handle(body, signature)
        
-    except InvalidSignatureError:
-        abort(400)
+   # except InvalidSignatureError:
+    #    abort(400)
         
         
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
     if text=="Mc3 yay":
+        print(profile)
+        print(event.source.user_id)
         if isinstance(event.source, SourceUser):
             profile = event.source.user_id
             print (profile)
